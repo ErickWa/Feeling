@@ -39,6 +39,14 @@ served at **https://feelingthemachine.com** by the Cloudflare Pages project
    you run it.
 6. **Released forms are never edited.** A change is a new `forms/vX.Y/`.
 
+## Accounts code
+
+`lib/accounts.js` holds the rules (pure functions), `lib/api.js` the wiring,
+`functions/api/` one-line routes, `migrations/` the D1 schema, `site/seal.js`
+the sealing used by both `site/account.js` and the vault scripts. The
+privacy promise has its own test (`tests/accounts.test.mjs`, "THE PROMISE"):
+any change that makes a name or email readable in the database turns it red.
+
 ## Not yet
 
 Not enrolled in devkit (`targets.json`), so none of the shared gates

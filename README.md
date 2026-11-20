@@ -48,3 +48,15 @@ Done on 2026-11-20: the repo, the labels, milestones and timeline issues, the Pa
 Mail to any address at feelingthemachine.com is forwarded to the researcher's own inbox by a Cloudflare Email Routing catch-all (set up 2026-11-20). The page and the privacy policy name `hello@`; routing has to work before either names an address.
 
 Fonts are served from the site itself (no Google), so nothing on the page depends on a service blocked in mainland China. Cloudflare can still be slow from China, so send Chinese participants the PDF information sheet directly as well.
+
+## Participant accounts (behind a switch until go-live)
+
+`functions/api/` routes into `lib/api.js`; the rules are in `lib/accounts.js`; the schema is `migrations/`; the page is `site/account.html`. Every `/api` route answers 503 until `ACCOUNTS_OPEN` in `wrangler.toml` is `"true"` (go-live, #28), and CI checks that production still refuses.
+
+To run it locally, with links printed instead of emailed:
+
+1. Make a throwaway vault key in a scratch copy, never this repo's `site/` (or use the real one once it exists).
+2. Create `.dev.vars` (gitignored) with `ACCOUNTS_OPEN=true`, `VAULT_KID=<kid>`, `HMAC_KEY=<anything>`, `MAIL_MODE=console`.
+3. `npx wrangler@4.152.0 d1 migrations apply feeling --local`, then `npx wrangler@4.152.0 pages dev`.
+
+`MAIL_MODE=console` is refused anywhere but localhost.

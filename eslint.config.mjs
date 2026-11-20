@@ -9,11 +9,11 @@
 import js from "@eslint/js";
 
 export default [
-  { ignores: ["node_modules/**"] },
+  { ignores: ["node_modules/**", ".wrangler/**"] },
   js.configs.recommended,
   {
     name: "feeling/browser",
-    files: ["site/**/*.js"],
+    files: ["site/site.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "script",
@@ -21,8 +21,8 @@ export default [
     },
   },
   {
-    // seal.js is the one browser file that is a module: the sign-up page will
-    // import it, and so do the vault scripts in Node. Only globals both have.
+    // seal.js is imported by the account page AND by the vault scripts in
+    // Node, so it may use only globals both have.
     name: "feeling/seal",
     files: ["site/seal.js"],
     languageOptions: {
@@ -32,8 +32,29 @@ export default [
     },
   },
   {
+    // account.js is a browser module (top-level await is at the floor).
+    name: "feeling/account",
+    files: ["site/account.js"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: "module",
+      globals: { document: "readonly", location: "readonly", history: "readonly", fetch: "readonly" },
+    },
+  },
+  {
+    // Pages Functions and the logic they call run on the Workers runtime:
+    // fetch and WebCrypto are there, `process` is not.
+    name: "feeling/worker",
+    files: ["functions/**/*.js", "lib/**/*.js"],
+    languageOptions: {
+      ecmaVersion: 2024,
+      sourceType: "module",
+      globals: { crypto: "readonly", btoa: "readonly", fetch: "readonly", Response: "readonly", URL: "readonly", TextEncoder: "readonly", console: "readonly" },
+    },
+  },
+  {
     name: "feeling/node",
     files: ["*.mjs", "tests/**/*.mjs", "scripts/**/*.mjs"],
-    languageOptions: { ecmaVersion: 2024, sourceType: "module", globals: { URL: "readonly", process: "readonly", console: "readonly" } },
+    languageOptions: { ecmaVersion: 2024, sourceType: "module", globals: { URL: "readonly", process: "readonly", console: "readonly", Request: "readonly" } },
   },
 ];

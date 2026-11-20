@@ -49,3 +49,7 @@ node_modules/
 
 # Private keys belong in the vault. tests/seal.test.mjs also fails on one.
 *.private.json
+
+# Local dev secrets for `wrangler pages dev`, and its local D1.
+.dev.vars
+.wrangler/

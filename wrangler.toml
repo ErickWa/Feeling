@@ -1,0 +1,22 @@
+# The Pages project `feeling`. With this file present, `wrangler pages deploy`
+# takes its bindings and variables from here, not from the dashboard.
+# Secrets (HMAC_KEY, MAIL_TOKEN) are set with `wrangler pages secret put` and
+# never written here.
+name = "feeling"
+pages_build_output_dir = "site"
+compatibility_date = "2026-10-19"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "feeling"
+database_id = "0da66a67-0a25-4d59-9a2a-54b2c4caf506"
+migrations_dir = "migrations"
+
+[vars]
+# "true" only at go-live (#28): until then every /api route answers 503.
+ACCOUNTS_OPEN = "false"
+# The kid in site/vault-key.json, once scripts/vault_keygen.mjs has made it.
+VAULT_KID = ""
+FORM1_VERSION = "1.0-draft"
+ACCOUNT_ID = "6010d070417dea8ddd87556f1ecf622c"
+MAIL_FROM = "no-reply@feelingthemachine.com"

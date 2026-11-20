@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Your account · Feeling the Machine</title>
+<meta name="description" content="Join the Feeling the Machine panel, and see or change your choices. 加入《感受机器》联系名单，查看或修改你的选择。">
+<link rel="stylesheet" href="/site.css">
+<link rel="canonical" href="https://feelingthemachine.com/account">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="/">Feeling the Machine <span class="han">感受机器</span></a>
+    <div class="lang" role="group" aria-label="Language / 语言">
+      <button type="button" id="lang-en" data-set="en" aria-pressed="true">English</button>
+      <button type="button" id="lang-zh" data-set="zh" aria-pressed="false">中文</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap account">
+  <p class="eyebrow"><span class="t" lang="en">Your account</span><span class="t" lang="zh-CN">你的账户</span></p>
+
+  <section data-state="loading">
+    <p><span class="t" lang="en">One moment…</span><span class="t" lang="zh-CN">请稍候……</span></p>
+  </section>
+
+  <section data-state="closed" hidden>
+    <h1><span class="t" lang="en">Not open yet.</span><span class="t" lang="zh-CN">尚未开放。</span></h1>
+    <p><span class="t" lang="en">Signing up here opens soon. Until then, email <a href="mailto:hello@feelingthemachine.com?subject=Panel">hello@feelingthemachine.com</a> with the subject “Panel” and you'll receive the agreement to read and sign.</span><span class="t" lang="zh-CN">本网站的注册功能即将开放。在此之前，请发送邮件至 <a href="mailto:hello@feelingthemachine.com?subject=Panel">hello@feelingthemachine.com</a>，主题写“Panel”或“联系名单”，你会收到同意书供阅读和签署。</span></p>
+  </section>
+
+  <section data-state="start" hidden>
+    <h1><span class="t" lang="en">Join, or sign in.</span><span class="t" lang="zh-CN">加入或登录。</span></h1>
+    <p><span class="t" lang="en">Enter your email address. We'll send you a link: to finish joining if you're new, or to sign in if you've joined before. There are no passwords.</span><span class="t" lang="zh-CN">请输入你的邮箱地址，我们会给你发送一个链接：如果你是新成员，用它完成加入；如果你已经加入，用它登录。不设密码。</span></p>
+    <form id="start-form" class="form" novalidate>
+      <label for="email"><span class="t" lang="en">Email address</span><span class="t" lang="zh-CN">邮箱地址</span></label>
+      <input id="email" name="email" type="email" autocomplete="email" required maxlength="254">
+      <button type="submit" class="btn primary"><span class="t" lang="en">Send me a link</span><span class="t" lang="zh-CN">发送链接</span></button>
+    </form>
+    <p class="note"><span class="t" lang="en">Your address is encrypted in this browser before it is sent, so only the researcher's offline archive can read it. <a href="/privacy">How your information is handled</a></span><span class="t" lang="zh-CN">你的邮箱会先在本浏览器中加密再发送，只有研究者的离线档案才能读取。<a href="/privacy">了解信息如何处理</a></span></p>
+  </section>
+
+  <section data-state="sent" hidden>
+    <h1><span class="t" lang="en">Check your inbox.</span><span class="t" lang="zh-CN">请查收邮件。</span></h1>
+    <p><span class="t" lang="en">If the address is right, a link is on its way. It works once, for 30 minutes. Nothing arrived? Look in your spam folder, then try again.</span><span class="t" lang="zh-CN">如果地址正确，链接正在发送中。链接只能使用一次，30分钟内有效。没有收到？请先检查垃圾邮件，然后再试一次。</span></p>
+  </section>
+
+  <section data-state="join" hidden>
+    <h1><span class="t" lang="en">Join the contact panel.</span><span class="t" lang="zh-CN">加入联系名单。</span></h1>
+    <div class="agreement">
+      <p><span class="t" lang="en">The panel agreement's final text will appear here before sign-up opens.</span><span class="t" lang="zh-CN">联系名单协议的正式文本将在注册开放前显示在此处。</span></p>
+    </div>
+    <form id="join-form" class="form" novalidate>
+      <label for="name"><span class="t" lang="en">Your name</span><span class="t" lang="zh-CN">你的姓名</span></label>
+      <input id="name" name="name" autocomplete="name" required maxlength="200">
+      <p class="hint"><span class="t" lang="en">Encrypted in this browser. The website never sees it.</span><span class="t" lang="zh-CN">在本浏览器中加密，网站永远看不到。</span></p>
+
+      <label for="role"><span class="t" lang="en">Your work</span><span class="t" lang="zh-CN">你的工作</span></label>
+      <select id="role" name="role" required>
+        <option value="">—</option>
+        <option value="research">Research · 研究</option>
+        <option value="engineering">Engineering · 工程</option>
+        <option value="product-data">Product or data · 产品或数据</option>
+        <option value="leadership">Leadership · 管理</option>
+        <option value="other">Other · 其他</option>
+      </select>
+
+      <label for="age"><span class="t" lang="en">Age</span><span class="t" lang="zh-CN">年龄</span></label>
+      <select id="age" name="ageBand" required>
+        <option value="">—</option>
+        <option>18-29</option><option>30-39</option><option>40-49</option><option>50-59</option><option>60+</option>
+      </select>
+      <p class="hint"><span class="t" lang="en">The panel is for adults, 18 and over.</span><span class="t" lang="zh-CN">联系名单仅限18岁及以上的成年人。</span></p>
+
+      <label for="country"><span class="t" lang="en">Where you live</span><span class="t" lang="zh-CN">你所在的地区</span></label>
+      <select id="country" name="country" required>
+        <option value="">—</option>
+        <option value="US">United States · 美国</option>
+        <option value="CN">Mainland China · 中国大陆</option>
+        <option value="XX">Elsewhere · 其他地区</option>
+      </select>
+
+      <fieldset>
+        <legend><span class="t" lang="en">I agree</span><span class="t" lang="zh-CN">我同意</span></legend>
+        <label class="check"><input type="checkbox" name="panel" required> <span class="t" lang="en">to be on the contact panel, so the researcher may contact me about conversations and studies. (Required)</span><span class="t" lang="zh-CN">加入联系名单，研究者可以就访谈和研究与我联系。（必选）</span></label>
+        <label class="check" id="cross-border-row" hidden><input type="checkbox" name="crossBorder"> <span class="t" lang="en">to my information being transferred to, and stored, outside mainland China, as the privacy policy describes. (Required in mainland China)</span><span class="t" lang="zh-CN">我的信息按隐私政策所述传输至中国大陆境外并在境外保存。（中国大陆用户必选）</span></label>
+        <label class="check"><input type="checkbox" name="readAgreement" required> <span class="t" lang="en">I have read the panel agreement and the <a href="/privacy">privacy policy</a>. (Required)</span><span class="t" lang="zh-CN">我已阅读联系名单协议和<a href="/privacy">隐私政策</a>。（必选）</span></label>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="t" lang="en">I'm also interested in (optional, change any time)</span><span class="t" lang="zh-CN">我也有兴趣（可选，随时可以修改）</span></legend>
+        <label class="check"><input type="checkbox" name="oralHistory"> <span class="t" lang="en">recording an oral history</span><span class="t" lang="zh-CN">录制一次口述历史访谈</span></label>
+        <label class="check"><input type="checkbox" name="futureStudies"> <span class="t" lang="en">hearing about future studies</span><span class="t" lang="zh-CN">了解今后的研究</span></label>
+        <label class="check"><input type="checkbox" name="updates"> <span class="t" lang="en">the twice-yearly project update</span><span class="t" lang="zh-CN">每半年一次的项目进展通知</span></label>
+      </fieldset>
+
+      <button type="submit" class="btn primary"><span class="t" lang="en">Join</span><span class="t" lang="zh-CN">加入</span></button>
+    </form>
+  </section>
+
+  <section data-state="me" hidden>
+    <h1><span class="t" lang="en">You're on the panel.</span><span class="t" lang="zh-CN">你已在联系名单中。</span></h1>
+    <p><span class="t" lang="en">Your participant number is</span><span class="t" lang="zh-CN">你的参与者编号是</span> <b class="pid" id="pid"></b></p>
+    <dl class="choices">
+      <dt><span class="t" lang="en">Oral history</span><span class="t" lang="zh-CN">口述历史</span></dt><dd data-field="oral_history"></dd>
+      <dt><span class="t" lang="en">Future studies</span><span class="t" lang="zh-CN">今后的研究</span></dt><dd data-field="future_studies"></dd>
+      <dt><span class="t" lang="en">Project updates</span><span class="t" lang="zh-CN">项目进展通知</span></dt><dd data-field="updates"></dd>
+    </dl>
+    <template id="yes"><span class="t" lang="en">Yes</span><span class="t" lang="zh-CN">是</span></template>
+    <template id="no"><span class="t" lang="en">No</span><span class="t" lang="zh-CN">否</span></template>
+    <p class="note"><span class="t" lang="en">Changing your choices, downloading your record, withdrawing and deleting your account arrive here shortly. Until then, write to hello@feelingthemachine.com.</span><span class="t" lang="zh-CN">修改选择、下载记录、退出和删除账户的功能即将在此提供。在此之前，请写信至 hello@feelingthemachine.com。</span></p>
+    <button type="button" id="signout" class="btn ghost"><span class="t" lang="en">Sign out</span><span class="t" lang="zh-CN">退出登录</span></button>
+  </section>
+
+  <div class="msg" id="msg" role="alert" hidden>
+    <p data-msg="link_expired"><span class="t" lang="en">That link has expired or was already used. Enter your email again for a new one.</span><span class="t" lang="zh-CN">该链接已过期或已被使用。请重新输入邮箱获取新链接。</span></p>
+    <p data-msg="already_joined"><span class="t" lang="en">This address has already joined. Enter it again to sign in.</span><span class="t" lang="zh-CN">该邮箱已经加入。请重新输入以登录。</span></p>
+    <p data-msg="slow_down"><span class="t" lang="en">Too many links in the last hour. Please try again later.</span><span class="t" lang="zh-CN">过去一小时内发送的链接过多，请稍后再试。</span></p>
+    <p data-msg="invalid"><span class="t" lang="en">Please check what you entered.</span><span class="t" lang="zh-CN">请检查你填写的内容。</span></p>
+    <p data-msg="server"><span class="t" lang="en">Something went wrong on our side. Please try again, or write to hello@feelingthemachine.com.</span><span class="t" lang="zh-CN">我们这边出了问题。请重试，或写信至 hello@feelingthemachine.com。</span></p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><a href="/">Feeling the Machine · 感受机器</a> · <a href="/privacy"><span class="t" lang="en">Privacy</span><span class="t" lang="zh-CN">隐私政策</span></a></span>
+  </div>
+</footer>
+
+<script src="/site.js" defer></script>
+<script type="module" src="/account.js"></script>
+</body>
+</html>
