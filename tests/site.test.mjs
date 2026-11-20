@@ -1,4 +1,4 @@
-// Checks on site/ as it sits in the repo, which is exactly what gets deployed.
+// Checks on every page in site/ as it sits in the repo, which is exactly what gets deployed.
 //
 // WHAT THIS CANNOT SEE: what Cloudflare serves (the header floor here is the
 // file's, not the response's), whether the mailbox the page names exists
@@ -8,29 +8,49 @@
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 
 const read = (p) => readFileSync(new URL(`../site/${p}`, import.meta.url), "utf8");
-const html = read("index.html");
+const pages = readdirSync(new URL("../site/", import.meta.url)).filter((f) => f.endsWith(".html"));
 const headers = read("_headers");
 
-test("every English string has a Chinese partner", () => {
-  const en = html.match(/class="t" lang="en"/g)?.length ?? 0;
-  const zh = html.match(/class="t" lang="zh-CN"/g)?.length ?? 0;
-  assert.ok(en > 20, `only ${en} English strings: has the page's markup changed shape?`);
-  assert.equal(zh, en, `${en} English strings but ${zh} Chinese`);
+for (const page of pages) {
+  const html = read(page);
+
+  test(`${page}: every English string has a Chinese partner`, () => {
+    const en = html.match(/class="t" lang="en"/g)?.length ?? 0;
+    const zh = html.match(/class="t" lang="zh-CN"/g)?.length ?? 0;
+    assert.ok(en > 10, `only ${en} English strings: has the page's markup changed shape?`);
+    assert.equal(zh, en, `${en} English strings but ${zh} Chinese`);
+  });
+
+  test(`${page}: the only contact address is at the project's own domain`, () => {
+    const addrs = new Set(html.match(/[\w.+-]+@[\w-]+(\.[\w-]+)+/g));
+    assert.deepEqual([...addrs], ["hello@feelingthemachine.com"]);
+  });
+
+  test(`${page}: no inline script, style block or style attribute (the CSP refuses them)`, () => {
+    assert.doesNotMatch(html, /<script(?![^>]*\ssrc=)[^>]*>/);
+    assert.doesNotMatch(html, /<style[\s>]/);
+    assert.doesNotMatch(html, /\sstyle="/);
+    assert.doesNotMatch(html, /\son[a-z]+="/);
+  });
+}
+
+// The policy's markers, after the portfolio's legal.mjs, which this repo does
+// not take yet: an operator, an effective date in both languages, a contact at
+// this domain (checked above). WHAT THIS CANNOT SEE: whether the policy is
+// TRUE. It is written against protocol/participant-accounts.md and
+// data-management.md; change either and re-read the policy by hand.
+test("privacy.html names its operator and its effective date in both languages", () => {
+  const html = read("privacy.html");
+  assert.match(html, /Erick Watson/);
+  assert.match(html, /in effect from \d{1,2} \w+ 20\d\d/i);
+  assert.match(html, /自20\d\d年\d{1,2}月\d{1,2}日起生效/);
 });
 
-test("the contact address is at the project's own domain", () => {
-  const addrs = new Set(html.match(/[\w.+-]+@[\w-]+(\.[\w-]+)+/g));
-  assert.deepEqual([...addrs], ["hello@feelingthemachine.com"]);
-});
-
-test("no inline script, style block or style attribute (the CSP refuses them)", () => {
-  assert.doesNotMatch(html, /<script(?![^>]*\ssrc=)[^>]*>/);
-  assert.doesNotMatch(html, /<style[\s>]/);
-  assert.doesNotMatch(html, /\sstyle="/);
-  assert.doesNotMatch(html, /\son[a-z]+="/);
+test("the home page links the privacy policy", () => {
+  assert.match(read("index.html"), /href="\/privacy"/);
 });
 
 test("_headers declares the portfolio floor in one /* rule", () => {

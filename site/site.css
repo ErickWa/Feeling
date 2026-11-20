@@ -101,6 +101,9 @@ html[data-lang="zh"] section.block > h2 { font-family: var(--font-han); font-wei
 section.block > h2 .no { display: block; font: 500 12px/1 var(--font-mono); color: var(--ink-2); letter-spacing: 0.1em; margin-bottom: 10px; }
 .body p { margin: 0 0 16px; max-width: 65ch; }
 .body p:last-child { margin-bottom: 0; }
+.body ul { margin: 0 0 16px; padding-left: 20px; max-width: 65ch; }
+.body li { margin-bottom: 8px; }
+.hero.policy { grid-template-columns: 1fr; padding-bottom: 24px; }
 
 .ways { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--rule); }
 .way { padding: 24px; display: flex; flex-direction: column; gap: 12px; }

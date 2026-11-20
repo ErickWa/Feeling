@@ -1,7 +1,4 @@
 (function () {
-  // The address is written once, in index.html, so the page works without this script.
-  var link = document.getElementById("email-link");
-  var EMAIL = link.textContent;
   var root = document.documentElement;
   function setLang(l) {
     root.setAttribute("data-lang", l);
@@ -17,7 +14,12 @@
   document.querySelectorAll(".lang button").forEach(function (b) {
     b.addEventListener("click", function () { setLang(b.getAttribute("data-set")); });
   });
-  document.getElementById("copy-email").addEventListener("click", function () {
+  // The copy button is on the home page only. The address is written once, in
+  // index.html, so the page works without this script.
+  var copy = document.getElementById("copy-email");
+  if (!copy) return;
+  var EMAIL = document.getElementById("email-link").textContent;
+  copy.addEventListener("click", function () {
     var s = document.getElementById("copy-status");
     var ok = root.getAttribute("data-lang") === "zh" ? "已复制" : "Copied";
     var no = root.getAttribute("data-lang") === "zh" ? "请手动复制上面的地址" : "Copy the address above by hand";
