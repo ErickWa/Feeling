@@ -44,6 +44,6 @@ Done on 2026-11-20: the repo, the labels, milestones and timeline issues, the Pa
 
 `site/` is served as it is, with no build step, by the Cloudflare Pages project `feeling` at https://feelingthemachine.com. A push to `master` runs `npm run check` and then deploys from the same CI job (once the `CLOUDFLARE_API_TOKEN` secret is set). To deploy by hand: `npx wrangler@4.152.0 pages deploy site --project-name=feeling --branch=master`.
 
-`hello@feelingthemachine.com` is a Cloudflare Email Routing rule, forwarding to the researcher's own inbox. The page names it, so the routing must exist before the page does.
+Mail to any address at feelingthemachine.com is forwarded to the researcher's own inbox by a Cloudflare Email Routing catch-all (set up 2026-11-20). The page and the privacy policy name `hello@`; routing has to work before either names an address.
 
 Google Fonts may not load in mainland China; the page falls back to system Chinese fonts. Cloudflare can also be slow from China, so send Chinese participants the PDF information sheet directly as well.
