@@ -53,14 +53,16 @@ test("the home page links the privacy policy", () => {
   assert.match(read("index.html"), /href="\/privacy"/);
 });
 
-test("_headers declares the portfolio floor in one /* rule", () => {
+test("_headers declares the portfolio floor in its /* rule, one rule per path", () => {
   const rules = headers.split("\n").filter((l) => /^\S/.test(l) && !l.startsWith("#"));
-  assert.deepEqual(rules, ["/*"], "exactly one rule per path, and only /*");
-  const csp = headers.match(/^\s+Content-Security-Policy: (.+)$/m)?.[1] ?? "";
-  assert.match(headers, /^\s+X-Content-Type-Options: nosniff$/m);
-  assert.match(headers, /^\s+Strict-Transport-Security: max-age=[1-9]\d{6,}/m);
-  assert.match(headers, /^\s+Referrer-Policy: \S+/m);
-  assert.ok(/^\s+X-Frame-Options: DENY$/m.test(headers) || /frame-ancestors 'none'/.test(csp), "framing refused");
+  assert.equal(new Set(rules).size, rules.length, "two rules for one path: Pages keeps only one");
+  assert.ok(rules.includes("/*"), "the floor lives in the /* rule");
+  const floor = headers.slice(headers.indexOf("\n/*\n"));
+  const csp = floor.match(/^\s+Content-Security-Policy: (.+)$/m)?.[1] ?? "";
+  assert.match(floor, /^\s+X-Content-Type-Options: nosniff$/m);
+  assert.match(floor, /^\s+Strict-Transport-Security: max-age=[1-9]\d{6,}/m);
+  assert.match(floor, /^\s+Referrer-Policy: \S+/m);
+  assert.ok(/^\s+X-Frame-Options: DENY$/m.test(floor) || /frame-ancestors 'none'/.test(csp), "framing refused");
   assert.match(csp, /base-uri /);
   assert.match(csp, /form-action /);
   assert.doesNotMatch(csp, /unsafe-inline|unsafe-eval/);

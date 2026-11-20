@@ -6,17 +6,24 @@
 # EXACTLY ONE RULE PER PATH. Pages silently does not merge two rules with the
 # identical path; add a header to the block that exists.
 
+/fonts/*
+  # A different path from `/*`, so Pages merges it with the block below. Font
+  # files change only when scripts/subset_han.sh or a Fontsource upgrade
+  # rewrites them; a month of caching is safe, and a stale glyph set only
+  # falls back to the system's Chinese serif.
+  Cache-Control: public, max-age=2592000
+
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: max-age=63072000; includeSubDomains
   Permissions-Policy: camera=(), geolocation=(), microphone=(), payment=(), usb=()
-  Content-Security-Policy: default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'
 
-# THE ONE THIRD PARTY IS GOOGLE FONTS, which the page shipped with. It is also
-# the one thing that may not load in mainland China; the font stacks fall back
-# to system Chinese fonts. Self-hosting would remove it and the CSP lines with it.
+# NOTHING IS LOADED FROM ANY OTHER ORIGIN. Google Fonts was the last third
+# party and left on 2026-11-20; the fonts are in /fonts/. A new external
+# source is a change to the privacy policy first and to this line second.
 #
 # NO 'unsafe-inline' ANYWHERE: the page's <style> and <script> were moved to
 # site.css and site.js so the policy could stay shut. A style attribute or

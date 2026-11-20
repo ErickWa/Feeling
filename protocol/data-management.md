@@ -33,3 +33,5 @@ The key lives in a separate vault: `03_key/key.csv` with columns `id,name`.
 - **Withdrawals:** act within 14 days, log the date and action in `07_admin/withdrawal-log.csv`, and confirm in writing.
 - **Cross-border:** log every move of material out of China, with the date, the files and the consent reference. Interviews in China avoid sensitive personal information.
 - **Recordings:** copy them into the vault the same day, then delete them from the recorder or phone.
+- **Panel emails:** mail to any feelingthemachine.com address is forwarded to the researcher's inbox. Once a person's details are in the vault and that has been checked, delete their emails from the mailbox. The privacy policy promises this.
+- **Consent records** (the consent register, and on the site each consent row) are kept as long as any material they cover, because they are the proof of consent. Contact details still go at 12 months.
