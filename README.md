@@ -46,4 +46,4 @@ Done on 2026-11-20: the repo, the labels, milestones and timeline issues, the Pa
 
 Mail to any address at feelingthemachine.com is forwarded to the researcher's own inbox by a Cloudflare Email Routing catch-all (set up 2026-11-20). The page and the privacy policy name `hello@`; routing has to work before either names an address.
 
-Google Fonts may not load in mainland China; the page falls back to system Chinese fonts. Cloudflare can also be slow from China, so send Chinese participants the PDF information sheet directly as well.
+Fonts are served from the site itself (no Google), so nothing on the page depends on a service blocked in mainland China. Cloudflare can still be slow from China, so send Chinese participants the PDF information sheet directly as well.

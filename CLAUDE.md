@@ -29,10 +29,15 @@ served at **https://feelingthemachine.com** by the Cloudflare Pages project
 4. **The site holds nothing it can read back about who someone is.**
    Participant accounts (`protocol/participant-accounts.md`, decided
    2026-11-20) seal name and email in the browser with the vault's public key;
-   the private key never leaves the vault. No analytics and no third party but
-   Google Fonts. Accounts go live only after the privacy policy (EN and ZH) is
-   published at this domain.
-5. **Released forms are never edited.** A change is a new `forms/vX.Y/`.
+   the private key never leaves the vault. No analytics, and nothing loaded
+   from another origin: fonts are self-hosted in `site/fonts/`. Cloudflare is
+   the only company in the loop, and the privacy policy at `/privacy` says
+   exactly what it sees; change what the site does and that page changes in
+   the same commit.
+6. **Chinese text changes need the font re-cut.** `scripts/subset_han.sh`
+   rebuilds Noto Serif SC from the pages; `tests/fonts.test.mjs` fails until
+   you run it.
+7. **Released forms are never edited.** A change is a new `forms/vX.Y/`.
 
 ## Not yet
 
