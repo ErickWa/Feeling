@@ -86,7 +86,14 @@ tombstones). Like `make_vault.sh`, it refuses to write inside this repo.
   this domain.
 - Encryption with WebCrypto's ECDH P-256 + HKDF + AES-GCM, which every browser
   at the portfolio floor (Safari 16.4, Chrome 111) has. X25519 would be nicer
-  but is not at the floor. The sealing and HMAC code is pure functions with tests.
+  but is not at the floor. `site/seal.js` is the one implementation, imported
+  by the page to seal and by the vault scripts to open; the field name is bound
+  in, so a sealed email cannot be opened as a name. Tested in
+  `tests/seal.test.mjs`; a Chrome-made seal was opened in Node on 2026-11-20.
+  Safari is untried.
+- The key: `scripts/vault_keygen.mjs` writes the private half to
+  `07_admin/site-keys/<kid>.private.json` in the vault and the public half to
+  `site/vault-key.json`. Rotation keeps old private keys, so old seals open.
 - Session cookie: `HttpOnly; Secure; SameSite=Lax`, short-lived. Sign-in
   tokens are single-use and stored only as hashes.
 - Rate limits per IP and per address HMAC on the two email-sending endpoints.

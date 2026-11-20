@@ -46,3 +46,6 @@ node_modules/
 !.dev.vars.example
 .env*
 !.env.example
+
+# Private keys belong in the vault. tests/seal.test.mjs also fails on one.
+*.private.json

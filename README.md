@@ -32,6 +32,7 @@ These are edited in Claude and exported here when a version is frozen:
 Done on 2026-11-20: the repo, the labels, milestones and timeline issues, the Pages project and the domain. What is left:
 
 1. Create your encrypted vault (Cryptomator or VeraCrypt), then run `scripts/make_vault.sh /path/to/mounted/vault`.
+2. Create the site's sealing key: `node scripts/vault_keygen.mjs /path/to/mounted/vault`. The private key goes to `07_admin/site-keys/` in the vault; commit the `site/vault-key.json` it writes. Back the vault up straight afterwards: without that private key, nothing participants seal on the site can ever be read.
 
 ## Day-to-day
 

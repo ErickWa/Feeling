@@ -21,8 +21,19 @@ export default [
     },
   },
   {
+    // seal.js is the one browser file that is a module: the sign-up page will
+    // import it, and so do the vault scripts in Node. Only globals both have.
+    name: "feeling/seal",
+    files: ["site/seal.js"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: "module",
+      globals: { crypto: "readonly", btoa: "readonly", atob: "readonly", TextEncoder: "readonly", TextDecoder: "readonly" },
+    },
+  },
+  {
     name: "feeling/node",
-    files: ["*.mjs", "tests/**/*.mjs"],
-    languageOptions: { ecmaVersion: 2024, sourceType: "module", globals: { URL: "readonly" } },
+    files: ["*.mjs", "tests/**/*.mjs", "scripts/**/*.mjs"],
+    languageOptions: { ecmaVersion: 2024, sourceType: "module", globals: { URL: "readonly", process: "readonly", console: "readonly" } },
   },
 ];
