@@ -12,7 +12,7 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { DatabaseSync } from "node:sqlite";
 import { normalizeEmail, sealedFor, validateJoin } from "../lib/accounts.js";
-import { gate, join, me, signin, signout, start } from "../lib/api.js";
+import { choices, gate, join, me, remove, signin, signout, start } from "../lib/api.js";
 import { generateVaultKey, importPublicKey, open, seal, vaultKeys } from "../site/seal.js";
 
 const ORIGIN = "https://feelingthemachine.com";
@@ -206,4 +206,83 @@ test("a failure answers 500 without echoing the request", async () => {
     { email: "ada@example.com", sealedEmail: await seal(w.pub, "email", "ada@example.com") });
   assert.equal(res.status, 500);
   assert.doesNotMatch(await res.text(), /ada/);
+});
+
+// ---- #26: the participant's own page ----
+
+async function signedUp(w, email = "ada@example.com", extra = {}) {
+  const res = await joinOne(w, email, extra);
+  return { id: (await res.json()).id, cookie: `__Host-ftm=${cookieOf(res)}` };
+}
+const mine = async (w, cookie) => (await call(w.env, me, "/api/me", undefined, { cookie })).json();
+
+test("me returns everything the site holds, sealed values included", async () => {
+  const w = await world();
+  const { cookie } = await signedUp(w);
+  const r = await mine(w, cookie);
+  assert.match(r.participant.sealed_name, /^v1\./);
+  assert.match(r.participant.sealed_email, /^v1\./);
+  assert.match(r.participant.email_hmac, /^[0-9a-f]{64}$/);
+  assert.deepEqual(r.requests, []);
+});
+
+test("changing choices adds a consent row and never edits one", async () => {
+  const w = await world();
+  const { cookie } = await signedUp(w);
+  const res = await call(w.env, choices, "/api/choices", { panel: true, oralHistory: false, futureStudies: true, updates: true }, { cookie });
+  assert.equal(res.status, 200);
+  const r = await mine(w, cookie);
+  assert.equal(r.consents.length, 2);
+  assert.deepEqual([r.consents[0].oral_history, r.consents[1].oral_history, r.consents[1].future_studies], [1, 0, 1]);
+  assert.equal(r.consents[1].form_version, r.consents[0].form_version, "same agreement, so same version");
+  assert.deepEqual(r.requests, [], "a change of interests is not a request for the vault");
+});
+
+test("leaving zeroes everything and logs a request; rejoining needs consent again", async () => {
+  const w = await world();
+  const { cookie } = await signedUp(w);
+  await call(w.env, choices, "/api/choices", { panel: false, oralHistory: true }, { cookie });
+  let r = await mine(w, cookie);
+  assert.deepEqual([r.consents.at(-1).panel, r.consents.at(-1).oral_history], [0, 0]);
+  assert.equal(r.requests[0].kind, "leave");
+  assert.equal((await call(w.env, choices, "/api/choices", { panel: true }, { cookie })).status, 400, "rejoin without agreeing");
+  w.env.FORM1_VERSION = "1.1";
+  assert.equal((await call(w.env, choices, "/api/choices", { panel: true, agree: true, updates: true }, { cookie })).status, 200);
+  r = await mine(w, cookie);
+  assert.equal(r.consents.at(-1).panel, 1);
+  assert.equal(r.consents.at(-1).form_version, "1.1", "a rejoin agrees to the current version");
+  assert.deepEqual(r.requests.map((q) => q.kind), ["leave", "rejoin"]);
+});
+
+test("rejoining from mainland China needs the cross-border consent again", async () => {
+  const w = await world();
+  const { cookie } = await signedUp(w, "li@example.cn", { country: "CN", crossBorder: true });
+  await call(w.env, choices, "/api/choices", { panel: false }, { cookie });
+  assert.equal((await call(w.env, choices, "/api/choices", { panel: true, agree: true }, { cookie })).status, 400);
+  assert.equal((await call(w.env, choices, "/api/choices", { panel: true, agree: true, crossBorder: true }, { cookie })).status, 200);
+});
+
+test("deleting removes every row about the person but the request, and the address can join anew", async () => {
+  const w = await world();
+  const { id, cookie } = await signedUp(w);
+  await signedUp(w, "grace@example.com");
+  assert.equal((await call(w.env, remove, "/api/delete", {}, { cookie })).status, 400, "needs confirm");
+  const res = await call(w.env, remove, "/api/delete", { confirm: "delete" }, { cookie });
+  assert.equal(res.status, 200);
+  assert.match(res.headers.get("set-cookie"), /Max-Age=0/);
+  assert.equal((await call(w.env, me, "/api/me", undefined, { cookie })).status, 401);
+  const db = w.env.DB.raw;
+  for (const t of ["participants", "consents", "sessions"]) {
+    assert.equal(db.prepare(`SELECT count(*) AS n FROM ${t} WHERE ${t === "participants" ? "id" : "participant_id"} = ?`).get(id).n, 0, t);
+  }
+  assert.deepEqual(db.prepare("SELECT participant_id, kind FROM requests").all().map((r) => ({ ...r })), [{ participant_id: id, kind: "delete" }]);
+  assert.equal(db.prepare("SELECT count(*) AS n FROM participants").get().n, 1, "the other participant is untouched");
+  const again = await joinOne(w, "ada@example.com");
+  assert.deepEqual(await again.json(), { id: "P003" }, "a new person with a new number");
+});
+
+test("the page's actions need a session", async () => {
+  const w = await world();
+  assert.equal((await call(w.env, choices, "/api/choices", { panel: true })).status, 401);
+  assert.equal((await call(w.env, remove, "/api/delete", { confirm: "delete" })).status, 401);
 });

@@ -24,6 +24,21 @@
 <main class="wrap account">
   <p class="eyebrow"><span class="t" lang="en">Your account</span><span class="t" lang="zh-CN">你的账户</span></p>
 
+  <!-- Messages sit at the top and scroll into view, so a result is seen wherever the button was. -->
+  <p class="ok" id="ok" role="status" hidden>
+    <span data-ok="saved"><span class="t" lang="en">Saved.</span><span class="t" lang="zh-CN">已保存。</span></span>
+    <span data-ok="leave"><span class="t" lang="en">You've left the panel. Nobody will contact you.</span><span class="t" lang="zh-CN">你已退出联系名单，不会再有人联系你。</span></span>
+    <span data-ok="rejoin"><span class="t" lang="en">Welcome back.</span><span class="t" lang="zh-CN">欢迎回来。</span></span>
+  </p>
+
+  <div class="msg" id="msg" role="alert" hidden>
+    <p data-msg="link_expired"><span class="t" lang="en">That link has expired or was already used. Enter your email again for a new one.</span><span class="t" lang="zh-CN">该链接已过期或已被使用。请重新输入邮箱获取新链接。</span></p>
+    <p data-msg="already_joined"><span class="t" lang="en">This address has already joined. Enter it again to sign in.</span><span class="t" lang="zh-CN">该邮箱已经加入。请重新输入以登录。</span></p>
+    <p data-msg="slow_down"><span class="t" lang="en">Too many links in the last hour. Please try again later.</span><span class="t" lang="zh-CN">过去一小时内发送的链接过多，请稍后再试。</span></p>
+    <p data-msg="invalid"><span class="t" lang="en">Please check what you entered.</span><span class="t" lang="zh-CN">请检查你填写的内容。</span></p>
+    <p data-msg="server"><span class="t" lang="en">Something went wrong on our side. Please try again, or write to hello@feelingthemachine.com.</span><span class="t" lang="zh-CN">我们这边出了问题。请重试，或写信至 hello@feelingthemachine.com。</span></p>
+  </div>
+
   <section data-state="loading">
     <p><span class="t" lang="en">One moment…</span><span class="t" lang="zh-CN">请稍候……</span></p>
   </section>
@@ -103,26 +118,60 @@
   </section>
 
   <section data-state="me" hidden>
-    <h1><span class="t" lang="en">You're on the panel.</span><span class="t" lang="zh-CN">你已在联系名单中。</span></h1>
+    <h1>
+      <span data-when="in"><span class="t" lang="en">You're on the panel.</span><span class="t" lang="zh-CN">你已在联系名单中。</span></span>
+      <span data-when="out"><span class="t" lang="en">You've left the panel.</span><span class="t" lang="zh-CN">你已退出联系名单。</span></span>
+    </h1>
     <p><span class="t" lang="en">Your participant number is</span><span class="t" lang="zh-CN">你的参与者编号是</span> <b class="pid" id="pid"></b></p>
-    <dl class="choices">
-      <dt><span class="t" lang="en">Oral history</span><span class="t" lang="zh-CN">口述历史</span></dt><dd data-field="oral_history"></dd>
-      <dt><span class="t" lang="en">Future studies</span><span class="t" lang="zh-CN">今后的研究</span></dt><dd data-field="future_studies"></dd>
-      <dt><span class="t" lang="en">Project updates</span><span class="t" lang="zh-CN">项目进展通知</span></dt><dd data-field="updates"></dd>
-    </dl>
-    <template id="yes"><span class="t" lang="en">Yes</span><span class="t" lang="zh-CN">是</span></template>
-    <template id="no"><span class="t" lang="en">No</span><span class="t" lang="zh-CN">否</span></template>
-    <p class="note"><span class="t" lang="en">Changing your choices, downloading your record, withdrawing and deleting your account arrive here shortly. Until then, write to hello@feelingthemachine.com.</span><span class="t" lang="zh-CN">修改选择、下载记录、退出和删除账户的功能即将在此提供。在此之前，请写信至 hello@feelingthemachine.com。</span></p>
-    <button type="button" id="signout" class="btn ghost"><span class="t" lang="en">Sign out</span><span class="t" lang="zh-CN">退出登录</span></button>
+
+    <form id="choices-form" class="form" data-when="in" novalidate>
+      <fieldset>
+        <legend><span class="t" lang="en">I'm interested in</span><span class="t" lang="zh-CN">我有兴趣</span></legend>
+        <label class="check"><input type="checkbox" name="oralHistory"> <span class="t" lang="en">recording an oral history</span><span class="t" lang="zh-CN">录制一次口述历史访谈</span></label>
+        <label class="check"><input type="checkbox" name="futureStudies"> <span class="t" lang="en">hearing about future studies</span><span class="t" lang="zh-CN">了解今后的研究</span></label>
+        <label class="check"><input type="checkbox" name="updates"> <span class="t" lang="en">the twice-yearly project update</span><span class="t" lang="zh-CN">每半年一次的项目进展通知</span></label>
+      </fieldset>
+      <div class="row">
+        <button type="submit" class="btn primary"><span class="t" lang="en">Save my choices</span><span class="t" lang="zh-CN">保存我的选择</span></button>
+        <button type="button" id="leave" class="btn ghost"><span class="t" lang="en">Leave the panel</span><span class="t" lang="zh-CN">退出联系名单</span></button>
+      </div>
+      <p class="hint"><span class="t" lang="en">Leaving means you won't be contacted again. Your contact details are deleted 12 months later, and you can rejoin here any time before then.</span><span class="t" lang="zh-CN">退出后不会再有人联系你。你的联系方式将在12个月后删除；在此之前，你可以随时在这里重新加入。</span></p>
+    </form>
+
+    <form id="rejoin-form" class="form" data-when="out" novalidate>
+      <fieldset>
+        <legend><span class="t" lang="en">Rejoin</span><span class="t" lang="zh-CN">重新加入</span></legend>
+        <label class="check"><input type="checkbox" name="agree" required> <span class="t" lang="en">I agree to be on the contact panel again, under the current panel agreement and <a href="/privacy">privacy policy</a>.</span><span class="t" lang="zh-CN">我同意按照现行的联系名单协议和<a href="/privacy">隐私政策</a>重新加入联系名单。</span></label>
+        <label class="check" id="rejoin-cross-border" hidden><input type="checkbox" name="crossBorder"> <span class="t" lang="en">I consent again to my information being transferred to, and stored, outside mainland China.</span><span class="t" lang="zh-CN">我再次同意我的信息传输至中国大陆境外并在境外保存。</span></label>
+      </fieldset>
+      <button type="submit" class="btn primary"><span class="t" lang="en">Rejoin</span><span class="t" lang="zh-CN">重新加入</span></button>
+    </form>
+
+    <h2 class="sub"><span class="t" lang="en">Your consent history</span><span class="t" lang="zh-CN">你的同意记录</span></h2>
+    <ol class="history" id="history"></ol>
+    <template id="history-row"><li><time></time> <span class="t" lang="en">Panel agreement</span><span class="t" lang="zh-CN">联系名单协议</span> <code data-version></code>: <span data-field="panel"></span> · <span class="t" lang="en">oral history</span><span class="t" lang="zh-CN">口述历史</span> <span data-field="oral_history"></span> · <span class="t" lang="en">studies</span><span class="t" lang="zh-CN">研究</span> <span data-field="future_studies"></span> · <span class="t" lang="en">updates</span><span class="t" lang="zh-CN">进展通知</span> <span data-field="updates"></span></li></template>
+    <template id="yes"><span class="t" lang="en">yes</span><span class="t" lang="zh-CN">是</span></template>
+    <template id="no"><span class="t" lang="en">no</span><span class="t" lang="zh-CN">否</span></template>
+
+    <h2 class="sub"><span class="t" lang="en">Your record</span><span class="t" lang="zh-CN">你的记录</span></h2>
+    <p><span class="t" lang="en">Download everything this website holds about you, as a file. Your name and email are in it only in encrypted form: the website cannot read them, so it cannot show them to you either. For what the researcher's archive holds, write to hello@feelingthemachine.com.</span><span class="t" lang="zh-CN">以文件形式下载本网站保存的关于你的全部信息。其中你的姓名和邮箱只以加密形式存在：网站无法读取，因此也无法显示给你。如需了解研究者档案中保存的内容，请写信至 hello@feelingthemachine.com。</span></p>
+    <button type="button" id="download" class="btn ghost"><span class="t" lang="en">Download my record</span><span class="t" lang="zh-CN">下载我的记录</span></button>
+
+    <h2 class="sub"><span class="t" lang="en">Delete your account</span><span class="t" lang="zh-CN">删除账户</span></h2>
+    <p><span class="t" lang="en">This removes everything this website holds about you, at once. Only your participant number, the request and its date remain, so the researcher can delete your details from the archive too, within 14 days, and confirm in writing. Oral history recordings follow their release form; write to hello@feelingthemachine.com about those.</span><span class="t" lang="zh-CN">这会立即删除本网站保存的关于你的全部信息，只保留你的参与者编号、请求内容和日期，以便研究者在14天内同样从档案中删除你的信息，并书面确认。口述历史录音按其授权书处理，相关事宜请写信至 hello@feelingthemachine.com。</span></p>
+    <label class="check"><input type="checkbox" id="delete-confirm"> <span class="t" lang="en">I understand this deletes my account and cannot be undone.</span><span class="t" lang="zh-CN">我明白这会删除我的账户，且无法撤销。</span></label>
+    <div class="row">
+      <button type="button" id="delete" class="btn danger" disabled><span class="t" lang="en">Delete my account</span><span class="t" lang="zh-CN">删除我的账户</span></button>
+      <button type="button" id="signout" class="btn ghost"><span class="t" lang="en">Sign out</span><span class="t" lang="zh-CN">退出登录</span></button>
+    </div>
   </section>
 
-  <div class="msg" id="msg" role="alert" hidden>
-    <p data-msg="link_expired"><span class="t" lang="en">That link has expired or was already used. Enter your email again for a new one.</span><span class="t" lang="zh-CN">该链接已过期或已被使用。请重新输入邮箱获取新链接。</span></p>
-    <p data-msg="already_joined"><span class="t" lang="en">This address has already joined. Enter it again to sign in.</span><span class="t" lang="zh-CN">该邮箱已经加入。请重新输入以登录。</span></p>
-    <p data-msg="slow_down"><span class="t" lang="en">Too many links in the last hour. Please try again later.</span><span class="t" lang="zh-CN">过去一小时内发送的链接过多，请稍后再试。</span></p>
-    <p data-msg="invalid"><span class="t" lang="en">Please check what you entered.</span><span class="t" lang="zh-CN">请检查你填写的内容。</span></p>
-    <p data-msg="server"><span class="t" lang="en">Something went wrong on our side. Please try again, or write to hello@feelingthemachine.com.</span><span class="t" lang="zh-CN">我们这边出了问题。请重试，或写信至 hello@feelingthemachine.com。</span></p>
-  </div>
+  <section data-state="deleted" hidden>
+    <h1><span class="t" lang="en">Your account is deleted.</span><span class="t" lang="zh-CN">你的账户已删除。</span></h1>
+    <p><span class="t" lang="en">Nothing about you remains on this website but your number and the date you asked. The researcher will delete your details from the archive within 14 days and confirm in writing. Thank you for taking part.</span><span class="t" lang="zh-CN">本网站上除了你的编号和请求日期之外，不再保留任何关于你的信息。研究者将在14天内从档案中删除你的信息并书面确认。感谢你的参与。</span></p>
+  </section>
+
+
 </main>
 
 <footer>

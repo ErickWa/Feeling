@@ -15,6 +15,7 @@ function show(state) {
 }
 
 function say(key) {
+  if (key) ok(null);
   const box = $("#msg");
   let found = false;
   for (const p of box.querySelectorAll("[data-msg]")) {
@@ -23,6 +24,7 @@ function say(key) {
   }
   if (!found) box.querySelector('[data-msg="server"]').hidden = false;
   box.hidden = !key;
+  if (key) box.scrollIntoView({ block: "nearest" });
 }
 
 async function api(path, body) {
@@ -38,13 +40,42 @@ async function vaultKey() {
   return res.ok ? importPublicKey(await res.json()) : null;
 }
 
-function renderMe({ participant, consents }) {
-  $("#pid").textContent = participant.id;
+// The last record /api/me returned: the download is exactly this.
+let record = null;
+
+function yesNo(v) {
+  return $(v ? "#yes" : "#no").content.cloneNode(true);
+}
+
+function renderMe(data) {
+  record = data;
+  const { participant, consents } = data;
   const latest = consents.at(-1) ?? {};
-  for (const dd of document.querySelectorAll("[data-field]")) {
-    dd.replaceChildren($(latest[dd.dataset.field] ? "#yes" : "#no").content.cloneNode(true));
-  }
+  const inPanel = Boolean(latest.panel);
+  $("#pid").textContent = participant.id;
+  for (const el of document.querySelectorAll("[data-when]")) el.hidden = (el.dataset.when === "in") !== inPanel;
+  const f = $("#choices-form");
+  f.oralHistory.checked = Boolean(latest.oral_history);
+  f.futureStudies.checked = Boolean(latest.future_studies);
+  f.updates.checked = Boolean(latest.updates);
+  $("#rejoin-form").reset();
+  $("#rejoin-cross-border").hidden = participant.country !== "CN";
+  $("#history").replaceChildren(...consents.slice().reverse().map((c) => {
+    const li = $("#history-row").content.cloneNode(true);
+    li.querySelector("time").textContent = c.at.slice(0, 10);
+    li.querySelector("[data-version]").textContent = `${c.form} v${c.form_version}`;
+    for (const el of li.querySelectorAll("[data-field]")) el.replaceChildren(yesNo(c[el.dataset.field]));
+    return li;
+  }));
+  $("#delete-confirm").checked = false;
+  $("#delete").disabled = true;
   show("me");
+}
+
+function ok(key) {
+  for (const el of document.querySelectorAll("[data-ok]")) el.hidden = el.dataset.ok !== key;
+  $("#ok").hidden = !key;
+  if (key) $("#ok").scrollIntoView({ block: "nearest" });
 }
 
 async function loadMe() {
@@ -99,8 +130,59 @@ $("#join-form").addEventListener("submit", async (e) => {
   say(r.data.error);
 });
 
+async function saveChoices(body) {
+  say(null);
+  ok(null);
+  const r = await api("/api/choices", { ...body, lang: lang() });
+  if (r.status === 401) return show("start");
+  if (r.status !== 200) return say(r.data.error);
+  await loadMe();
+  ok(r.data.request ?? "saved");
+}
+
+$("#choices-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const f = e.target;
+  saveChoices({ panel: true, oralHistory: f.oralHistory.checked, futureStudies: f.futureStudies.checked, updates: f.updates.checked });
+});
+
+$("#leave").addEventListener("click", () => saveChoices({ panel: false }));
+
+$("#rejoin-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const f = e.target;
+  if (!f.agree.checked || (!$("#rejoin-cross-border").hidden && !f.crossBorder.checked)) return say("invalid");
+  saveChoices({ panel: true, agree: true, crossBorder: f.crossBorder.checked });
+});
+
+$("#download").addEventListener("click", () => {
+  if (!record) return;
+  const file = { exported: new Date().toISOString(), source: "https://feelingthemachine.com", ...record };
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(file, null, 2)], { type: "application/json" }));
+  a.download = `feeling-the-machine-${record.participant.id}.json`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+});
+
+$("#delete-confirm").addEventListener("change", (e) => {
+  $("#delete").disabled = !e.target.checked;
+});
+
+$("#delete").addEventListener("click", async () => {
+  if (!$("#delete-confirm").checked) return;
+  say(null);
+  const r = await api("/api/delete", { confirm: "delete" });
+  if (r.status !== 200) return say(r.data.error);
+  record = null;
+  ok(null);
+  show("deleted");
+});
+
 $("#signout").addEventListener("click", async () => {
   await api("/api/signout", {});
+  record = null;
+  ok(null);
   show("start");
 });
 

@@ -38,7 +38,7 @@ export default [
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",
-      globals: { document: "readonly", location: "readonly", history: "readonly", fetch: "readonly" },
+      globals: { document: "readonly", location: "readonly", history: "readonly", fetch: "readonly", URL: "readonly", Blob: "readonly", setTimeout: "readonly" },
     },
   },
   {

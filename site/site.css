@@ -42,6 +42,9 @@
 }
 
 * { box-sizing: border-box; }
+/* `hidden` must win over any display rule: .form and label.check set grid, which
+   otherwise beats the browser's own [hidden] style and shows what JS hid. */
+[hidden] { display: none !important; }
 html, body { margin: 0; }
 body {
   background: var(--paper); color: var(--ink);
@@ -176,13 +179,23 @@ details p { margin: 10px 0 0; color: var(--ink-2); max-width: 65ch; }
 .form label.check { font-weight: 400; margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; }
 .form label.check input { margin-top: 5px; }
 .form .btn { justify-self: start; margin-top: 12px; border: 0; cursor: pointer; font: inherit; }
+.form .btn.ghost { border: 1px solid var(--rule); }
 .hint, .note { font-size: 14px; color: var(--ink-2); margin: 0; }
 .agreement { border-left: 2px solid var(--accent); padding: 4px 0 4px 16px; color: var(--ink-2); }
 .msg { border: 1px solid var(--seal); color: var(--seal); border-radius: 4px; padding: 12px 16px; margin: 16px 0; }
 .msg p { margin: 0; }
 .pid { font: 500 20px/1 var(--font-mono); }
-.choices { display: grid; grid-template-columns: max-content 1fr; gap: 6px 24px; margin: 20px 0; }
-.choices dd { margin: 0; }
+.account h2.sub { font-family: var(--font-display); font-weight: 400; font-size: 26px; margin: 40px 0 12px; }
+html[data-lang="zh"] .account h2.sub { font-family: var(--font-han); font-weight: 600; font-size: 21px; }
+.account .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.account label.check { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; margin: 8px 0; }
+.btn.ghost { background: transparent; border: 1px solid var(--rule); cursor: pointer; font: inherit; }
+.btn.danger { background: var(--seal); color: var(--paper); border: 0; cursor: pointer; font: inherit; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.history { padding-left: 20px; font-size: 14px; color: var(--ink-2); }
+.history li { margin-bottom: 6px; }
+.history time, .history code { font-family: var(--font-mono); }
+.ok { border: 1px solid var(--accent); color: var(--accent); border-radius: 4px; padding: 12px 16px; margin: 16px 0; }
 
 footer { padding: 40px 0 56px; font: 400 13px/1.6 var(--font-mono); color: var(--ink-2); }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }

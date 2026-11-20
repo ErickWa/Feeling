@@ -72,6 +72,15 @@ They cannot see their own name or email echoed back, because the site cannot
 read them. A request for what the vault holds goes to Erick, who answers from
 the vault.
 
+**Built (#26)**: `POST /api/choices` (a new consent row; leaving zeroes every
+interest and logs a `leave` request; rejoining needs the agreement again, and
+the cross-border consent again in mainland China, and is recorded against the
+current form version), `POST /api/delete` (every row about the person goes at
+once, leaving a `delete` request), and `GET /api/me`, which returns every
+column the site holds, sealed values included, and is what the download
+saves. The `requests` table (`migrations/0002_requests.sql`) is the vault's
+to-do list; #27 marks each one done.
+
 **Into the vault**: `scripts/export_to_vault.mjs`, run by Erick with the vault
 mounted. It pulls new rows with a read-only token, decrypts sealed fields with
 the vault's private key, writes `contact-log.csv`, `consent-register.csv` and
