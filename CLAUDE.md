@@ -34,14 +34,14 @@ served at **https://feelingthemachine.com** by the Cloudflare Pages project
    the only company in the loop, and the privacy policy at `/privacy` says
    exactly what it sees; change what the site does and that page changes in
    the same commit.
-6. **Chinese text changes need the font re-cut.** `scripts/subset_han.sh`
+5. **Chinese text changes need the font re-cut.** `scripts/subset_han.sh`
    rebuilds Noto Serif SC from the pages; `tests/fonts.test.mjs` fails until
    you run it.
-7. **Released forms are never edited.** A change is a new `forms/vX.Y/`.
+6. **Released forms are never edited.** A change is a new `forms/vX.Y/`.
 
 ## Not yet
 
 Not enrolled in devkit (`targets.json`), so none of the shared gates
 (`budget`, `smoke`, `headers`, `legal`, `audit`) run here; `npm run check` is
-lint plus `tests/site.test.mjs`. The portfolio's bilingual-repo list does not
+lint plus the tests in `tests/`. The portfolio's bilingual-repo list does not
 name this repo yet either.
