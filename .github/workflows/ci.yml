@@ -15,6 +15,11 @@ name: CI
 #
 # WHAT THIS CANNOT SEE: zone settings (Email Routing for hello@, the www
 # hostname) and every response header except the CSP, which the last step reads.
+#
+# EMAIL ADDRESS OBFUSCATION IS OFF FOR THE ZONE (dashboard, 2026-11-20). On, it
+# rewrote the page's mailto into a /cdn-cgi script link, breaking the no-JS link,
+# the copy button and the byte comparison below. Turned back on, that comparison
+# is what goes red.
 
 on:
   push:
