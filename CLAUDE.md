@@ -1,0 +1,40 @@
+# Feeling the Machine: standing rules
+
+This file overrides the portfolio conventions (`~/.claude/CLAUDE.md`) for this
+repo. Where it is silent, those apply.
+
+## What this is
+
+The administration repo for *Feeling the Machine* (感受机器), Erick's long-term
+oral history and research project on how people who build AI experience its
+growing abilities. It holds the machinery (protocols, form versions, templates,
+vault scripts, the task list as GitHub issues) and the public site in `site/`,
+served at **https://feelingthemachine.com** by the Cloudflare Pages project
+`feeling`. The living planning documents are Claude artifacts linked from
+`README.md`; they are the source of truth and this repo receives frozen exports.
+
+## Invariants
+
+1. **No participant data, ever.** No names, contact details, recordings,
+   transcripts, signed forms or answers, in a file, a commit, an issue, a log
+   or a test fixture. They live in the encrypted vault (`protocol/data-management.md`).
+   `.gitignore` is a safety net, not the rule.
+2. **Bilingual: EN and ZH move together.** Every user-facing string on the
+   site is a pair of `<span class="t" lang="en">` / `lang="zh-CN"`; changing
+   one changes the other in the same commit. The test counts the pairs; it
+   cannot read them, so Chinese wording that matters goes to a native Chinese reviewer for
+   review, as the forms do.
+3. **No inline script or style.** The CSP has no `'unsafe-inline'`; behaviour
+   goes in `site/site.js`, styling in `site/site.css`.
+4. **The site collects nothing.** No form, no analytics, no third party but
+   Google Fonts. Any change to that (participant accounts included) is its own
+   decision, recorded with the *Decision* issue template, and arrives with a
+   privacy policy at this domain.
+5. **Released forms are never edited.** A change is a new `forms/vX.Y/`.
+
+## Not yet
+
+Not enrolled in devkit (`targets.json`), so none of the shared gates
+(`budget`, `smoke`, `headers`, `legal`, `audit`) run here; `npm run check` is
+lint plus `tests/site.test.mjs`. The portfolio's bilingual-repo list does not
+name this repo yet either.

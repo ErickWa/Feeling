@@ -1,0 +1,16 @@
+{
+  "name": "feeling",
+  "private": true,
+  "type": "module",
+  "description": "Feeling the Machine: study administration and the public site at feelingthemachine.com.",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "node --test tests/",
+    "check": "npm run lint && npm run test"
+  },
+  "_check_comment": "The one gate. CI runs `npm ci && npm run check`, then deploys `site/` from the same job. There is no build: `site/` is served as it is in the repo, so the bytes checked are the bytes deployed. WHAT IT CANNOT SEE: the shell scripts in scripts/ (no linter reads them), what Cloudflare actually serves (curl it), and the encrypted vault, which by design never touches this repo.",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.15.0"
+  }
+}

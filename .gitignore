@@ -1,0 +1,41 @@
+# Participant data must never be committed. These patterns are a safety net, not a substitute for the rule.
+
+# Vault and any local data folders
+vault/
+data/
+private/
+FeelingTheMachine/
+*.hc
+*.cryptomator
+masterkey.cryptomator
+
+# Audio and video
+*.wav
+*.mp3
+*.m4a
+*.aac
+*.flac
+*.ogg
+*.mp4
+*.mov
+*.webm
+
+# Transcripts, signed forms and filled logs
+*transcript*
+*signed*
+*_filled*
+contact-log*.xlsx
+*.key
+
+# Filled CSVs (blank templates live in templates/ and are allowed)
+*.csv
+!templates/*.csv
+
+# OS and editor clutter
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Tooling
+node_modules/
