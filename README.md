@@ -11,7 +11,7 @@ Administration repo for *Feeling the Machine*, a long-term oral history and rese
 | --- | --- |
 | `site/` | The public bilingual website, served by Cloudflare Pages at https://feelingthemachine.com |
 | `forms/` | Released versions of consent and release forms (PDF), with a changelog |
-| `protocol/` | Oral history themes, data-management rules, links to the living planning docs |
+| `protocol/` | Oral history themes, data-management rules, the participant-accounts design |
 | `templates/` | Blank logs and sheets to copy *into the vault* before filling in |
 | `scripts/` | Vault setup and new-interview folders |
 | `tests/` | The site checks behind `npm run check` |

@@ -26,10 +26,12 @@ served at **https://feelingthemachine.com** by the Cloudflare Pages project
    review, as the forms do.
 3. **No inline script or style.** The CSP has no `'unsafe-inline'`; behaviour
    goes in `site/site.js`, styling in `site/site.css`.
-4. **The site collects nothing.** No form, no analytics, no third party but
-   Google Fonts. Any change to that (participant accounts included) is its own
-   decision, recorded with the *Decision* issue template, and arrives with a
-   privacy policy at this domain.
+4. **The site holds nothing it can read back about who someone is.**
+   Participant accounts (`protocol/participant-accounts.md`, decided
+   2026-11-20) seal name and email in the browser with the vault's public key;
+   the private key never leaves the vault. No analytics and no third party but
+   Google Fonts. Accounts go live only after the privacy policy (EN and ZH) is
+   published at this domain.
 5. **Released forms are never edited.** A change is a new `forms/vX.Y/`.
 
 ## Not yet
