@@ -12,8 +12,7 @@ https://claude.ai/artifact/WSJRn9X7Jt5RJUFxh1VfnF
    - `F3_oral-history-release_EN.pdf` / `..._ZH.pdf` / `..._DE.pdf`
    - `F4_change-or-withdrawal_EN.pdf` / `..._ZH.pdf` / `..._DE.pdf`
 
-   The German forms are for German-speaking participants; the interviews
-   themselves stay in English or Chinese, and the German Form 2 says so.
+   Interviews can be in English, Chinese or German (decided 2026-11-21).
    Form 3's grant of rights wants a German lawyer's look before a German
    copy is signed (note under it in the doc).
 3. Add a line to `CHANGELOG.md` and commit.
