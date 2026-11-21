@@ -13,6 +13,7 @@ Administration repo for *Feeling the Machine*, a long-term oral history and rese
 | `forms/` | Released versions of consent and release forms (PDF), with a changelog |
 | `protocol/` | Oral history themes, data-management rules, the participant-accounts design |
 | `templates/` | Blank logs and sheets to copy *into the vault* before filling in |
+| `docs/` | `GO-LIVE.md`, the checklist for opening participant accounts |
 | `scripts/` | Vault setup and new-interview folders |
 | `tests/` | The site checks behind `npm run check` |
 | `.github/` | Issue templates for tasks and decisions |
