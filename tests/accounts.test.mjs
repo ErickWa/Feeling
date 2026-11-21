@@ -9,7 +9,7 @@
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { normalizeEmail, sealedFor, validateJoin } from "../lib/accounts.js";
+import { langOf, linkMessage, normalizeEmail, sealedFor, validateJoin } from "../lib/accounts.js";
 import { choices, join, me, remove, signin, signout, start } from "../lib/api.js";
 import { generateVaultKey, importPublicKey, open, seal } from "../site/seal.js";
 import { call, cookieOf, joinOne, linkToken, world } from "./helpers/world.mjs";
@@ -226,4 +226,37 @@ test("the page's actions need a session", async () => {
   const w = await world();
   assert.equal((await call(w.env, choices, "/api/choices", { panel: true })).status, 401);
   assert.equal((await call(w.env, remove, "/api/delete", { confirm: "delete" })).status, 401);
+});
+
+// The consent row's lang is the record of which text the person read when
+// they agreed, so a German consent must not be filed as English.
+test("German: the link arrives in German and the consent is recorded as German", async () => {
+  const w = await world();
+  const email = "lena@example.de";
+  const r1 = await call(w.env, start, "/api/start", { email, sealedEmail: await seal(w.pub, "email", email), lang: "de" });
+  assert.equal(r1.status, 202);
+  const mail = w.outbox.at(-1);
+  assert.match(mail.subject, /beitreten/);
+  assert.match(mail.text, /Vereinbarung/);
+  const res = await call(w.env, join, "/api/join", {
+    token: linkToken(mail, "join"), sealedName: await seal(w.pub, "name", "Lena"), role: "research", ageBand: "30-39", country: "XX",
+    panel: true, readAgreement: true, lang: "de",
+  });
+  assert.equal(res.status, 201);
+  const cookie = `__Host-ftm=${cookieOf(res)}`;
+  await call(w.env, choices, "/api/choices", { panel: true, updates: true, lang: "fr" }, { cookie });
+  const db = w.env.DB.raw;
+  assert.equal(db.prepare("SELECT lang FROM participants").get().lang, "de");
+  assert.deepEqual(db.prepare("SELECT lang FROM consents ORDER BY rowid").all().map((r) => r.lang), ["de", "en"], "an unknown language is filed as English");
+});
+
+test("every language has both emails, each carrying the link", () => {
+  for (const l of ["en", "zh", "de", "fr", undefined]) {
+    for (const purpose of ["join", "signin"]) {
+      const m = linkMessage(purpose, l, "https://feelingthemachine.com/account#x=1");
+      assert.ok(m.subject && m.text.includes("#x=1"), `${l} ${purpose}`);
+    }
+  }
+  assert.equal(langOf("de"), "de");
+  assert.equal(langOf("zh-CN"), "en");
 });

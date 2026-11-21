@@ -8,7 +8,8 @@
 import { importPublicKey, seal } from "./seal.js";
 
 const $ = (sel) => document.querySelector(sel);
-const lang = () => (document.documentElement.getAttribute("data-lang") === "zh" ? "zh" : "en");
+// The language on screen; the server records anything it does not know as English.
+const lang = () => document.documentElement.getAttribute("data-lang") || "en";
 
 function show(state) {
   for (const s of document.querySelectorAll("[data-state]")) s.hidden = s.dataset.state !== state;

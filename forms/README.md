@@ -5,9 +5,9 @@ https://claude.ai/artifact/WSJRn9X7Jt5RJUFxh1VfnF
 
 ## Releasing a version
 
-1. When the wording is final, including a native Chinese reviewer's review of the Chinese, export each form from the doc as a PDF.
+1. When the wording is final, including a native Chinese reviewer's review of the Chinese and a native speaker's German review, export each form from the doc as a PDF.
 2. Save the PDFs under `forms/v1.0/`, using these names:
-   - `F1_panel-agreement_EN.pdf` / `F1_panel-agreement_ZH.pdf`
+   - `F1_panel-agreement_EN.pdf` / `F1_panel-agreement_ZH.pdf` / `F1_panel-agreement_DE.pdf` (the sign-up page offers German, so Form 1 needs it; Forms 2-4 only if interviews are offered in German)
    - `F2_oral-history-information_EN.pdf` / `..._ZH.pdf`
    - `F3_oral-history-release_EN.pdf` / `..._ZH.pdf`
    - `F4_change-or-withdrawal_EN.pdf` / `..._ZH.pdf`

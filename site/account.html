@@ -17,6 +17,7 @@
 <meta property="og:image:alt" content="Feeling the Machine, 感受机器: an oral history of the people who build AI">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="zh_CN">
+<meta property="og:locale:alternate" content="de_DE">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/site.css">
 <link rel="canonical" href="https://feelingthemachine.com/account">
@@ -26,161 +27,162 @@
 <header class="top">
   <div class="wrap">
     <a class="mark" href="/">Feeling the Machine <span class="han">感受机器</span></a>
-    <div class="lang" role="group" aria-label="Language / 语言">
+    <div class="lang" role="group" aria-label="Language / 语言 / Sprache">
       <button type="button" id="lang-en" data-set="en" aria-pressed="true">English</button>
       <button type="button" id="lang-zh" data-set="zh" aria-pressed="false">中文</button>
+      <button type="button" id="lang-de" data-set="de" aria-pressed="false">Deutsch</button>
     </div>
   </div>
 </header>
 
 <main class="wrap account">
-  <p class="eyebrow"><span class="t" lang="en">Your account</span><span class="t" lang="zh-CN">你的账户</span></p>
+  <p class="eyebrow"><span class="t" lang="en">Your account</span><span class="t" lang="zh-CN">你的账户</span><span class="t" lang="de">Ihr Konto</span></p>
 
   <!-- Messages sit at the top and scroll into view, so a result is seen wherever the button was. -->
   <p class="ok" id="ok" role="status" hidden>
-    <span data-ok="saved"><span class="t" lang="en">Saved.</span><span class="t" lang="zh-CN">已保存。</span></span>
-    <span data-ok="leave"><span class="t" lang="en">You've left the panel. Nobody will contact you.</span><span class="t" lang="zh-CN">你已退出联系名单，不会再有人联系你。</span></span>
-    <span data-ok="rejoin"><span class="t" lang="en">Welcome back.</span><span class="t" lang="zh-CN">欢迎回来。</span></span>
+    <span data-ok="saved"><span class="t" lang="en">Saved.</span><span class="t" lang="zh-CN">已保存。</span><span class="t" lang="de">Gespeichert.</span></span>
+    <span data-ok="leave"><span class="t" lang="en">You've left the panel. Nobody will contact you.</span><span class="t" lang="zh-CN">你已退出联系名单，不会再有人联系你。</span><span class="t" lang="de">Sie haben das Panel verlassen. Niemand wird Sie kontaktieren.</span></span>
+    <span data-ok="rejoin"><span class="t" lang="en">Welcome back.</span><span class="t" lang="zh-CN">欢迎回来。</span><span class="t" lang="de">Willkommen zurück.</span></span>
   </p>
 
   <div class="msg" id="msg" role="alert" hidden>
-    <p data-msg="link_expired"><span class="t" lang="en">That link has expired or was already used. Enter your email again for a new one.</span><span class="t" lang="zh-CN">该链接已过期或已被使用。请重新输入邮箱获取新链接。</span></p>
-    <p data-msg="already_joined"><span class="t" lang="en">This address has already joined. Enter it again to sign in.</span><span class="t" lang="zh-CN">该邮箱已经加入。请重新输入以登录。</span></p>
-    <p data-msg="slow_down"><span class="t" lang="en">Too many links in the last hour. Please try again later.</span><span class="t" lang="zh-CN">过去一小时内发送的链接过多，请稍后再试。</span></p>
-    <p data-msg="invalid"><span class="t" lang="en">Please check what you entered.</span><span class="t" lang="zh-CN">请检查你填写的内容。</span></p>
-    <p data-msg="server"><span class="t" lang="en">Something went wrong on our side. Please try again, or write to hello@feelingthemachine.com.</span><span class="t" lang="zh-CN">我们这边出了问题。请重试，或写信至 hello@feelingthemachine.com。</span></p>
+    <p data-msg="link_expired"><span class="t" lang="en">That link has expired or was already used. Enter your email again for a new one.</span><span class="t" lang="zh-CN">该链接已过期或已被使用。请重新输入邮箱获取新链接。</span><span class="t" lang="de">Dieser Link ist abgelaufen oder wurde schon benutzt. Geben Sie Ihre E-Mail-Adresse erneut ein, um einen neuen zu erhalten.</span></p>
+    <p data-msg="already_joined"><span class="t" lang="en">This address has already joined. Enter it again to sign in.</span><span class="t" lang="zh-CN">该邮箱已经加入。请重新输入以登录。</span><span class="t" lang="de">Diese Adresse ist bereits beigetreten. Geben Sie sie erneut ein, um sich anzumelden.</span></p>
+    <p data-msg="slow_down"><span class="t" lang="en">Too many links in the last hour. Please try again later.</span><span class="t" lang="zh-CN">过去一小时内发送的链接过多，请稍后再试。</span><span class="t" lang="de">Zu viele Links in der letzten Stunde. Bitte versuchen Sie es später noch einmal.</span></p>
+    <p data-msg="invalid"><span class="t" lang="en">Please check what you entered.</span><span class="t" lang="zh-CN">请检查你填写的内容。</span><span class="t" lang="de">Bitte prüfen Sie Ihre Angaben.</span></p>
+    <p data-msg="server"><span class="t" lang="en">Something went wrong on our side. Please try again, or write to hello@feelingthemachine.com.</span><span class="t" lang="zh-CN">我们这边出了问题。请重试，或写信至 hello@feelingthemachine.com。</span><span class="t" lang="de">Bei uns ist etwas schiefgegangen. Bitte versuchen Sie es noch einmal oder schreiben Sie an hello@feelingthemachine.com.</span></p>
   </div>
 
   <section data-state="loading">
-    <p><span class="t" lang="en">One moment…</span><span class="t" lang="zh-CN">请稍候……</span></p>
+    <p><span class="t" lang="en">One moment…</span><span class="t" lang="zh-CN">请稍候……</span><span class="t" lang="de">Einen Moment …</span></p>
   </section>
 
   <section data-state="closed" hidden>
-    <h1><span class="t" lang="en">Not open yet.</span><span class="t" lang="zh-CN">尚未开放。</span></h1>
-    <p><span class="t" lang="en">Signing up here opens soon. Until then, email <a href="mailto:hello@feelingthemachine.com?subject=Panel">hello@feelingthemachine.com</a> with the subject “Panel” and you'll receive the agreement to read and sign.</span><span class="t" lang="zh-CN">本网站的注册功能即将开放。在此之前，请发送邮件至 <a href="mailto:hello@feelingthemachine.com?subject=Panel">hello@feelingthemachine.com</a>，主题写“Panel”或“联系名单”，你会收到同意书供阅读和签署。</span></p>
+    <h1><span class="t" lang="en">Not open yet.</span><span class="t" lang="zh-CN">尚未开放。</span><span class="t" lang="de">Noch nicht geöffnet.</span></h1>
+    <p><span class="t" lang="en">Signing up here opens soon. Until then, email <a href="mailto:hello@feelingthemachine.com?subject=Panel">hello@feelingthemachine.com</a> with the subject “Panel” and you'll receive the agreement to read and sign.</span><span class="t" lang="zh-CN">本网站的注册功能即将开放。在此之前，请发送邮件至 <a href="mailto:hello@feelingthemachine.com?subject=Panel">hello@feelingthemachine.com</a>，主题写“Panel”或“联系名单”，你会收到同意书供阅读和签署。</span><span class="t" lang="de">Die Registrierung hier öffnet bald. Bis dahin schreiben Sie an <a href="mailto:hello@feelingthemachine.com?subject=Panel">hello@feelingthemachine.com</a> mit dem Betreff „Panel“, und Sie erhalten die Vereinbarung zum Lesen und Unterschreiben.</span></p>
   </section>
 
   <section data-state="start" hidden>
-    <h1><span class="t" lang="en">Join, or sign in.</span><span class="t" lang="zh-CN">加入或登录。</span></h1>
-    <p><span class="t" lang="en">Enter your email address. We'll send you a link: to finish joining if you're new, or to sign in if you've joined before. There are no passwords.</span><span class="t" lang="zh-CN">请输入你的邮箱地址，我们会给你发送一个链接：如果你是新成员，用它完成加入；如果你已经加入，用它登录。不设密码。</span></p>
+    <h1><span class="t" lang="en">Join, or sign in.</span><span class="t" lang="zh-CN">加入或登录。</span><span class="t" lang="de">Beitreten oder anmelden.</span></h1>
+    <p><span class="t" lang="en">Enter your email address. We'll send you a link: to finish joining if you're new, or to sign in if you've joined before. There are no passwords.</span><span class="t" lang="zh-CN">请输入你的邮箱地址，我们会给你发送一个链接：如果你是新成员，用它完成加入；如果你已经加入，用它登录。不设密码。</span><span class="t" lang="de">Geben Sie Ihre E-Mail-Adresse ein. Wir schicken Ihnen einen Link: zum Abschließen des Beitritts, wenn Sie neu sind, oder zum Anmelden, wenn Sie schon beigetreten sind. Passwörter gibt es nicht.</span></p>
     <form id="start-form" class="form" novalidate>
-      <label for="email"><span class="t" lang="en">Email address</span><span class="t" lang="zh-CN">邮箱地址</span></label>
+      <label for="email"><span class="t" lang="en">Email address</span><span class="t" lang="zh-CN">邮箱地址</span><span class="t" lang="de">E-Mail-Adresse</span></label>
       <input id="email" name="email" type="email" autocomplete="email" required maxlength="254">
-      <button type="submit" class="btn primary"><span class="t" lang="en">Send me a link</span><span class="t" lang="zh-CN">发送链接</span></button>
+      <button type="submit" class="btn primary"><span class="t" lang="en">Send me a link</span><span class="t" lang="zh-CN">发送链接</span><span class="t" lang="de">Link senden</span></button>
     </form>
-    <p class="note"><span class="t" lang="en">Your address is encrypted in this browser before it is sent, so only the researcher's offline archive can read it. <a href="/privacy">How your information is handled</a></span><span class="t" lang="zh-CN">你的邮箱会先在本浏览器中加密再发送，只有研究者的离线档案才能读取。<a href="/privacy">了解信息如何处理</a></span></p>
+    <p class="note"><span class="t" lang="en">Your address is encrypted in this browser before it is sent, so only the researcher's offline archive can read it. <a href="/privacy">How your information is handled</a></span><span class="t" lang="zh-CN">你的邮箱会先在本浏览器中加密再发送，只有研究者的离线档案才能读取。<a href="/privacy">了解信息如何处理</a></span><span class="t" lang="de">Ihre Adresse wird in diesem Browser verschlüsselt, bevor sie gesendet wird, sodass nur das Offline-Archiv des Forschers sie lesen kann. <a href="/privacy">Wie Ihre Daten verarbeitet werden</a></span></p>
   </section>
 
   <section data-state="sent" hidden>
-    <h1><span class="t" lang="en">Check your inbox.</span><span class="t" lang="zh-CN">请查收邮件。</span></h1>
-    <p><span class="t" lang="en">If the address is right, a link is on its way. It works once, for 30 minutes. Nothing arrived? Look in your spam folder, then try again.</span><span class="t" lang="zh-CN">如果地址正确，链接正在发送中。链接只能使用一次，30分钟内有效。没有收到？请先检查垃圾邮件，然后再试一次。</span></p>
+    <h1><span class="t" lang="en">Check your inbox.</span><span class="t" lang="zh-CN">请查收邮件。</span><span class="t" lang="de">Sehen Sie in Ihr Postfach.</span></h1>
+    <p><span class="t" lang="en">If the address is right, a link is on its way. It works once, for 30 minutes. Nothing arrived? Look in your spam folder, then try again.</span><span class="t" lang="zh-CN">如果地址正确，链接正在发送中。链接只能使用一次，30分钟内有效。没有收到？请先检查垃圾邮件，然后再试一次。</span><span class="t" lang="de">Wenn die Adresse stimmt, ist ein Link unterwegs. Er funktioniert einmal, 30 Minuten lang. Nichts angekommen? Sehen Sie im Spam-Ordner nach und versuchen Sie es dann erneut.</span></p>
   </section>
 
   <section data-state="join" hidden>
-    <h1><span class="t" lang="en">Join the contact panel.</span><span class="t" lang="zh-CN">加入联系名单。</span></h1>
+    <h1><span class="t" lang="en">Join the contact panel.</span><span class="t" lang="zh-CN">加入联系名单。</span><span class="t" lang="de">Dem Kontaktpanel beitreten.</span></h1>
     <div class="agreement">
-      <p><span class="t" lang="en">The panel agreement's final text will appear here before sign-up opens.</span><span class="t" lang="zh-CN">联系名单协议的正式文本将在注册开放前显示在此处。</span></p>
+      <p><span class="t" lang="en">The panel agreement's final text will appear here before sign-up opens.</span><span class="t" lang="zh-CN">联系名单协议的正式文本将在注册开放前显示在此处。</span><span class="t" lang="de">Der endgültige Text der Panel-Vereinbarung erscheint hier, bevor die Registrierung öffnet.</span></p>
     </div>
     <form id="join-form" class="form" novalidate>
-      <label for="name"><span class="t" lang="en">Your name</span><span class="t" lang="zh-CN">你的姓名</span></label>
+      <label for="name"><span class="t" lang="en">Your name</span><span class="t" lang="zh-CN">你的姓名</span><span class="t" lang="de">Ihr Name</span></label>
       <input id="name" name="name" autocomplete="name" required maxlength="200">
-      <p class="hint"><span class="t" lang="en">Encrypted in this browser. The website never sees it.</span><span class="t" lang="zh-CN">在本浏览器中加密，网站永远看不到。</span></p>
+      <p class="hint"><span class="t" lang="en">Encrypted in this browser. The website never sees it.</span><span class="t" lang="zh-CN">在本浏览器中加密，网站永远看不到。</span><span class="t" lang="de">In diesem Browser verschlüsselt. Die Website sieht ihn nie.</span></p>
 
-      <label for="role"><span class="t" lang="en">Your work</span><span class="t" lang="zh-CN">你的工作</span></label>
+      <label for="role"><span class="t" lang="en">Your work</span><span class="t" lang="zh-CN">你的工作</span><span class="t" lang="de">Ihre Tätigkeit</span></label>
       <select id="role" name="role" required>
         <option value="">—</option>
-        <option value="research">Research · 研究</option>
-        <option value="engineering">Engineering · 工程</option>
-        <option value="product-data">Product or data · 产品或数据</option>
-        <option value="leadership">Leadership · 管理</option>
-        <option value="other">Other · 其他</option>
+        <option value="research">Research · 研究 · Forschung</option>
+        <option value="engineering">Engineering · 工程 · Entwicklung</option>
+        <option value="product-data">Product or data · 产品或数据 · Produkt oder Daten</option>
+        <option value="leadership">Leadership · 管理 · Leitung</option>
+        <option value="other">Other · 其他 · Sonstiges</option>
       </select>
 
-      <label for="age"><span class="t" lang="en">Age</span><span class="t" lang="zh-CN">年龄</span></label>
+      <label for="age"><span class="t" lang="en">Age</span><span class="t" lang="zh-CN">年龄</span><span class="t" lang="de">Alter</span></label>
       <select id="age" name="ageBand" required>
         <option value="">—</option>
         <option>18-29</option><option>30-39</option><option>40-49</option><option>50-59</option><option>60+</option>
       </select>
-      <p class="hint"><span class="t" lang="en">The panel is for adults, 18 and over.</span><span class="t" lang="zh-CN">联系名单仅限18岁及以上的成年人。</span></p>
+      <p class="hint"><span class="t" lang="en">The panel is for adults, 18 and over.</span><span class="t" lang="zh-CN">联系名单仅限18岁及以上的成年人。</span><span class="t" lang="de">Das Panel ist für Erwachsene ab 18 Jahren.</span></p>
 
-      <label for="country"><span class="t" lang="en">Where you live</span><span class="t" lang="zh-CN">你所在的地区</span></label>
+      <label for="country"><span class="t" lang="en">Where you live</span><span class="t" lang="zh-CN">你所在的地区</span><span class="t" lang="de">Wo Sie leben</span></label>
       <select id="country" name="country" required>
         <option value="">—</option>
-        <option value="US">United States · 美国</option>
-        <option value="CN">Mainland China · 中国大陆</option>
-        <option value="XX">Elsewhere · 其他地区</option>
+        <option value="US">United States · 美国 · USA</option>
+        <option value="CN">Mainland China · 中国大陆 · Festlandchina</option>
+        <option value="XX">Elsewhere · 其他地区 · Anderswo</option>
       </select>
 
       <fieldset>
-        <legend><span class="t" lang="en">I agree</span><span class="t" lang="zh-CN">我同意</span></legend>
-        <label class="check"><input type="checkbox" name="panel" required> <span class="t" lang="en">to be on the contact panel, so the researcher may contact me about conversations and studies. (Required)</span><span class="t" lang="zh-CN">加入联系名单，研究者可以就访谈和研究与我联系。（必选）</span></label>
-        <label class="check" id="cross-border-row" hidden><input type="checkbox" name="crossBorder"> <span class="t" lang="en">to my information being transferred to, and stored, outside mainland China, as the privacy policy describes. (Required in mainland China)</span><span class="t" lang="zh-CN">我的信息按隐私政策所述传输至中国大陆境外并在境外保存。（中国大陆用户必选）</span></label>
-        <label class="check"><input type="checkbox" name="readAgreement" required> <span class="t" lang="en">I have read the panel agreement and the <a href="/privacy">privacy policy</a>. (Required)</span><span class="t" lang="zh-CN">我已阅读联系名单协议和<a href="/privacy">隐私政策</a>。（必选）</span></label>
+        <legend><span class="t" lang="en">I agree</span><span class="t" lang="zh-CN">我同意</span><span class="t" lang="de">Ich bin einverstanden,</span></legend>
+        <label class="check"><input type="checkbox" name="panel" required> <span class="t" lang="en">to be on the contact panel, so the researcher may contact me about conversations and studies. (Required)</span><span class="t" lang="zh-CN">加入联系名单，研究者可以就访谈和研究与我联系。（必选）</span><span class="t" lang="de">im Kontaktpanel zu sein, sodass der Forscher mich wegen Gesprächen und Studien kontaktieren darf. (Erforderlich)</span></label>
+        <label class="check" id="cross-border-row" hidden><input type="checkbox" name="crossBorder"> <span class="t" lang="en">to my information being transferred to, and stored, outside mainland China, as the privacy policy describes. (Required in mainland China)</span><span class="t" lang="zh-CN">我的信息按隐私政策所述传输至中国大陆境外并在境外保存。（中国大陆用户必选）</span><span class="t" lang="de">dass meine Daten, wie in der Datenschutzerklärung beschrieben, außerhalb Festlandchinas übermittelt und gespeichert werden. (In Festlandchina erforderlich)</span></label>
+        <label class="check"><input type="checkbox" name="readAgreement" required> <span class="t" lang="en">I have read the panel agreement and the <a href="/privacy">privacy policy</a>. (Required)</span><span class="t" lang="zh-CN">我已阅读联系名单协议和<a href="/privacy">隐私政策</a>。（必选）</span><span class="t" lang="de">Ich habe die Panel-Vereinbarung und die <a href="/privacy">Datenschutzerklärung</a> gelesen. (Erforderlich)</span></label>
       </fieldset>
 
       <fieldset>
-        <legend><span class="t" lang="en">I'm also interested in (optional, change any time)</span><span class="t" lang="zh-CN">我也有兴趣（可选，随时可以修改）</span></legend>
-        <label class="check"><input type="checkbox" name="oralHistory"> <span class="t" lang="en">recording an oral history</span><span class="t" lang="zh-CN">录制一次口述历史访谈</span></label>
-        <label class="check"><input type="checkbox" name="futureStudies"> <span class="t" lang="en">hearing about future studies</span><span class="t" lang="zh-CN">了解今后的研究</span></label>
-        <label class="check"><input type="checkbox" name="updates"> <span class="t" lang="en">the twice-yearly project update</span><span class="t" lang="zh-CN">每半年一次的项目进展通知</span></label>
+        <legend><span class="t" lang="en">I'm also interested in (optional, change any time)</span><span class="t" lang="zh-CN">我也有兴趣（可选，随时可以修改）</span><span class="t" lang="de">Ich interessiere mich auch für (freiwillig, jederzeit änderbar)</span></legend>
+        <label class="check"><input type="checkbox" name="oralHistory"> <span class="t" lang="en">recording an oral history</span><span class="t" lang="zh-CN">录制一次口述历史访谈</span><span class="t" lang="de">die Aufnahme einer Oral History</span></label>
+        <label class="check"><input type="checkbox" name="futureStudies"> <span class="t" lang="en">hearing about future studies</span><span class="t" lang="zh-CN">了解今后的研究</span><span class="t" lang="de">Informationen über künftige Studien</span></label>
+        <label class="check"><input type="checkbox" name="updates"> <span class="t" lang="en">the twice-yearly project update</span><span class="t" lang="zh-CN">每半年一次的项目进展通知</span><span class="t" lang="de">die Projektneuigkeiten zweimal im Jahr</span></label>
       </fieldset>
 
-      <button type="submit" class="btn primary"><span class="t" lang="en">Join</span><span class="t" lang="zh-CN">加入</span></button>
+      <button type="submit" class="btn primary"><span class="t" lang="en">Join</span><span class="t" lang="zh-CN">加入</span><span class="t" lang="de">Beitreten</span></button>
     </form>
   </section>
 
   <section data-state="me" hidden>
     <h1>
-      <span data-when="in"><span class="t" lang="en">You're on the panel.</span><span class="t" lang="zh-CN">你已在联系名单中。</span></span>
-      <span data-when="out"><span class="t" lang="en">You've left the panel.</span><span class="t" lang="zh-CN">你已退出联系名单。</span></span>
+      <span data-when="in"><span class="t" lang="en">You're on the panel.</span><span class="t" lang="zh-CN">你已在联系名单中。</span><span class="t" lang="de">Sie sind im Panel.</span></span>
+      <span data-when="out"><span class="t" lang="en">You've left the panel.</span><span class="t" lang="zh-CN">你已退出联系名单。</span><span class="t" lang="de">Sie haben das Panel verlassen.</span></span>
     </h1>
-    <p><span class="t" lang="en">Your participant number is</span><span class="t" lang="zh-CN">你的参与者编号是</span> <b class="pid" id="pid"></b></p>
+    <p><span class="t" lang="en">Your participant number is</span><span class="t" lang="zh-CN">你的参与者编号是</span><span class="t" lang="de">Ihre Teilnehmernummer ist</span> <b class="pid" id="pid"></b></p>
 
     <form id="choices-form" class="form" data-when="in" novalidate>
       <fieldset>
-        <legend><span class="t" lang="en">I'm interested in</span><span class="t" lang="zh-CN">我有兴趣</span></legend>
-        <label class="check"><input type="checkbox" name="oralHistory"> <span class="t" lang="en">recording an oral history</span><span class="t" lang="zh-CN">录制一次口述历史访谈</span></label>
-        <label class="check"><input type="checkbox" name="futureStudies"> <span class="t" lang="en">hearing about future studies</span><span class="t" lang="zh-CN">了解今后的研究</span></label>
-        <label class="check"><input type="checkbox" name="updates"> <span class="t" lang="en">the twice-yearly project update</span><span class="t" lang="zh-CN">每半年一次的项目进展通知</span></label>
+        <legend><span class="t" lang="en">I'm interested in</span><span class="t" lang="zh-CN">我有兴趣</span><span class="t" lang="de">Ich interessiere mich für</span></legend>
+        <label class="check"><input type="checkbox" name="oralHistory"> <span class="t" lang="en">recording an oral history</span><span class="t" lang="zh-CN">录制一次口述历史访谈</span><span class="t" lang="de">die Aufnahme einer Oral History</span></label>
+        <label class="check"><input type="checkbox" name="futureStudies"> <span class="t" lang="en">hearing about future studies</span><span class="t" lang="zh-CN">了解今后的研究</span><span class="t" lang="de">Informationen über künftige Studien</span></label>
+        <label class="check"><input type="checkbox" name="updates"> <span class="t" lang="en">the twice-yearly project update</span><span class="t" lang="zh-CN">每半年一次的项目进展通知</span><span class="t" lang="de">die Projektneuigkeiten zweimal im Jahr</span></label>
       </fieldset>
       <div class="row">
-        <button type="submit" class="btn primary"><span class="t" lang="en">Save my choices</span><span class="t" lang="zh-CN">保存我的选择</span></button>
-        <button type="button" id="leave" class="btn ghost"><span class="t" lang="en">Leave the panel</span><span class="t" lang="zh-CN">退出联系名单</span></button>
+        <button type="submit" class="btn primary"><span class="t" lang="en">Save my choices</span><span class="t" lang="zh-CN">保存我的选择</span><span class="t" lang="de">Meine Auswahl speichern</span></button>
+        <button type="button" id="leave" class="btn ghost"><span class="t" lang="en">Leave the panel</span><span class="t" lang="zh-CN">退出联系名单</span><span class="t" lang="de">Panel verlassen</span></button>
       </div>
-      <p class="hint"><span class="t" lang="en">Leaving means you won't be contacted again. Your contact details are deleted 12 months later, and you can rejoin here any time before then.</span><span class="t" lang="zh-CN">退出后不会再有人联系你。你的联系方式将在12个月后删除；在此之前，你可以随时在这里重新加入。</span></p>
+      <p class="hint"><span class="t" lang="en">Leaving means you won't be contacted again. Your contact details are deleted 12 months later, and you can rejoin here any time before then.</span><span class="t" lang="zh-CN">退出后不会再有人联系你。你的联系方式将在12个月后删除；在此之前，你可以随时在这里重新加入。</span><span class="t" lang="de">Wenn Sie das Panel verlassen, werden Sie nicht mehr kontaktiert. Ihre Kontaktdaten werden 12 Monate später gelöscht, und bis dahin können Sie hier jederzeit wieder beitreten.</span></p>
     </form>
 
     <form id="rejoin-form" class="form" data-when="out" novalidate>
       <fieldset>
-        <legend><span class="t" lang="en">Rejoin</span><span class="t" lang="zh-CN">重新加入</span></legend>
-        <label class="check"><input type="checkbox" name="agree" required> <span class="t" lang="en">I agree to be on the contact panel again, under the current panel agreement and <a href="/privacy">privacy policy</a>.</span><span class="t" lang="zh-CN">我同意按照现行的联系名单协议和<a href="/privacy">隐私政策</a>重新加入联系名单。</span></label>
-        <label class="check" id="rejoin-cross-border" hidden><input type="checkbox" name="crossBorder"> <span class="t" lang="en">I consent again to my information being transferred to, and stored, outside mainland China.</span><span class="t" lang="zh-CN">我再次同意我的信息传输至中国大陆境外并在境外保存。</span></label>
+        <legend><span class="t" lang="en">Rejoin</span><span class="t" lang="zh-CN">重新加入</span><span class="t" lang="de">Wieder beitreten</span></legend>
+        <label class="check"><input type="checkbox" name="agree" required> <span class="t" lang="en">I agree to be on the contact panel again, under the current panel agreement and <a href="/privacy">privacy policy</a>.</span><span class="t" lang="zh-CN">我同意按照现行的联系名单协议和<a href="/privacy">隐私政策</a>重新加入联系名单。</span><span class="t" lang="de">Ich bin einverstanden, wieder im Kontaktpanel zu sein, nach der aktuellen Panel-Vereinbarung und <a href="/privacy">Datenschutzerklärung</a>.</span></label>
+        <label class="check" id="rejoin-cross-border" hidden><input type="checkbox" name="crossBorder"> <span class="t" lang="en">I consent again to my information being transferred to, and stored, outside mainland China.</span><span class="t" lang="zh-CN">我再次同意我的信息传输至中国大陆境外并在境外保存。</span><span class="t" lang="de">Ich willige erneut ein, dass meine Daten außerhalb Festlandchinas übermittelt und gespeichert werden.</span></label>
       </fieldset>
-      <button type="submit" class="btn primary"><span class="t" lang="en">Rejoin</span><span class="t" lang="zh-CN">重新加入</span></button>
+      <button type="submit" class="btn primary"><span class="t" lang="en">Rejoin</span><span class="t" lang="zh-CN">重新加入</span><span class="t" lang="de">Wieder beitreten</span></button>
     </form>
 
-    <h2 class="sub"><span class="t" lang="en">Your consent history</span><span class="t" lang="zh-CN">你的同意记录</span></h2>
+    <h2 class="sub"><span class="t" lang="en">Your consent history</span><span class="t" lang="zh-CN">你的同意记录</span><span class="t" lang="de">Ihr Einwilligungsverlauf</span></h2>
     <ol class="history" id="history"></ol>
-    <template id="history-row"><li><time></time> <span class="t" lang="en">Panel agreement</span><span class="t" lang="zh-CN">联系名单协议</span> <code data-version></code>: <span data-field="panel"></span> · <span class="t" lang="en">oral history</span><span class="t" lang="zh-CN">口述历史</span> <span data-field="oral_history"></span> · <span class="t" lang="en">studies</span><span class="t" lang="zh-CN">研究</span> <span data-field="future_studies"></span> · <span class="t" lang="en">updates</span><span class="t" lang="zh-CN">进展通知</span> <span data-field="updates"></span></li></template>
-    <template id="yes"><span class="t" lang="en">yes</span><span class="t" lang="zh-CN">是</span></template>
-    <template id="no"><span class="t" lang="en">no</span><span class="t" lang="zh-CN">否</span></template>
+    <template id="history-row"><li><time></time> <span class="t" lang="en">Panel agreement</span><span class="t" lang="zh-CN">联系名单协议</span><span class="t" lang="de">Panel-Vereinbarung</span> <code data-version></code>: <span data-field="panel"></span> · <span class="t" lang="en">oral history</span><span class="t" lang="zh-CN">口述历史</span><span class="t" lang="de">Oral History</span> <span data-field="oral_history"></span> · <span class="t" lang="en">studies</span><span class="t" lang="zh-CN">研究</span><span class="t" lang="de">Studien</span> <span data-field="future_studies"></span> · <span class="t" lang="en">updates</span><span class="t" lang="zh-CN">进展通知</span><span class="t" lang="de">Neuigkeiten</span> <span data-field="updates"></span></li></template>
+    <template id="yes"><span class="t" lang="en">yes</span><span class="t" lang="zh-CN">是</span><span class="t" lang="de">ja</span></template>
+    <template id="no"><span class="t" lang="en">no</span><span class="t" lang="zh-CN">否</span><span class="t" lang="de">nein</span></template>
 
-    <h2 class="sub"><span class="t" lang="en">Your record</span><span class="t" lang="zh-CN">你的记录</span></h2>
-    <p><span class="t" lang="en">Download everything this website holds about you, as a file. Your name and email are in it only in encrypted form: the website cannot read them, so it cannot show them to you either. For what the researcher's archive holds, write to hello@feelingthemachine.com.</span><span class="t" lang="zh-CN">以文件形式下载本网站保存的关于你的全部信息。其中你的姓名和邮箱只以加密形式存在：网站无法读取，因此也无法显示给你。如需了解研究者档案中保存的内容，请写信至 hello@feelingthemachine.com。</span></p>
-    <button type="button" id="download" class="btn ghost"><span class="t" lang="en">Download my record</span><span class="t" lang="zh-CN">下载我的记录</span></button>
+    <h2 class="sub"><span class="t" lang="en">Your record</span><span class="t" lang="zh-CN">你的记录</span><span class="t" lang="de">Ihr Eintrag</span></h2>
+    <p><span class="t" lang="en">Download everything this website holds about you, as a file. Your name and email are in it only in encrypted form: the website cannot read them, so it cannot show them to you either. For what the researcher's archive holds, write to hello@feelingthemachine.com.</span><span class="t" lang="zh-CN">以文件形式下载本网站保存的关于你的全部信息。其中你的姓名和邮箱只以加密形式存在：网站无法读取，因此也无法显示给你。如需了解研究者档案中保存的内容，请写信至 hello@feelingthemachine.com。</span><span class="t" lang="de">Laden Sie alles, was diese Website über Sie speichert, als Datei herunter. Ihr Name und Ihre E-Mail-Adresse sind darin nur verschlüsselt enthalten: Die Website kann sie nicht lesen und Ihnen daher auch nicht anzeigen. Was das Archiv des Forschers enthält, erfahren Sie unter hello@feelingthemachine.com.</span></p>
+    <button type="button" id="download" class="btn ghost"><span class="t" lang="en">Download my record</span><span class="t" lang="zh-CN">下载我的记录</span><span class="t" lang="de">Meinen Eintrag herunterladen</span></button>
 
-    <h2 class="sub"><span class="t" lang="en">Delete your account</span><span class="t" lang="zh-CN">删除账户</span></h2>
-    <p><span class="t" lang="en">This removes everything this website holds about you, at once. Only your participant number, the request and its date remain, so the researcher can delete your details from the archive too, within 14 days, and confirm in writing. Oral history recordings follow their release form; write to hello@feelingthemachine.com about those.</span><span class="t" lang="zh-CN">这会立即删除本网站保存的关于你的全部信息，只保留你的参与者编号、请求内容和日期，以便研究者在14天内同样从档案中删除你的信息，并书面确认。口述历史录音按其授权书处理，相关事宜请写信至 hello@feelingthemachine.com。</span></p>
-    <label class="check"><input type="checkbox" id="delete-confirm"> <span class="t" lang="en">I understand this deletes my account and cannot be undone.</span><span class="t" lang="zh-CN">我明白这会删除我的账户，且无法撤销。</span></label>
+    <h2 class="sub"><span class="t" lang="en">Delete your account</span><span class="t" lang="zh-CN">删除账户</span><span class="t" lang="de">Konto löschen</span></h2>
+    <p><span class="t" lang="en">This removes everything this website holds about you, at once. Only your participant number, the request and its date remain, so the researcher can delete your details from the archive too, within 14 days, and confirm in writing. Oral history recordings follow their release form; write to hello@feelingthemachine.com about those.</span><span class="t" lang="zh-CN">这会立即删除本网站保存的关于你的全部信息，只保留你的参与者编号、请求内容和日期，以便研究者在14天内同样从档案中删除你的信息，并书面确认。口述历史录音按其授权书处理，相关事宜请写信至 hello@feelingthemachine.com。</span><span class="t" lang="de">Damit wird alles, was diese Website über Sie speichert, sofort entfernt. Nur Ihre Teilnehmernummer, der Antrag und sein Datum bleiben, damit der Forscher Ihre Angaben innerhalb von 14 Tagen auch aus dem Archiv löschen und dies schriftlich bestätigen kann. Für Oral-History-Aufnahmen gilt ihre Freigabeerklärung; schreiben Sie dazu an hello@feelingthemachine.com.</span></p>
+    <label class="check"><input type="checkbox" id="delete-confirm"> <span class="t" lang="en">I understand this deletes my account and cannot be undone.</span><span class="t" lang="zh-CN">我明白这会删除我的账户，且无法撤销。</span><span class="t" lang="de">Mir ist klar, dass dies mein Konto löscht und nicht rückgängig gemacht werden kann.</span></label>
     <div class="row">
-      <button type="button" id="delete" class="btn danger" disabled><span class="t" lang="en">Delete my account</span><span class="t" lang="zh-CN">删除我的账户</span></button>
-      <button type="button" id="signout" class="btn ghost"><span class="t" lang="en">Sign out</span><span class="t" lang="zh-CN">退出登录</span></button>
+      <button type="button" id="delete" class="btn danger" disabled><span class="t" lang="en">Delete my account</span><span class="t" lang="zh-CN">删除我的账户</span><span class="t" lang="de">Mein Konto löschen</span></button>
+      <button type="button" id="signout" class="btn ghost"><span class="t" lang="en">Sign out</span><span class="t" lang="zh-CN">退出登录</span><span class="t" lang="de">Abmelden</span></button>
     </div>
   </section>
 
   <section data-state="deleted" hidden>
-    <h1><span class="t" lang="en">Your account is deleted.</span><span class="t" lang="zh-CN">你的账户已删除。</span></h1>
-    <p><span class="t" lang="en">Nothing about you remains on this website but your number and the date you asked. The researcher will delete your details from the archive within 14 days and confirm in writing. Thank you for taking part.</span><span class="t" lang="zh-CN">本网站上除了你的编号和请求日期之外，不再保留任何关于你的信息。研究者将在14天内从档案中删除你的信息并书面确认。感谢你的参与。</span></p>
+    <h1><span class="t" lang="en">Your account is deleted.</span><span class="t" lang="zh-CN">你的账户已删除。</span><span class="t" lang="de">Ihr Konto ist gelöscht.</span></h1>
+    <p><span class="t" lang="en">Nothing about you remains on this website but your number and the date you asked. The researcher will delete your details from the archive within 14 days and confirm in writing. Thank you for taking part.</span><span class="t" lang="zh-CN">本网站上除了你的编号和请求日期之外，不再保留任何关于你的信息。研究者将在14天内从档案中删除你的信息并书面确认。感谢你的参与。</span><span class="t" lang="de">Von Ihnen bleibt auf dieser Website nichts außer Ihrer Nummer und dem Datum Ihres Antrags. Der Forscher löscht Ihre Angaben innerhalb von 14 Tagen aus dem Archiv und bestätigt dies schriftlich. Danke für Ihre Teilnahme.</span></p>
   </section>
 
 
@@ -188,7 +190,7 @@
 
 <footer>
   <div class="wrap">
-    <span><a href="/">Feeling the Machine · 感受机器</a> · <a href="/privacy"><span class="t" lang="en">Privacy</span><span class="t" lang="zh-CN">隐私政策</span></a></span>
+    <span><a href="/">Feeling the Machine · 感受机器</a> · <a href="/privacy"><span class="t" lang="en">Privacy</span><span class="t" lang="zh-CN">隐私政策</span><span class="t" lang="de">Datenschutz</span></a></span>
   </div>
 </footer>
 

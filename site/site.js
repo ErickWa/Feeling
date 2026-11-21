@@ -1,9 +1,8 @@
 (function () {
   var root = document.documentElement;
   var TAGS = { en: "en", zh: "zh-CN", de: "de" };
-  // A page offers the languages it has buttons for. /account has no German yet
-  // (its consent forms exist only in English and Chinese), so a visitor who
-  // chose German elsewhere sees it in English there.
+  // A page offers the languages it has buttons for; a choice a page lacks falls
+  // back to English there. Every page has all three today.
   function offered(l) { return Boolean(document.getElementById("lang-" + l)); }
   function setLang(l) {
     if (!offered(l)) l = "en";
@@ -20,8 +19,8 @@
   var start = "";
   try { start = localStorage.getItem("ftm-lang") || ""; } catch { /* storage blocked: fall back to the browser's language */ }
   if (!TAGS[start]) start = (navigator.language || "").toLowerCase().slice(0, 2);
-  // setLang, not choose: falling back to English on /account must not
-  // overwrite a stored German choice for the pages that have it.
+  // setLang, not choose: a fallback to English on a page without the stored
+  // language must not overwrite the choice for the pages that have it.
   setLang(start);
   document.querySelectorAll(".lang button").forEach(function (b) {
     b.addEventListener("click", function () { choose(b.getAttribute("data-set")); });
