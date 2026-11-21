@@ -66,18 +66,28 @@ password or secret into a chat, an issue or this file.
 - [ ] **C3. Starting P-number.** The highest P-number already given to email
   sign-ups in the vault, or "none". The site's `next_participant` is set
   above it.
+- [ ] **C4. German review** by a native speaker, of every German passage on
+  `/`, `/privacy` and `/account` (every state), the German sign-in emails in
+  `lib/accounts.js`, and German Forms 1-4 and the invitation email in the
+  forms doc. All of it was drafted by Claude on 2026-11-21. Corrections go to
+  Claude, which applies them in the same commit as nothing else.
+- [ ] **C5. Legal review** by a German data-protection lawyer (issue #31):
+  the privacy policy's open points and Form 3, point 2.
 
 ## D. Testing in production
 
 - [ ] **D1. Soft launch (Claude).** `ACCOUNTS_OPEN = "true"`, `/account`
   still unlinked from the home page; the CI check flips from "must refuse" to
   "must answer".
-- [ ] **D2. Delivery test.** From real inboxes at **QQ**, **163** and
-  **Gmail**, join at `https://feelingthemachine.com/account`. For each:
+- [ ] **D2. Delivery test.** From real inboxes at **QQ**, **163**, **Gmail**
+  and **GMX** (or web.de: the two largest German providers, with their own
+  spam filtering), join at `https://feelingthemachine.com/account`, in the
+  inbox's language: Chinese for QQ and 163, German for GMX. For each:
   arrived? how long? inbox or spam?
   - [ ] QQ
   - [ ] 163
   - [ ] Gmail
+  - [ ] GMX or web.de
 - [ ] **D3. The whole cycle** with one test account: change choices, leave,
   rejoin, download (check the file saves), delete. Keep a second one joined.
 - [ ] **D4. First vault run**, main vault mounted, outside mainland China:
