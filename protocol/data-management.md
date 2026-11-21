@@ -31,7 +31,8 @@ The key lives in a separate vault: `03_key/key.csv` with columns `id,name`.
 - **Backups:** three copies, on two kinds of media, one of them off-site. Test a restore every quarter (there's a recurring issue for it).
 - **Retention:** contact details are deleted 12 months after someone leaves the panel. Oral history material is kept as the release says.
 - **Withdrawals:** act within 14 days, log the date and action in `07_admin/withdrawal-log.csv`, and confirm in writing.
+- **The vault never enters mainland China** (decided 2026-11-21). Neither the main vault, the key vault, nor any backup or synced copy is opened on, stored on, or carried on a device in mainland China, including a laptop travelling to Xi'an. The privacy policy and the cross-border consent both promise the archive is kept outside mainland China, and participants outside China have not consented to their data being handled there. Work in Xi'an that needs participant data waits until you are outside China.
 - **Cross-border:** log every move of material out of China, with the date, the files and the consent reference. Interviews in China avoid sensitive personal information.
-- **Recordings:** copy them into the vault the same day, then delete them from the recorder or phone.
+- **Recordings:** copy them into the vault the same day, then delete them from the recorder or phone. *Recordings made in China cannot follow this rule as written, because the vault is not there; see the open question in the Decision issue of 2026-11-21.*
 - **Panel emails:** mail to any feelingthemachine.com address is forwarded to the researcher's inbox. Once a person's details are in the vault and that has been checked, delete their emails from the mailbox. The privacy policy promises this.
 - **Consent records** (the consent register, and on the site each consent row) are kept as long as any material they cover, because they are the proof of consent. Contact details still go at 12 months.
