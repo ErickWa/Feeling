@@ -39,6 +39,13 @@ for (const page of pages) {
     assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
   });
 
+  test(`${page}: a tab title and a search description in every language`, () => {
+    for (const l of ["zh", "de"]) assert.match(html, new RegExp(`<html[^>]* data-title-${l}="[^"]+"`), `no ${l} title`);
+    const description = html.match(/<meta name="description" content="([^"]+)">/)?.[1] ?? "";
+    assert.match(description, /\p{Script=Han}/u, "no Chinese in the description");
+    assert.match(description, /\b(Sie|Ihre[nr]?|die|und)\b/, "no German in the description");
+  });
+
   test(`${page}: every icon it links is in site/`, () => {
     const icons = [...html.matchAll(/<link rel="(?:icon|apple-touch-icon)" href="\/([^"]+)"/g)].map((m) => m[1]);
     assert.ok(icons.length >= 2, "no favicon linked");

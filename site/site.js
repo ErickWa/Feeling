@@ -1,6 +1,8 @@
 (function () {
   var root = document.documentElement;
   var TAGS = { en: "en", zh: "zh-CN", de: "de" };
+  // <title> is the English one; data-title-zh / data-title-de on <html> hold the others.
+  var EN_TITLE = document.title;
   // A page offers the languages it has buttons for; a choice a page lacks falls
   // back to English there. Every page has all three today.
   function offered(l) { return Boolean(document.getElementById("lang-" + l)); }
@@ -8,6 +10,7 @@
     if (!offered(l)) l = "en";
     root.setAttribute("data-lang", l);
     root.setAttribute("lang", TAGS[l]);
+    document.title = l === "en" ? EN_TITLE : root.getAttribute("data-title-" + l) || EN_TITLE;
     document.querySelectorAll(".lang button").forEach(function (b) {
       b.setAttribute("aria-pressed", String(b.getAttribute("data-set") === l));
     });
