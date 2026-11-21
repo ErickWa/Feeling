@@ -39,6 +39,12 @@ for (const page of pages) {
     assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
   });
 
+  test(`${page}: every icon it links is in site/`, () => {
+    const icons = [...html.matchAll(/<link rel="(?:icon|apple-touch-icon)" href="\/([^"]+)"/g)].map((m) => m[1]);
+    assert.ok(icons.length >= 2, "no favicon linked");
+    for (const f of icons) assert.ok(existsSync(new URL(`../site/${f}`, import.meta.url)), `${f} is missing`);
+  });
+
   test(`${page}: the only contact address is at the project's own domain`, () => {
     const addrs = new Set(html.match(/[\w.+-]+@[\w-]+(\.[\w-]+)+/g));
     assert.deepEqual([...addrs], ["hello@feelingthemachine.com"]);
