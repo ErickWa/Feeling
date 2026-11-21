@@ -2,13 +2,15 @@
 //
 // WHAT THIS CANNOT SEE: what Cloudflare serves (the header floor here is the
 // file's, not the response's), whether the mailbox the page names exists
-// (Email Routing is configured in the dashboard), and whether the Chinese says
-// the same thing as the English. It counts that both languages are present,
-// pairwise; it cannot read them.
+// (Email Routing is configured in the dashboard), and whether the Chinese or
+// German says the same thing as the English. It counts that every language is
+// present, string for string; it cannot read them. Nor can it see what a link
+// preview looks like: Slack, LinkedIn and WeChat each crop and cache og.png
+// their own way.
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync } from "node:fs";
 
 const read = (p) => readFileSync(new URL(`../site/${p}`, import.meta.url), "utf8");
 const pages = readdirSync(new URL("../site/", import.meta.url)).filter((f) => f.endsWith(".html"));
@@ -17,11 +19,24 @@ const headers = read("_headers");
 for (const page of pages) {
   const html = read(page);
 
-  test(`${page}: every English string has a Chinese partner`, () => {
-    const en = html.match(/class="t" lang="en"/g)?.length ?? 0;
-    const zh = html.match(/class="t" lang="zh-CN"/g)?.length ?? 0;
+  test(`${page}: every English string has a Chinese partner, and a German one where German is offered`, () => {
+    const count = (tag) => html.match(new RegExp(`class="t" lang="${tag}"`, "g"))?.length ?? 0;
+    const en = count("en");
     assert.ok(en > 10, `only ${en} English strings: has the page's markup changed shape?`);
-    assert.equal(zh, en, `${en} English strings but ${zh} Chinese`);
+    assert.equal(count("zh-CN"), en, `${en} English strings but ${count("zh-CN")} Chinese`);
+    // All or nothing: a half-German page would show blanks where strings are missing.
+    const de = count("de");
+    const offered = html.includes('id="lang-de"');
+    assert.equal(de, offered ? en : 0, offered ? `${en} English strings but ${de} German` : "German strings on a page with no German button");
+  });
+
+  test(`${page}: the link preview names this page and an image that exists`, () => {
+    const meta = (prop) => html.match(new RegExp(`<meta property="${prop}" content="([^"]+)">`))?.[1];
+    assert.equal(meta("og:url"), html.match(/<link rel="canonical" href="([^"]+)">/)?.[1]);
+    const image = meta("og:image") ?? "";
+    assert.match(image, /^https:\/\/feelingthemachine\.com\//);
+    assert.ok(existsSync(new URL(`../site/${image.slice(image.lastIndexOf("/") + 1)}`, import.meta.url)), `${image} is not in site/`);
+    assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
   });
 
   test(`${page}: the only contact address is at the project's own domain`, () => {
@@ -42,11 +57,20 @@ for (const page of pages) {
 // this domain (checked above). WHAT THIS CANNOT SEE: whether the policy is
 // TRUE. It is written against protocol/participant-accounts.md and
 // data-management.md; change either and re-read the policy by hand.
-test("privacy.html names its operator and its effective date in both languages", () => {
+test("privacy.html names its operator and its effective date in all three languages", () => {
   const html = read("privacy.html");
   assert.match(html, /Erick Watson/);
   assert.match(html, /in effect from \d{1,2} \w+ 20\d\d/i);
   assert.match(html, /自20\d\d年\d{1,2}月\d{1,2}日起生效/);
+  assert.match(html, /gültig ab \d{1,2}\. \S+ 20\d\d/i);
+});
+
+test("the sitemap lists exactly the pages that may be indexed, and robots.txt points to it", () => {
+  const path = (p) => (p === "index.html" ? "/" : `/${p.replace(/\.html$/, "")}`);
+  const indexable = pages.filter((p) => !read(p).includes('<meta name="robots" content="noindex">')).map(path).sort();
+  const listed = [...read("sitemap.xml").matchAll(/<loc>https:\/\/feelingthemachine\.com(\/[^<]*)<\/loc>/g)].map((m) => m[1]).sort();
+  assert.deepEqual(listed, indexable);
+  assert.match(read("robots.txt"), /^Sitemap: https:\/\/feelingthemachine\.com\/sitemap\.xml$/m);
 });
 
 test("the home page links the privacy policy", () => {

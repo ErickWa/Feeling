@@ -19,11 +19,18 @@ served at **https://feelingthemachine.com** by the Cloudflare Pages project
    transcripts, signed forms or answers, in a file, a commit, an issue, a log
    or a test fixture. They live in the encrypted vault (`protocol/data-management.md`).
    `.gitignore` is a safety net, not the rule.
-2. **Bilingual: EN and ZH move together.** Every user-facing string on the
-   site is a pair of `<span class="t" lang="en">` / `lang="zh-CN"`; changing
-   one changes the other in the same commit. The test counts the pairs; it
-   cannot read them, so Chinese wording that matters goes to a native Chinese reviewer for
-   review, as the forms do.
+2. **EN and ZH move together; DE follows where it is offered.** Every
+   user-facing string on the site is a `<span class="t" lang="en">` /
+   `lang="zh-CN"` pair, and on the pages with a Deutsch button (home, privacy;
+   added 2026-11-21) a `lang="de"` third. Changing one changes the others in
+   the same commit. The test counts them, all or nothing per page; it cannot
+   read them, so Chinese wording that matters goes to a native Chinese reviewer for review,
+   as the forms do, and German wording that matters (above all the privacy
+   policy) needs a native speaker's review too: the first German was drafted
+   by Claude and has had none. `/account` stays EN/ZH on purpose: consent is
+   given there against Form 1, which exists only in English and Chinese, and
+   the API records the consent language as `en` or `zh`. German there needs a
+   German Form 1 first.
 3. **No inline script or style.** The CSP has no `'unsafe-inline'`; behaviour
    goes in `site/site.js`, styling in `site/site.css`.
 4. **The site holds nothing it can read back about who someone is.**

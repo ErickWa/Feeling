@@ -1,0 +1,8 @@
+# Every crawler is welcome, AI search crawlers included: being found by the
+# people who build AI is the point. /account is not disallowed here on purpose;
+# it carries <meta name="robots" content="noindex">, and a crawler barred from
+# fetching it could never read that and might list the bare URL instead.
+User-agent: *
+Disallow: /api/
+
+Sitemap: https://feelingthemachine.com/sitemap.xml

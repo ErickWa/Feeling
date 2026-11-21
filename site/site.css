@@ -51,7 +51,14 @@ body {
   font-family: var(--font-body); font-size: 17px; line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
-html[data-lang="en"] .t[lang="zh-CN"], html[data-lang="zh"] .t[lang="en"] { display: none; }
+html[data-lang="en"] .t:not([lang="en"]),
+html[data-lang="zh"] .t:not([lang="zh-CN"]),
+html[data-lang="de"] .t:not([lang="de"]) { display: none; }
+/* German compounds (Datenschutzaufsichtsbehörde) overflow a phone-width column unbroken. */
+html[data-lang="de"] body { hyphens: auto; overflow-wrap: break-word; }
+/* ...but never the project's name, which German hyphenation reads as German. */
+.name { hyphens: manual; white-space: nowrap; }
+html[data-lang="de"] h1 { hyphens: manual; }
 html[data-lang="zh"] body { line-height: 1.8; }
 a { color: var(--accent); text-underline-offset: 3px; }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
@@ -59,7 +66,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 
 /* Header */
 header.top { border-bottom: 1px solid var(--rule); }
-header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 16px; padding-bottom: 16px; }
+header.top .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; padding-top: 16px; padding-bottom: 16px; }
 .mark { display: flex; align-items: baseline; gap: 10px; font-family: var(--font-display); font-size: 22px; text-decoration: none; color: var(--ink); }
 .mark .han { font-family: var(--font-han); font-weight: 600; font-size: 16px; color: var(--ink-2); letter-spacing: 0.08em; }
 .lang { display: inline-flex; border: 1px solid var(--rule); border-radius: 999px; padding: 3px; gap: 2px; }
