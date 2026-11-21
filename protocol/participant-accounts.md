@@ -81,8 +81,13 @@ column the site holds, sealed values included, and is what the download
 saves. The `requests` table (`migrations/0002_requests.sql`) is the vault's
 to-do list; #27 marks each one done.
 
-**Into the vault**: `scripts/export_to_vault.mjs`, run by Erick with the vault
-mounted. It pulls new rows with a read-only token, decrypts sealed fields with
+**Into the vault** (built, #27): `scripts/export_to_vault.mjs`, run by Erick with the vault
+mounted; the logic is `scripts/vault_lib.mjs`, tested in `tests/vault.test.mjs`.
+It also checks every opened email against the site's fingerprint of the
+address that received the link, and refuses to copy one that does not match;
+and it stops if a site P-number is already somebody else's in the contact log.
+A deletion removes the contact-log row and keeps the consent-register rows,
+which carry no contact details, as proof of what was agreed. It pulls new rows with a read-only token, decrypts sealed fields with
 the vault's private key, writes `contact-log.csv`, `consent-register.csv` and
 `withdrawal-log.csv`, acts on tombstones, then deletes from the site whatever
 the vault now holds that the site no longer needs (sealed fields and processed

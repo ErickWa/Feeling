@@ -55,6 +55,6 @@ export default [
   {
     name: "feeling/node",
     files: ["*.mjs", "tests/**/*.mjs", "scripts/**/*.mjs"],
-    languageOptions: { ecmaVersion: 2024, sourceType: "module", globals: { URL: "readonly", process: "readonly", console: "readonly", Request: "readonly" } },
+    languageOptions: { ecmaVersion: 2024, sourceType: "module", globals: { URL: "readonly", process: "readonly", console: "readonly", Request: "readonly", fetch: "readonly" } },
   },
 ];
