@@ -37,10 +37,13 @@ served at **https://feelingthemachine.com** by the Cloudflare Pages project
    Participant accounts (`protocol/participant-accounts.md`, decided
    2026-11-20) seal name and email in the browser with the vault's public key;
    the private key never leaves the vault. No analytics, and nothing loaded
-   from another origin: fonts are self-hosted in `site/fonts/`. Cloudflare is
-   the only company in the loop, and the privacy policy at `/privacy` says
-   exactly what it sees; change what the site does and that page changes in
-   the same commit.
+   from another origin: fonts are self-hosted in `site/fonts/`. Cloudflare
+   (hosting, database, mail) and Proton (the mailbox panel mail is forwarded
+   to) are the only companies in the loop, and the privacy policy at
+   `/privacy` names both and says exactly what they see; change what the site
+   does, or where mail goes, and that page changes in the same commit. Until
+   2026-11-21 this line said Cloudflare alone, and so did the policy: the
+   forwarding target's MX records were the only place Proton appeared.
 5. **Chinese text changes need the font re-cut.** `scripts/subset_han.sh`
    rebuilds Noto Serif SC from the pages; `tests/fonts.test.mjs` fails until
    you run it.
