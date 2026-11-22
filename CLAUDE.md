@@ -26,11 +26,11 @@ served at **https://feelingthemachine.com** by the Cloudflare Pages project
    test counts them, all or nothing per page; it cannot read them, so Chinese
    wording that matters goes to a native Chinese reviewer for review, as the forms do, and
    German wording that matters (above all the privacy policy and Form 1)
-   needs a native speaker's review too: the German was drafted by Claude and
-   has had none. **A consent row's `lang` is the record of which text the
+   needs a native speaker's review too. The German was drafted by Claude and
+   reviewed by a native speaker on 2026-11-22 (GO-LIVE C4); text added since
+   then has not been. **A consent row's `lang` is the record of which text the
    person agreed to**, so sign-up may not open in a language whose Form 1 is
-   not released: today that holds because accounts are closed and Form 1
-   v1.0 is unreleased in all three.
+   not released. Form 1 v1.0 was released in all three on 2026-11-22.
 3. **No inline script or style.** The CSP has no `'unsafe-inline'`; behaviour
    goes in `site/site.js`, styling in `site/site.css`.
 4. **The site holds nothing it can read back about who someone is.**

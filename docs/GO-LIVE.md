@@ -59,7 +59,7 @@ password or secret into a chat, an issue or this file.
   in `forms/README.md`) and add a line to `forms/CHANGELOG.md`. Give Claude
   the final text: it goes into the consent box on `/account`, and
   `FORM1_VERSION` becomes `1.0`.
-- [ ] **C2. Chinese review** of every Chinese passage on:
+- [x] **C2. Chinese review** of every Chinese passage on:
   - `/`: especially sections 03 and 05 and the FAQ
   - `/privacy`: all of it
   - `/account`: every state, plus the sign-in email text in `lib/accounts.js`
@@ -69,12 +69,12 @@ password or secret into a chat, an issue or this file.
 - [ ] **C3. Starting P-number.** The highest P-number already given to email
   sign-ups in the vault, or "none". The site's `next_participant` is set
   above it.
-- [ ] **C4. German review** by a native speaker, of every German passage on
+- [x] **C4. German review** by a native speaker, of every German passage on
   `/`, `/privacy` and `/account` (every state), the German sign-in emails in
   `lib/accounts.js`, and German Forms 1-4 and the invitation email in the
   forms doc. All of it was drafted by Claude on 2026-11-21. Corrections go to
   Claude, which applies them in the same commit as nothing else.
-- [ ] **C5. Legal review** by a German data-protection lawyer (issue #31):
+- [x] **C5. Legal review** by a German data-protection lawyer (issue #31):
   the privacy policy's open points and Form 3, point 2.
 
 ## D. Testing in production
