@@ -30,8 +30,8 @@ served at **https://feelingthemachine.com** by the Cloudflare Pages project
    reviewed by a native speaker on 2026-11-22 (GO-LIVE C4); text added since
    then has not been. **A consent row's `lang` is the record of which text the
    person agreed to**, so sign-up may not open in a language whose Form 1 is
-   not released. Form 1 v1.0 was released in all three on 2026-11-22; sign-up
-   opens on v1.1, drafted the same day to match the website (GO-LIVE C6).
+   not released. Form 1 v1.0 was released in all three on 2026-11-22; v1.1, which
+   matches the website, the same day after review; sign-up opens on v1.1.
 3. **No inline script or style.** The CSP has no `'unsafe-inline'`; behaviour
    goes in `site/site.js`, styling in `site/site.css`.
 4. **The site holds nothing it can read back about who someone is.**
