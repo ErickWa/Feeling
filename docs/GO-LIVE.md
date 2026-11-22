@@ -38,14 +38,14 @@ password or secret into a chat, an issue or this file.
 
 ## B. Email sending (Cloudflare dashboard)
 
-- [ ] **B1. Plan.** Workers & Pages → Plans: Email Sending needs **Workers
+- [x] **B1. Plan.** Workers & Pages → Plans: Email Sending needs **Workers
   Paid** ($5/month, 3,000 emails included).
-- [ ] **B2. Onboard the sending domain.** Compute → Email Service → Email
+- [x] **B2. Onboard the sending domain.** Compute → Email Service → Email
   Sending → **Onboard Domain** → `feelingthemachine.com`. Cloudflare adds DNS
   records under `cf-bounce`, and a DMARC record with `p=reject` (the domain
   has none). The inbound catch-all keeps working. Wait until it shows as
   verified (usually 5–15 minutes).
-- [ ] **B3. Sending token.** My Profile → API Tokens → Create Token → Start
+- [x] **B3. Sending token.** My Profile → API Tokens → Create Token → Start
   from scratch → Account policy, scoped to your account, permission **Email
   Sending: Edit** only, named "feeling mail (Pages Function)". Copy it, then
   paste it when asked:
