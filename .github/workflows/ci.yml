@@ -85,16 +85,17 @@ jobs:
           curl -sI https://feelingthemachine.com/ | grep -i "^content-security-policy: .*form-action" \
             || { echo "::error::production sends no CSP"; exit 1; }
 
-      # UNTIL GO-LIVE (#28) PRODUCTION MUST REFUSE SIGN-UPS. ACCOUNTS_OPEN in
-      # wrangler.toml is "false"; a 503 here proves the deployed Functions read
-      # it. #28 replaces this step with one that requires the API to answer.
-      - name: Accounts stay closed until go-live
+      # SINCE THE SOFT LAUNCH (GO-LIVE D1) PRODUCTION MUST ANSWER. An empty body
+      # has to come back 400 "invalid": that is only reachable past the gate,
+      # so it proves ACCOUNTS_OPEN is "true" and VAULT_KID and HMAC_KEY are set
+      # (503 not_open / not_configured otherwise). What it cannot see: whether      # D1 is reachable, or whether a sign-in email is ever sent or delivered.
+      - name: Accounts answer
         if: env.HAVE_CF_TOKEN == 'true' && github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
         run: |
-          code=$(curl -s -o /dev/null -w '%{http_code}' -X POST -H 'origin: https://feelingthemachine.com' \
+          body=$(curl -s -w ' %{http_code}' -X POST -H 'origin: https://feelingthemachine.com' \
             -H 'content-type: application/json' -d '{}' https://feelingthemachine.com/api/start)
-          if [ "$code" != "503" ]; then
-            echo "::error::/api/start answered $code, not 503: accounts are open before go-live (#28)"
+          if [ "$body" != '{"error":"invalid"} 400' ]; then
+            echo "::error::/api/start answered '$body', not '{\"error\":\"invalid\"} 400': accounts are closed or misconfigured"
             exit 1
           fi
-          echo "accounts closed (503), as they must be until #28"
+          echo "accounts open and configured (400 invalid for an empty request)"

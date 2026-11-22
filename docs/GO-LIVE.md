@@ -87,7 +87,7 @@ password or secret into a chat, an issue or this file.
 
 ## D. Testing in production
 
-- [ ] **D1. Soft launch (Claude).** `ACCOUNTS_OPEN = "true"`, `/account`
+- [x] **D1. Soft launch (Claude).** `ACCOUNTS_OPEN = "true"`, `/account`
   still unlinked from the home page; the CI check flips from "must refuse" to
   "must answer".
 - [ ] **D2. Delivery test.** From real inboxes at **QQ**, **163**, **Gmail**

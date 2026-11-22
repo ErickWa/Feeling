@@ -13,8 +13,9 @@ database_id = "0da66a67-0a25-4d59-9a2a-54b2c4caf506"
 migrations_dir = "migrations"
 
 [vars]
-# "true" only at go-live (#28): until then every /api route answers 503.
-ACCOUNTS_OPEN = "false"
+# "true" since the soft launch (GO-LIVE D1, 2026-11-22); "false" makes every
+# /api route answer 503 again, and CI then fails until it is put back.
+ACCOUNTS_OPEN = "true"
 # The kid in site/vault-key.json, once scripts/vault_keygen.mjs has made it.
 VAULT_KID = "55c13a8400a8f8ac"
 FORM1_VERSION = "1.1"
