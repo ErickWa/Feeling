@@ -116,5 +116,18 @@ password or secret into a chat, an issue or this file.
 - [ ] **E1.** Privacy policy: new effective date; section 04 loses "Not open
   yet".
 - [ ] **E2.** Home page section 06: from "send an email" to the sign-up link,
-  EN and ZH.
+  EN, ZH and DE.
 - [ ] **E3.** Close #28; the weekly export (#30) starts.
+
+## F. After go-live (Claude)
+
+- [ ] **F1. Enrol in devkit**, as its own change and only once E3 is done:
+  not during D–E, because a new gate's first run tends to go red and a red
+  gate blocks the deploy a live launch may need in minutes. Take
+  `headers.mjs`, `legal.mjs`, `audit.mjs` and `budget.mjs`. Leave out
+  `consent.js` (the site has no cookies or adverts to consent to, and the
+  privacy policy says so) and `LICENSE` / `COMMERCIAL.md` / the CLA (whether
+  this private research repo carries a licence is its own decision). In the
+  same change: this repo's entry in devkit's `targets.json`, the "Not yet"
+  section of `CLAUDE.md`, and the portfolio's bilingual-repo list in devkit's
+  `conventions.md`, which names this repo as EN, ZH and DE.
