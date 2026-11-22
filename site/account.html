@@ -43,6 +43,7 @@
 
   <!-- Messages sit at the top and scroll into view, so a result is seen wherever the button was. -->
   <p class="ok" id="ok" role="status" hidden>
+    <span data-ok="joined"><span class="t" lang="en">You've joined, and your choices are saved. There's nothing more to do.</span><span class="t" lang="zh-CN">你已加入，你的选择已保存，不需要再做什么。</span><span class="t" lang="de">Sie sind beigetreten, und Ihre Auswahl ist gespeichert. Sie müssen nichts weiter tun.</span></span>
     <span data-ok="saved"><span class="t" lang="en">Saved.</span><span class="t" lang="zh-CN">已保存。</span><span class="t" lang="de">Gespeichert.</span></span>
     <span data-ok="leave"><span class="t" lang="en">You've left the panel. Nobody will contact you.</span><span class="t" lang="zh-CN">你已退出联系名单，不会再有人联系你。</span><span class="t" lang="de">Sie haben das Panel verlassen. Niemand wird Sie kontaktieren.</span></span>
     <span data-ok="rejoin"><span class="t" lang="en">Welcome back.</span><span class="t" lang="zh-CN">欢迎回来。</span><span class="t" lang="de">Willkommen zurück.</span></span>
@@ -151,13 +152,13 @@
 
     <form id="choices-form" class="form" data-when="in" novalidate>
       <fieldset>
-        <legend><span class="t" lang="en">I'm interested in</span><span class="t" lang="zh-CN">我有兴趣</span><span class="t" lang="de">Ich interessiere mich für</span></legend>
+        <legend><span class="t" lang="en">I'm interested in (saved; change any time)</span><span class="t" lang="zh-CN">我有兴趣（已保存，随时可以修改）</span><span class="t" lang="de">Ich interessiere mich für (gespeichert, jederzeit änderbar)</span></legend>
         <label class="check"><input type="checkbox" name="oralHistory"> <span class="t" lang="en">recording an oral history</span><span class="t" lang="zh-CN">录制一次口述历史访谈</span><span class="t" lang="de">die Aufnahme einer Oral History</span></label>
         <label class="check"><input type="checkbox" name="futureStudies"> <span class="t" lang="en">hearing about future studies</span><span class="t" lang="zh-CN">了解今后的研究</span><span class="t" lang="de">Informationen über künftige Studien</span></label>
         <label class="check"><input type="checkbox" name="updates"> <span class="t" lang="en">the twice-yearly project update</span><span class="t" lang="zh-CN">每半年一次的项目进展通知</span><span class="t" lang="de">die Projektneuigkeiten zweimal im Jahr</span></label>
       </fieldset>
       <div class="row">
-        <button type="submit" class="btn primary"><span class="t" lang="en">Save my choices</span><span class="t" lang="zh-CN">保存我的选择</span><span class="t" lang="de">Meine Auswahl speichern</span></button>
+        <button type="submit" id="save-choices" class="btn primary" disabled><span class="t" lang="en">Save changes</span><span class="t" lang="zh-CN">保存修改</span><span class="t" lang="de">Änderungen speichern</span></button>
         <button type="button" id="leave" class="btn ghost"><span class="t" lang="en">Leave the panel</span><span class="t" lang="zh-CN">退出联系名单</span><span class="t" lang="de">Panel verlassen</span></button>
       </div>
       <p class="hint"><span class="t" lang="en">Leaving means you won't be contacted again. Your contact details are deleted 12 months later, and you can rejoin here any time before then.</span><span class="t" lang="zh-CN">退出后不会再有人联系你。你的联系方式将在12个月后删除；在此之前，你可以随时在这里重新加入。</span><span class="t" lang="de">Wenn Sie das Panel verlassen, werden Sie nicht mehr kontaktiert. Ihre Kontaktdaten werden 12 Monate später gelöscht, und bis dahin können Sie hier jederzeit wieder beitreten.</span></p>

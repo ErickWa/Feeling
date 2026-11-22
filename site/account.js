@@ -59,6 +59,8 @@ function renderMe(data) {
   f.oralHistory.checked = Boolean(latest.oral_history);
   f.futureStudies.checked = Boolean(latest.future_studies);
   f.updates.checked = Boolean(latest.updates);
+  // The boxes show what is already saved, so there is nothing to save until one changes.
+  $("#save-choices").disabled = true;
   $("#rejoin-form").reset();
   $("#rejoin-cross-border").hidden = participant.country !== "CN";
   $("#history").replaceChildren(...consents.slice().reverse().map((c) => {
@@ -125,7 +127,8 @@ $("#join-form").addEventListener("submit", async (e) => {
   if (r.status === 201) {
     f.reset(); // don't leave the name sitting in the page once it is sealed and sent
     joinToken = null;
-    return loadMe();
+    await loadMe();
+    return ok("joined");
   }
   if (r.status === 410 || r.status === 409) show("start");
   say(r.data.error);
@@ -140,6 +143,13 @@ async function saveChoices(body) {
   await loadMe();
   ok(r.data.request ?? "saved");
 }
+
+$("#choices-form").addEventListener("change", (e) => {
+  const f = e.currentTarget, latest = record?.consents.at(-1) ?? {};
+  $("#save-choices").disabled = f.oralHistory.checked === Boolean(latest.oral_history)
+    && f.futureStudies.checked === Boolean(latest.future_studies)
+    && f.updates.checked === Boolean(latest.updates);
+});
 
 $("#choices-form").addEventListener("submit", (e) => {
   e.preventDefault();
