@@ -32,7 +32,7 @@ password or secret into a chat, an issue or this file.
   ```
   openssl rand -base64 48 | tee /path/to/mounted/vault/FeelingTheMachine/07_admin/hmac_key.txt | npx wrangler@4.152.0 pages secret put HMAC_KEY --project-name=feeling
   ```
-- [ ] **A5. Back up the vault** (three copies, two kinds of media, one
+- [x] **A5. Back up the vault** (three copies, two kinds of media, one
   off-site, none in mainland China). From here on, losing the vault loses
   every name participants have sealed.
 
