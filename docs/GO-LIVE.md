@@ -8,19 +8,22 @@ password or secret into a chat, an issue or this file.
 
 ## A. The vault (outside mainland China)
 
-- [ ] **A1. Create two encrypted vaults** (Cryptomator or VeraCrypt): the
+- [x] **A1. Create two encrypted vaults** (Cryptomator or VeraCrypt): the
   **main vault** (e.g. `FeelingTheMachine`) and the **key vault** with a
   different password, for `03_key/key.csv` (ID to name). Store them only
   where nothing syncs to a device that goes to Xi'an (decision #29).
-- [ ] **A2. Lay out the folders**, from the repo folder, main vault mounted:
+- [x] **A2. Lay out the folders**, from the repo folder, main vault mounted:
   ```
   scripts/make_vault.sh /path/to/mounted/vault
   ```
-- [ ] **A3. Create the site's sealing key:**
+- [x] **A3. Create the site's sealing key:**
   ```
   node scripts/vault_keygen.mjs /path/to/mounted/vault
   ```
-  It prints `Key <kid>`. Don't commit `site/vault-key.json` yourself; tell
+  Run it with `node`, not `bash` or `sudo`. The path is the **main** vault's
+  mount point (Cryptomator: `~/Library/Application Support/Cryptomator/mnt/<vault>`),
+  never the key vault, and it must hold the `FeelingTheMachine` folder that A2
+  made, under exactly that name. It prints `Key <kid>`. Don't commit `site/vault-key.json` yourself; tell
   Claude "key done" (it commits the file and sets `VAULT_KID` in
   `wrangler.toml`).
 - [ ] **A4. Create the fingerprint secret**, written to the vault and to

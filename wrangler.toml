@@ -16,7 +16,7 @@ migrations_dir = "migrations"
 # "true" only at go-live (#28): until then every /api route answers 503.
 ACCOUNTS_OPEN = "false"
 # The kid in site/vault-key.json, once scripts/vault_keygen.mjs has made it.
-VAULT_KID = ""
+VAULT_KID = "55c13a8400a8f8ac"
 FORM1_VERSION = "1.0-draft"
 ACCOUNT_ID = "6010d070417dea8ddd87556f1ecf622c"
 MAIL_FROM = "no-reply@feelingthemachine.com"
