@@ -66,9 +66,10 @@ password or secret into a chat, an issue or this file.
 
   Corrections go to Claude, which applies them and re-cuts the font
   (`scripts/subset_han.sh`).
-- [ ] **C3. Starting P-number.** The highest P-number already given to email
+- [x] **C3. Starting P-number.** The highest P-number already given to email
   sign-ups in the vault, or "none". The site's `next_participant` is set
-  above it.
+  above it. "None" (2026-11-22): production already holds
+  `next_participant = 1` and no participants, so the site starts at P001.
 - [x] **C4. German review** by a native speaker, of every German passage on
   `/`, `/privacy` and `/account` (every state), the German sign-in emails in
   `lib/accounts.js`, and German Forms 1-4 and the invitation email in the
