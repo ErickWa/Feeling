@@ -17,6 +17,6 @@ migrations_dir = "migrations"
 ACCOUNTS_OPEN = "false"
 # The kid in site/vault-key.json, once scripts/vault_keygen.mjs has made it.
 VAULT_KID = "55c13a8400a8f8ac"
-FORM1_VERSION = "1.0-draft"
+FORM1_VERSION = "1.0"
 ACCOUNT_ID = "6010d070417dea8ddd87556f1ecf622c"
 MAIL_FROM = "no-reply@feelingthemachine.com"

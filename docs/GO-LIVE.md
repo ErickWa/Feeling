@@ -55,7 +55,7 @@ password or secret into a chat, an issue or this file.
 
 ## C. Content
 
-- [ ] **C1. Form 1 final**, EN, ZH and DE (German reviewed by a native speaker). Export the PDFs to `forms/v1.0/` (names
+- [x] **C1. Form 1 final**, EN, ZH and DE (German reviewed by a native speaker). Export the PDFs to `forms/v1.0/` (names
   in `forms/README.md`) and add a line to `forms/CHANGELOG.md`. Give Claude
   the final text: it goes into the consent box on `/account`, and
   `FORM1_VERSION` becomes `1.0`.
