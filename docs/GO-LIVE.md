@@ -26,7 +26,7 @@ password or secret into a chat, an issue or this file.
   made, under exactly that name. It prints `Key <kid>`. Don't commit `site/vault-key.json` yourself; tell
   Claude "key done" (it commits the file and sets `VAULT_KID` in
   `wrangler.toml`).
-- [ ] **A4. Create the fingerprint secret**, written to the vault and to
+- [x] **A4. Create the fingerprint secret**, written to the vault and to
   Cloudflare without being shown (run `npx wrangler@4.152.0 login` first if
   asked):
   ```
