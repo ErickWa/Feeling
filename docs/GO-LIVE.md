@@ -76,6 +76,13 @@ password or secret into a chat, an issue or this file.
   Claude, which applies them in the same commit as nothing else.
 - [x] **C5. Legal review** by a German data-protection lawyer (issue #31):
   the privacy policy's open points and Form 3, point 2.
+- [ ] **C6. Form 1 v1.1.** v1.0 did not describe web sign-up (it promised a
+  phone number, a signature and a file only Erick can read, while the website
+  keeps country, kind of work and age band itself). v1.1, drafted 2026-11-22,
+  is in the forms doc and in the `/account` box as `1.1-draft`. Approve the
+  English, have the Chinese and German reviewed as for v1.0, and give Claude
+  the corrections: it exports `forms/v1.1/`, adds the changelog line and sets
+  `FORM1_VERSION` to `1.1`. Sign-up (D1) opens on v1.1, not v1.0.
 
 ## D. Testing in production
 
