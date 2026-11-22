@@ -88,7 +88,9 @@ jobs:
       # SINCE THE SOFT LAUNCH (GO-LIVE D1) PRODUCTION MUST ANSWER. An empty body
       # has to come back 400 "invalid": that is only reachable past the gate,
       # so it proves ACCOUNTS_OPEN is "true" and VAULT_KID and HMAC_KEY are set
-      # (503 not_open / not_configured otherwise). What it cannot see: whether      # D1 is reachable, or whether a sign-in email is ever sent or delivered.
+      # (503 not_open / not_configured otherwise). What it cannot see:
+      # whether /account works in a browser, or whether a sign-in email is
+      # ever sent or delivered (D2 checks that by hand).
       - name: Accounts answer
         if: env.HAVE_CF_TOKEN == 'true' && github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
         run: |
