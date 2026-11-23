@@ -63,7 +63,7 @@ function renderMe(data) {
   $("#save-choices").disabled = true;
   $("#rejoin-form").reset();
   $("#rejoin-cross-border").hidden = participant.country !== "CN";
-  $("#history").replaceChildren(...consents.slice().reverse().map((c) => {
+  $("#history").replaceChildren(...consents.map((c) => {
     const li = $("#history-row").content.cloneNode(true);
     li.querySelector("time").textContent = c.at.slice(0, 10);
     li.querySelector("[data-version]").textContent = `${c.form} v${c.form_version}`;
