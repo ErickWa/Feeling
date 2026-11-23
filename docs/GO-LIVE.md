@@ -90,16 +90,16 @@ password or secret into a chat, an issue or this file.
 - [x] **D1. Soft launch (Claude).** `ACCOUNTS_OPEN = "true"`, `/account`
   still unlinked from the home page; the CI check flips from "must refuse" to
   "must answer".
-- [ ] **D2. Delivery test.** From real inboxes at **QQ**, **163**, **Gmail**
+- [x] **D2. Delivery test.** From real inboxes at **QQ**, **163**, **Gmail**
   and **GMX** (or web.de: the two largest German providers, with their own
   spam filtering), join at `https://feelingthemachine.com/account`, in the
   inbox's language: Chinese for QQ and 163, German for GMX. For each:
   arrived? how long? inbox or spam?
-  - [ ] QQ
-  - [ ] 163
-  - [ ] Gmail
-  - [ ] GMX or web.de
-- [ ] **D3. The whole cycle** with one test account: change choices, leave,
+  - [x] QQ
+  - [x] 163
+  - [x] Gmail
+  - [x] GMX or web.de
+- [x] **D3. The whole cycle** with one test account: change choices, leave,
   rejoin, download (check the file saves), delete. Keep a second one joined.
 - [ ] **D4. First vault run**, main vault mounted, outside mainland China:
   ```
