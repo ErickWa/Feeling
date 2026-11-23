@@ -19,6 +19,12 @@
 # the Join buttons rendered unstyled until the cache ran out. A new account.js
 # id against an old account.js is the same failure with broken behaviour
 # instead. These files are small and the ETag makes a revalidation a 304.
+#
+# NOT YET SERVED (2026-11-23): the zone's Browser Cache TTL (4 hours) raises
+# any shorter browser lifetime on edge-cached files, so these still go out as
+# max-age=14400 (fonts ask for longer and are untouched). They take effect
+# once that setting is "Respect Existing Headers"; until then, check with
+# `curl -sI https://feelingthemachine.com/site.css`.
 /site.css
   Cache-Control: public, max-age=0, must-revalidate
 
