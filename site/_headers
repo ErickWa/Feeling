@@ -13,6 +13,24 @@
   # falls back to the system's Chinese serif.
   Cache-Control: public, max-age=2592000
 
+# The page's own CSS and JS are revalidated on every load, like the HTML.
+# Pages caches assets for 4 hours by default and the HTML not at all, so a
+# deploy that changed both served new markup with old styling: on 2026-11-23
+# the Join buttons rendered unstyled until the cache ran out. A new account.js
+# id against an old account.js is the same failure with broken behaviour
+# instead. These files are small and the ETag makes a revalidation a 304.
+/site.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/site.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/account.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/seal.js
+  Cache-Control: public, max-age=0, must-revalidate
+
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
