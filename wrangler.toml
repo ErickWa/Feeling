@@ -21,3 +21,5 @@ VAULT_KID = "55c13a8400a8f8ac"
 FORM1_VERSION = "1.1"
 ACCOUNT_ID = "6010d070417dea8ddd87556f1ecf622c"
 MAIL_FROM = "no-reply@feelingthemachine.com"
+# The only host /api answers on, and the one every emailed link names.
+SITE_ORIGIN = "https://feelingthemachine.com"

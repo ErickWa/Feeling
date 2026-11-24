@@ -9,8 +9,8 @@
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { langOf, linkMessage, normalizeEmail, sealedFor, validateJoin } from "../lib/accounts.js";
-import { choices, join, me, remove, signin, signout, start } from "../lib/api.js";
+import { langOf, linkMessage, normalizeEmail, rateEmail, rateIp, sealedFor, validateJoin } from "../lib/accounts.js";
+import { choices, gate, join, me, remove, signin, signout, start } from "../lib/api.js";
 import { generateVaultKey, importPublicKey, open, seal } from "../site/seal.js";
 import { call, cookieOf, joinOne, linkToken, world } from "./helpers/world.mjs";
 
@@ -116,6 +116,70 @@ test("rate limits: three links per address and ten per IP an hour", async () => 
   assert.equal(await send("new@example.com", "192.0.2.1"), 429);
   const keys = w.env.DB.raw.prepare("SELECT key FROM rate").all().map((r) => r.key).join(" ");
   assert.doesNotMatch(keys, /192\.0\.2|198\.51|example/, "rate keys hold no IP or address");
+});
+
+// The four tests below are the security review of 2026-11-24, one per finding.
+test("rateEmail and rateIp: one quota per inbox and per IPv6 /64", () => {
+  assert.equal(rateEmail("ada@example.com"), "ada@example.com", "an ordinary address is unchanged");
+  assert.equal(rateEmail("ada+ftm@example.com"), "ada@example.com");
+  assert.equal(rateEmail("a.d.a+x@googlemail.com"), "ada@gmail.com");
+  assert.equal(rateEmail("a.da@example.com"), "a.da@example.com", "dots matter outside Gmail");
+  assert.equal(rateIp("203.0.113.9"), "203.0.113.9");
+  assert.equal(rateIp("::ffff:203.0.113.9"), "203.0.113.9");
+  assert.equal(rateIp("2001:db8:1:2:aaaa::1"), "2001:db8:1:2::/64");
+  assert.equal(rateIp("2001:DB8:1:2:bbbb:cccc:dddd:eeee"), "2001:db8:1:2::/64");
+  assert.equal(rateIp("2001:db8::1"), "2001:db8:0:0::/64");
+  assert.equal(rateIp(null), "local");
+});
+
+// Gmail addresses here have local parts under six characters, which Gmail
+// never issues, so none of them can be anyone's inbox.
+test("rate limits cannot be dodged with plus-tags, Gmail dots or fresh IPv6 addresses", async () => {
+  const w = await world();
+  const send = async (email, ip) => (await call(w.env, start, "/api/start", { email, sealedEmail: await seal(w.pub, "email", email) }, { "cf-connecting-ip": ip })).status;
+  for (const [i, e] of ["ab@gmail.com", "a.b@gmail.com", "ab+1@gmail.com"].entries()) assert.equal(await send(e, `198.51.100.${i}`), 202);
+  assert.equal(await send("a.b+2@googlemail.com", "198.51.100.9"), 429);
+  for (let i = 0; i < 10; i++) assert.equal(await send(`p${i}@example.com`, `2001:db8:1:2::${i + 1}`), 202);
+  assert.equal(await send("q@example.com", "2001:db8:1:2:ffff::1"), 429, "a new address in the same /64 is the same client");
+});
+
+test("a request refused for its IP does not spend the address's quota", async () => {
+  const w = await world();
+  const send = async (email, ip) => (await call(w.env, start, "/api/start", { email, sealedEmail: await seal(w.pub, "email", email) }, { "cf-connecting-ip": ip })).status;
+  for (let i = 0; i < 10; i++) await send(`filler${i}@example.com`, "192.0.2.66");
+  for (let i = 0; i < 5; i++) assert.equal(await send("ada@example.com", "192.0.2.66"), 429);
+  assert.equal(await send("ada@example.com", "198.51.100.1"), 202, "the participant can still sign in");
+});
+
+test("past the shared hourly cap nobody is mailed", async () => {
+  const w = await world();
+  const send = async (email, ip) => (await call(w.env, start, "/api/start", { email, sealedEmail: await seal(w.pub, "email", email) }, { "cf-connecting-ip": ip })).status;
+  for (let i = 0; i < 60; i++) assert.equal(await send(`p${i}@example.com`, `10.0.${i}.1`), 202);
+  assert.equal(await send("late@example.com", "10.1.0.1"), 429);
+  assert.equal(w.outbox.length, 60);
+});
+
+test("links always name SITE_ORIGIN, and /api answers on no other host", async () => {
+  const w = await world();
+  const body = { email: "ada@example.com", sealedEmail: await seal(w.pub, "email", "ada@example.com") };
+  const res = await call(w.env, start, "/api/start", body, { "cf-connecting-ip": "198.51.100.7" });
+  assert.equal(res.status, 202);
+  assert.match(w.outbox.at(-1).text, /https:\/\/feelingthemachine\.com\/account#join=/);
+  const elsewhere = new Request("https://feeling.pages.dev/api/start", { method: "POST", headers: { origin: "https://feeling.pages.dev", "content-type": "application/json" }, body: JSON.stringify(body) });
+  assert.equal((await gate(elsewhere, w.env, () => start(elsewhere, w.env))).status, 404);
+  const www = new Request("https://www.feelingthemachine.com/api/start", { method: "POST", headers: { origin: "https://www.feelingthemachine.com", "content-type": "application/json", "cf-connecting-ip": "198.51.100.8" }, body: JSON.stringify({ ...body, email: "grace@example.com", sealedEmail: await seal(w.pub, "email", "grace@example.com") }) });
+  assert.equal((await gate(www, w.env, () => start(www, w.env))).status, 202);
+  assert.match(w.outbox.at(-1).text, /https:\/\/feelingthemachine\.com\/account#/, "even from www, the link names the bare domain");
+});
+
+test("a link works once, and a join refused for a mistake does not spend it", async () => {
+  const w = await world();
+  await call(w.env, start, "/api/start", { email: "ada@example.com", sealedEmail: await seal(w.pub, "email", "ada@example.com") });
+  const token = linkToken(w.outbox.at(-1), "join");
+  const good = { token, sealedName: await seal(w.pub, "name", "Ada"), role: "research", ageBand: "30-39", country: "US", panel: true, readAgreement: true, lang: "en" };
+  assert.equal((await call(w.env, join, "/api/join", { ...good, readAgreement: false })).status, 400);
+  assert.equal((await call(w.env, join, "/api/join", good)).status, 201, "the link survived the mistake");
+  assert.equal((await call(w.env, join, "/api/join", good)).status, 410, "and is spent once used");
 });
 
 test("only same-origin JSON is accepted", async () => {

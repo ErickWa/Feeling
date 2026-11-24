@@ -154,6 +154,18 @@ test("a P-number the vault already gave someone else stops the run before anythi
   assert.equal(vault.read("01_panel/contact-log.csv"), before);
 });
 
+test("an address the CSV defused still matches when a run is repeated before the site lets go (security review, 2026-11-24)", async () => {
+  const { w, vault, run } = await setup();
+  await joinOne(w, "-ada@example.com");
+  const sealed = w.env.DB.raw.prepare("SELECT sealed_email, sealed_name FROM participants").get();
+  await run();
+  assert.equal(vault.table("01_panel/contact-log.csv")[0].email, "'-ada@example.com");
+  // As if the first run wrote the files and stopped before clearing the seals.
+  w.env.DB.raw.prepare("UPDATE participants SET sealed_email = ?, sealed_name = ?").run(sealed.sealed_email, sealed.sealed_name);
+  const again = await run();
+  assert.deepEqual(again.updated, ["P001"]);
+});
+
 test("a name typed as a formula is stored defused", async () => {
   const { w, vault, run } = await setup();
   await joinOne(w, "ada@example.com", { sealedName: await seal(w.pub, "name", '=HYPERLINK("http://evil","x")') });

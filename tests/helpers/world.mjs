@@ -39,7 +39,7 @@ export async function world() {
   const k = await generateVaultKey();
   const outbox = [];
   const env = {
-    DB: fakeD1(), ACCOUNTS_OPEN: "true", VAULT_KID: k.kid, HMAC_KEY: "test-hmac-key", FORM1_VERSION: "1.0-test",
+    DB: fakeD1(), ACCOUNTS_OPEN: "true", VAULT_KID: k.kid, HMAC_KEY: "test-hmac-key", FORM1_VERSION: "1.0-test", SITE_ORIGIN: ORIGIN,
     MAIL_SENDER: (m) => outbox.push(m),
   };
   return { env, outbox, pub: await importPublicKey(k.publicJwk), keys: await vaultKeys([k.privateJwk]) };

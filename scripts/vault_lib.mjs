@@ -100,7 +100,9 @@ export async function sync({ db, files, keys, hmacKey, today, dryRun = false }) 
         report.mismatched.push(p.id);
         continue;
       }
-      if (row && email !== null && row.email && row.email !== email) {
+      // Compared as stored: an address the CSV defused (a leading - or +) carries
+      // its apostrophe, and a re-run after an interrupted one must still match.
+      if (row && email !== null && row.email && row.email !== defuse(email)) {
         // The same P-number already belongs to somebody else in the vault:
         // the site's counter started too low. Stop before overwriting anyone.
         throw new Error(`${p.id} is already in the contact log with a different address; raise next_participant on the site and investigate`);
