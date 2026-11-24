@@ -212,10 +212,13 @@ password or secret into a chat, an issue or this file.
 
 ## E. Go-live (Claude, after the owner's OK)
 
-- [ ] **E1.** Privacy policy: new effective date; section 04 loses "Not open
-  yet".
-- [ ] **E2.** Home page section 06: from "send an email" to the sign-up link,
-  EN, ZH and DE.
+- [x] **E1.** Privacy policy: new effective date; section 04 loses "Not open
+  yet". In effect from 24 November 2026; section 04 now speaks in the present
+  tense in all three languages. The ZH and DE sentences are new and not yet
+  reviewed.
+- [x] **E2.** Home page section 06: from "send an email" to the sign-up link,
+  EN, ZH and DE. Done earlier in 383bb84; at go-live the timeline's "Contact
+  panel opens" moved from Dec 2026 to Nov 2026.
 - [ ] **E3.** Close #28; the weekly export (#30) starts.
 
 ## F. After go-live (Claude)
