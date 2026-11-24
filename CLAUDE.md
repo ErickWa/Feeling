@@ -58,9 +58,15 @@ the sealing used by both `site/account.js` and the vault scripts. The
 privacy promise has its own test (`tests/accounts.test.mjs`, "THE PROMISE"):
 any change that makes a name or email readable in the database turns it red.
 
-## Not yet
+## Shared gates
 
-Not enrolled in devkit (`targets.json`), so none of the shared gates
-(`budget`, `smoke`, `headers`, `legal`, `audit`) run here; `npm run check` is
-lint plus the tests in `tests/`. The portfolio's bilingual-repo list does not
-name this repo yet either.
+Enrolled in devkit on 2026-11-24 (GO-LIVE F1). `npm run check` is lint, the
+tests in `tests/`, then devkit's `budget`, `legal` and `audit`, configured in
+`budget.json` and `legal.json`; each config says what its rows cannot see.
+`scripts/headers.mjs` is delivered too and runs in CI after the deploy, never
+in `check`. The delivered files are listed in `devkit.files.json`: never edit
+them here; change them in devkit and run `npm run sync` there. Not taken, each
+argued in devkit's `targets.json`: `consent.js` (nothing here needs consent),
+`smoke`, `coverage`, and a licence (its own decision). The portfolio's
+conventions name this repo as shipping EN, ZH and DE, and bind it to the
+security-header floor.

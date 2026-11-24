@@ -73,7 +73,7 @@ for (const page of pages) {
 test("privacy.html names its operator and its effective date in all three languages", () => {
   const html = read("privacy.html");
   assert.match(html, /Erick Watson/);
-  assert.match(html, /in effect from \d{1,2} \w+ 20\d\d/i);
+  assert.match(html, /effective from \d{1,2} \w+ 20\d\d/i);
   assert.match(html, /自20\d\d年\d{1,2}月\d{1,2}日起生效/);
   assert.match(html, /gültig ab \d{1,2}\. \S+ 20\d\d/i);
 });

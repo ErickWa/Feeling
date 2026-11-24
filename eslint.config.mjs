@@ -7,9 +7,13 @@
 // into site/index.html (the CSP refuses that one at runtime instead).
 
 import js from "@eslint/js";
+import devkit from "./eslint.devkit.mjs";
 
 export default [
   { ignores: ["node_modules/**", ".wrangler/**"] },
+  // The files devkit delivers: linted in devkit, not here, and drift holds
+  // them byte-identical, so a finding here would be one this repo cannot fix.
+  devkit,
   js.configs.recommended,
   {
     name: "feeling/browser",

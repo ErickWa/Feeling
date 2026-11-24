@@ -214,8 +214,8 @@ password or secret into a chat, an issue or this file.
 
 - [x] **E1.** Privacy policy: new effective date; section 04 loses "Not open
   yet". In effect from 24 November 2026; section 04 now speaks in the present
-  tense in all three languages. The ZH and DE sentences are new and not yet
-  reviewed.
+  tense in all three languages. The new ZH and DE sentences were reviewed by
+  native speakers on 2026-11-24.
 - [x] **E2.** Home page section 06: from "send an email" to the sign-up link,
   EN, ZH and DE. Done earlier in 383bb84; at go-live the timeline's "Contact
   panel opens" moved from Dec 2026 to Nov 2026.
@@ -224,7 +224,7 @@ password or secret into a chat, an issue or this file.
 
 ## F. After go-live (Claude)
 
-- [ ] **F1. Enrol in devkit**, as its own change and only once E3 is done:
+- [x] **F1. Enrol in devkit**, as its own change and only once E3 is done:
   not during D–E, because a new gate's first run tends to go red and a red
   gate blocks the deploy a live launch may need in minutes. Take
   `headers.mjs`, `legal.mjs`, `audit.mjs` and `budget.mjs`. Leave out
@@ -234,3 +234,8 @@ password or secret into a chat, an issue or this file.
   same change: this repo's entry in devkit's `targets.json`, the "Not yet"
   section of `CLAUDE.md`, and the portfolio's bilingual-repo list in devkit's
   `conventions.md`, which names this repo as EN, ZH and DE.
+  Done 2026-11-24. Gates green on their first run, after two fixes they
+  turned up: the privacy page's English date now reads "Effective from"
+  (legal.mjs knows "effective", not "in effect"), and devkit's
+  headers.mjs learned to look in `site/` (it had read this repo as
+  promising no headers), delivered to all 13 repos that take it.

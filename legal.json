@@ -1,0 +1,28 @@
+{
+  "_comment": "Canonical gate is devkit/scripts/legal.mjs, delivered here (GO-LIVE F1, 2026-11-24). Green here means consistent with the fleet, never means lawful.",
+  "_entity_comment": "No company: Erick Watson runs the project as an independent researcher and is the controller the policy names, so he is the operator the page must name. Declared as `entity` because there is no `license` block to carry an owner.",
+  "entity": "Erick Watson",
+  "domain": "feelingthemachine.com",
+  "_pages_comment": "ONE PAGE, the privacy policy, read in its source because there is no build: site/privacy.html is the file Cloudflare serves. Beyond the four markers the gate derives (a contact route, the operator, an effective date, an address at feelingthemachine.com), it pins the claims that would make the page untrue if they went missing: both service providers by name (CLAUDE.md invariant 4: change where data goes and this page changes in the same commit), no analytics, and no sale. It reads the whole file, but every string pinned here is English, and the effective date it finds is the English one ('Effective from', reworded from 'In effect from' at enrolment because the gate's pattern knows 'effective' and not 'in effect'; the Chinese 起生效 and German gültig ab put the label where the pattern does not look). SO THE CHINESE AND GERMAN TEXT IS ASSERTED BY NOTHING HERE, and tests/site.test.mjs only counts it. WHAT THIS CANNOT SEE: whether the policy is lawful in any of the three jurisdictions it addresses, whether Cloudflare and Proton still do what it says, and whether hello@ is read.",
+  "pages": [
+    {
+      "label": "Privacy (en, zh, de)",
+      "path": "site/privacy.html",
+      "contains": [
+        "Cloudflare",
+        "Proton",
+        "run no analytics or tracking",
+        "Nothing is sold"
+      ]
+    }
+  ],
+  "_no_license_comment": "NO `license` BLOCK, DELIBERATELY. GO-LIVE F1 left LICENSE, COMMERCIAL.md and the CLA out: whether this private research repo carries a licence is its own decision, not a side effect of enrolment. When that is decided, the block arrives with the files.",
+  "_fonts_comment": "IBM Plex Sans and Mono, Instrument Serif and Noto Serif SC are all SIL OFL 1.1, and OFL requires the licence to travel with every copy. site/fonts/ carries one LICENSES.txt for all four families rather than a file per family.",
+  "fonts": {
+    "dirs": ["site/fonts"]
+  },
+  "_contact_comment": "Scanned because a personal address pasted into a file a visitor can read is a one-character mistake, and invariant 1 says no participant data, ever. `site` is everything served; `lib` and `functions` are the API, and lib/accounts.js writes the sign-in emails. WHAT THIS CANNOT SEE: tests/, docs/, protocol/ and forms/, which never ship but are in a repository; the git history; and _headers, whose lack of an extension keeps it out of the scanned file types.",
+  "contact": {
+    "dirs": ["site", "lib", "functions"]
+  }
+}

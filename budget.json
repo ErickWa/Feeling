@@ -1,0 +1,39 @@
+{
+  "_comment": "Canonical gate is devkit/scripts/budget.mjs, delivered here (GO-LIVE F1, 2026-11-24) and read by `npm run budget`. Comments are excluded from every line count on purpose: the portfolio does not ration documentation. Over a cap means cut something; arguing a cap is allowed, raising it silently in the commit that broke it is not.",
+  "_code_comment": "A CEILING FOR THE SITE AS DESIGNED, NOT MEASURED-PLUS-A-LITTLE. Measured 823 at enrolment: the accounts system (lib/, functions/, site/account.js and seal.js), the vault scripts and the lint config. The accounts design in protocol/participant-accounts.md is built and live, so what is left to write is maintenance and the weekly export, not a second system; 1000 leaves room for that and makes a new feature argue for itself. `scripts` is swept for .mjs, and the four scripts devkit delivers there are excluded automatically through devkit.files.json. WHAT THIS CANNOT SEE: the shell scripts (make_vault.sh, new_interview.sh, subset_han.sh), left out because the counter knows JavaScript's comments and not the shell's, so every `#` line would be billed as code; the HTML pages, which are weighed below rather than counted; and tests/, which are never counted anywhere in the fleet.",
+  "code": {
+    "label": "Code lines",
+    "dirs": ["lib", "functions", "site", "scripts"],
+    "files": ["eslint.config.mjs"],
+    "ext": [".js", ".mjs"],
+    "cap": 1000
+  },
+  "_deps_comment": "ZERO, AND THE ZERO IS THE POINT. The site holds sealed personal data, and every runtime package is code that runs beside it and that nobody here wrote or reviewed. Sealing uses the browser's own WebCrypto, the API is plain Pages Functions, and the database is D1 through its binding. devDependencies (eslint, wrangler) never reach a visitor or the Functions bundle; `npm run audit` covers them.",
+  "deps": {
+    "cap": 0
+  },
+  "_assets_comment": "THREE ROWS, WEIGHED AS A VISITOR DOWNLOADS THEM. Gzip -9 for text, as in the rest of the fleet; fonts raw, because woff2 is already compressed. Measured at enrolment: pages 32,939, CSS and scripts 10,754, fonts 352,756. Each cap is a ceiling for the site's current shape, three pages, not a fence a word's edit could trip. THE FONT ROW IS THE ONE THAT MOVES ON ITS OWN: three fifths of it is Noto Serif SC cut to the Chinese characters the pages use (scripts/subset_han.sh), so new Chinese text grows it; past the cap, the cut is to drop a weight (600 or 900), not to raise the number. WHAT THESE CANNOT SEE: images (favicons, the share card), which a browser fetches once or a crawler fetches instead of a visitor; the API's responses; and gzip as Cloudflare actually serves it, which is its own compression level, not -9.",
+  "assets": [
+    {
+      "label": "Pages (HTML)",
+      "dir": "site",
+      "match": "^site/[^/]+\\.html$",
+      "gzip": true,
+      "cap": 40000
+    },
+    {
+      "label": "Stylesheet and scripts",
+      "dir": "site",
+      "match": "^site/[^/]+\\.(css|js)$",
+      "gzip": true,
+      "cap": 14000
+    },
+    {
+      "label": "Self-hosted fonts",
+      "dir": "site/fonts",
+      "match": "\\.woff2$",
+      "gzip": false,
+      "cap": 380000
+    }
+  ]
+}

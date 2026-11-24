@@ -6,11 +6,14 @@
   "scripts": {
     "lint": "eslint .",
     "test": "node --test tests/",
-    "check": "npm run lint && npm run test",
+    "budget": "node scripts/budget.mjs",
+    "legal": "node scripts/legal.mjs",
+    "audit": "node scripts/audit.mjs",
+    "check": "npm run lint && npm run test && npm run budget && npm run legal && npm run audit",
     "deploy": "wrangler deploy",
     "preview": "wrangler dev"
   },
-  "_check_comment": "The one gate. CI runs `npm ci && npm run check`, then deploys `site/` from the same job. There is no build: `site/` is served as it is in the repo, so the bytes checked are the bytes deployed. WHAT IT CANNOT SEE: the shell scripts in scripts/ (no linter reads them), what Cloudflare actually serves (curl it), and the encrypted vault, which by design never touches this repo.",
+  "_check_comment": "The one gate. Lint and the repo's own tests first (cheapest), then devkit's three delivered gates (budget, legal, audit; enrolled 2026-11-24, GO-LIVE F1). `headers.mjs` is delivered too and deliberately NOT here: it asserts a deployed response, so CI runs it after the deploy. CI runs `npm ci && npm run check`, then deploys `site/` from the same job. There is no build: `site/` is served as it is in the repo, so the bytes checked are the bytes deployed. WHAT IT CANNOT SEE: the shell scripts in scripts/ (no linter reads them), what Cloudflare actually serves (curl it), and the encrypted vault, which by design never touches this repo.",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "eslint": "^10.15.0",
