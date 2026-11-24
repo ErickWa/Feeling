@@ -1,0 +1,50 @@
+Feeling the Machine (感受机器)
+Copyright 2026 Erick Watson
+
+This repository is licensed in parts. Where a part below names a licence, the
+file it names holds the full text.
+
+1. CODE: Apache License, Version 2.0 (LICENSE)
+
+   Everything not listed under 2 or 3: lib/, functions/, migrations/,
+   scripts/ (except the files under 3), tests/, site/ (except site/fonts/),
+   .github/workflows/, and the configuration files at the root.
+
+2. RESEARCH AND DOCUMENTATION MATERIALS: Creative Commons Attribution 4.0
+   International (LICENSE-CC-BY-4.0)
+
+   protocol/, forms/, templates/, docs/, and every Markdown (.md) file in the
+   repository. To attribute: "Feeling the Machine, by Erick Watson
+   (feelingthemachine.com), licensed under CC BY 4.0", with a link to the
+   licence and a note of any changes you made.
+
+3. NOT COVERED BY EITHER LICENCE
+
+   a. Six files delivered from a separate, proprietary repository (devkit) and
+      listed in devkit.files.json:
+
+        devkit.files.json
+        eslint.devkit.mjs
+        scripts/audit.mjs
+        scripts/budget.mjs
+        scripts/headers.mjs
+        scripts/legal.mjs
+
+      Copyright (C) 2026 Erick Watson. All rights reserved. They are included
+      only so that this repository's own checks run. No licence to use, copy,
+      modify, merge, publish, distribute, sublicense or sell them is granted by
+      their presence here, by the licences above, or by your possession of a
+      copy.
+
+   b. The fonts in site/fonts/, which keep their own licence, the SIL Open Font
+      License 1.1, reproduced in site/fonts/LICENSES.txt with each font's
+      copyright notice.
+
+   c. The names "Feeling the Machine" and "感受机器", and the project's logo
+      and icons, which identify the project. Neither licence grants permission
+      to use them (Apache 2.0, section 6; CC BY 4.0, section 2(b)(2)). A copy or
+      a fork must not present itself as the project or collect anyone's details
+      in its name.
+
+No participant data is in this repository or its history, and none may be
+added: see CLAUDE.md, invariant 1.

@@ -16,7 +16,8 @@
       ]
     }
   ],
-  "_no_license_comment": "NO `license` BLOCK, DELIBERATELY. GO-LIVE F1 left LICENSE, COMMERCIAL.md and the CLA out: whether this private research repo carries a licence is its own decision, not a side effect of enrolment. When that is decided, the block arrives with the files.",
+  "_license_comment": "APACHE-2.0 FOR CODE, CC BY 4.0 FOR THE RESEARCH MATERIALS, DECIDED BY THE OWNER ON 2026-11-24 when the repo went public, replacing the `_no_license_comment` that left it out at enrolment. The split, and the six devkit files and the fonts that neither licence covers, are set out in NOTICE. WHAT THIS ROW CANNOT SEE: NOTICE at all. It checks that LICENSE is the Apache text and that package.json agrees; it does not check the copyright line (the canonical Apache text names no owner, so it lives in NOTICE), the CC BY scope, or that the devkit carve-out still lists the files devkit.files.json names. Change either list and read NOTICE by hand.",
+  "license": { "spdx": "Apache-2.0", "file": "LICENSE", "contains": ["Apache License", "Version 2.0, January 2004"] },
   "_fonts_comment": "IBM Plex Sans and Mono, Instrument Serif and Noto Serif SC are all SIL OFL 1.1, and OFL requires the licence to travel with every copy. site/fonts/ carries one LICENSES.txt for all four families rather than a file per family.",
   "fonts": {
     "dirs": ["site/fonts"]

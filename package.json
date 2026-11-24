@@ -1,6 +1,7 @@
 {
   "name": "feeling",
   "private": true,
+  "license": "Apache-2.0",
   "type": "module",
   "description": "Feeling the Machine: study administration and the public site at feelingthemachine.com.",
   "scripts": {

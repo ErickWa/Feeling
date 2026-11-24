@@ -24,7 +24,7 @@ served at **https://feelingthemachine.com** by the Cloudflare Pages project
    (German added 2026-11-21, on every page). Changing one changes the others
    in the same commit, and so do the sign-in emails in `lib/accounts.js`. The
    test counts them, all or nothing per page; it cannot read them, so Chinese
-   wording that matters goes to a native Chinese reviewer for review, as the forms do, and
+   wording that matters goes to a native Chinese reviewer, as the forms do, and
    German wording that matters (above all the privacy policy and Form 1)
    needs a native speaker's review too. The German was drafted by Claude and
    reviewed by a native speaker on 2026-11-22 (GO-LIVE C4); text added since
@@ -50,6 +50,30 @@ served at **https://feelingthemachine.com** by the Cloudflare Pages project
    you run it.
 6. **Released forms are never edited.** A change is a new `forms/vX.Y/`.
 
+## A public repository
+
+Public since 2026-11-24, so that participants can check the site's promises
+against its code. Everything here is read by strangers: files, history,
+issues, commit messages. Invariant 1 therefore reaches further than the files:
+no participant's name, address or story in an issue, a comment or a commit
+message either, and an issue a participant opens with their own details gets
+its text removed and a reply asking them to write to hello@.
+
+- **Licences** (owner's decision, 2026-11-24): code Apache-2.0 (`LICENSE`),
+  research and documentation materials CC BY 4.0 (`LICENSE-CC-BY-4.0`).
+  `NOTICE` says which is which and names what neither covers: the six devkit
+  files, the fonts, the project's name and logo. A new top-level folder needs
+  a line in `NOTICE`.
+- **The only email address in the repo and its history is
+  hello@feelingthemachine.com** (owner's decision, 2026-11-24; history
+  rewritten that day), plus `no-reply@` as the sender in `wrangler.toml`,
+  reserved `example.*` addresses in tests, and Anthropic's
+  `noreply@anthropic.com` in the `Co-Authored-By` trailers Claude adds. Commit as hello@ in this repo
+  (`git config user.email`); `legal.mjs` scans the shipped files, and nothing
+  scans commit metadata, so that line is discipline.
+- **Security reports** come through GitHub's private vulnerability reporting
+  or hello@ (`SECURITY.md`).
+
 ## Accounts code
 
 `lib/accounts.js` holds the rules (pure functions), `lib/api.js` the wiring,
@@ -67,6 +91,6 @@ tests in `tests/`, then devkit's `budget`, `legal` and `audit`, configured in
 in `check`. The delivered files are listed in `devkit.files.json`: never edit
 them here; change them in devkit and run `npm run sync` there. Not taken, each
 argued in devkit's `targets.json`: `consent.js` (nothing here needs consent),
-`smoke`, `coverage`, and a licence (its own decision). The portfolio's
+`smoke` and `coverage`. The portfolio's
 conventions name this repo as shipping EN, ZH and DE, and bind it to the
 security-header floor.

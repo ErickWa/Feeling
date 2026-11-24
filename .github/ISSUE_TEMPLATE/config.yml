@@ -1,0 +1,10 @@
+# Issues on this repository are public. The blank issue is off so that every
+# visitor meets the bug template's warning about personal information first.
+blank_issues_enabled: false
+contact_links:
+  - name: I'm a participant, or my question is about my own record
+    url: mailto:hello@feelingthemachine.com
+    about: Write to the project directly. Never post personal information in an issue.
+  - name: Report a security problem privately
+    url: https://github.com/ErickWa/Feeling/security/advisories/new
+    about: Please do not open a public issue for a vulnerability.
