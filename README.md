@@ -40,7 +40,7 @@ Done on 2026-11-20: the repo, the labels, milestones and timeline issues, the Pa
 - **Tasks:** each timeline step is an issue; close it when its "done when" is met. The Path to a PhD doc's status column mirrors this.
 - **Decisions:** open an issue with the *Decision* template, so the reasoning is dated. Summarise it in the vault's decision log too.
 - **New interview:** `scripts/new_interview.sh /path/to/vault OH003`.
-- **Website sign-ups:** weekly, `CLOUDFLARE_API_TOKEN=$(npx wrangler@4.152.0 auth token) node scripts/export_to_vault.mjs /path/to/vault --dry-run`, then again without `--dry-run`. It prints IDs only, never names.
+- **Website sign-ups:** weekly, `CLOUDFLARE_API_TOKEN=$(npx wrangler@4.152.0 auth token | tail -n 1) node scripts/export_to_vault.mjs /path/to/vault --dry-run`, then again without `--dry-run`. It prints IDs only, never names.
 - **Form changes:** export the PDF to `forms/vX.Y/`, add a line to `forms/CHANGELOG.md`, and record which version each person signed in the vault's consent register.
 
 ## Website

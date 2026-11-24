@@ -124,8 +124,11 @@ password or secret into a chat, an issue or this file.
   2. **Dry run** (changes nothing anywhere; the token comes from your wrangler
      login and is never shown):
      ```
-     CLOUDFLARE_API_TOKEN=$(npx wrangler@4.152.0 auth token) node scripts/export_to_vault.mjs "$VAULT" --dry-run
+     CLOUDFLARE_API_TOKEN=$(npx wrangler@4.152.0 auth token | tail -n 1) node scripts/export_to_vault.mjs "$VAULT" --dry-run
      ```
+     Keep the `| tail -n 1`: wrangler prints its `⛅️ wrangler …` banner on
+     the same output as the token, and without it the banner becomes part of
+     the token (`Cannot convert argument to a ByteString`).
      It prints `DRY RUN: nothing written…`, then P-numbers and counts only.
      What to expect after D2 and D3:
      - *New in the contact log*: every test account still joined (the D3

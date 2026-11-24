@@ -8,7 +8,7 @@
 //
 // The token needs D1 Edit on the account (it marks requests done and clears
 // sealed values). Your wrangler login works:
-//   CLOUDFLARE_API_TOKEN=$(npx wrangler@4.152.0 auth token) node scripts/export_to_vault.mjs ...
+//   CLOUDFLARE_API_TOKEN=$(npx wrangler@4.152.0 auth token | tail -n 1) node scripts/export_to_vault.mjs ...
 //
 // Reads from the vault: 07_admin/site-keys/*.private.json (scripts/vault_keygen.mjs)
 // and 07_admin/hmac_key.txt (the site's HMAC_KEY secret, kept here when it was
@@ -36,7 +36,7 @@ if (!vaultArg) {
 }
 const token = process.env.CLOUDFLARE_API_TOKEN;
 if (!token) {
-  console.error("Set CLOUDFLARE_API_TOKEN (a token with D1 Edit, or $(npx wrangler@4.152.0 auth token)).");
+  console.error("Set CLOUDFLARE_API_TOKEN (a token with D1 Edit, or $(npx wrangler@4.152.0 auth token | tail -n 1)).");
   process.exit(2);
 }
 
