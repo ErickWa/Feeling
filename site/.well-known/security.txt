@@ -1,0 +1,4 @@
+Contact: mailto:hello@feelingthemachine.com
+Expires: 2027-11-24T00:00:00Z
+Preferred-Languages: en, zh, de
+Canonical: https://feelingthemachine.com/.well-known/security.txt

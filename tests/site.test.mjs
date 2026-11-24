@@ -104,3 +104,18 @@ test("_headers declares the portfolio floor in its /* rule, one rule per path", 
   assert.match(csp, /form-action /);
   assert.doesNotMatch(csp, /unsafe-inline|unsafe-eval/);
 });
+
+// RFC 9116. Scanners treat a security.txt past its Expires as absent, so this
+// goes red on the day it lapses rather than leaving a stale file looking fine;
+// renew it by moving Expires on, at most a year ahead as the RFC recommends.
+// WHAT THIS CANNOT SEE: whether Pages serves the dot-directory (check
+// `curl -s https://feelingthemachine.com/.well-known/security.txt`), or
+// whether anyone reads hello@.
+test("security.txt names this domain's contact and has not expired", () => {
+  const txt = read(".well-known/security.txt");
+  assert.match(txt, /^Contact: mailto:hello@feelingthemachine\.com$/m);
+  assert.match(txt, /^Canonical: https:\/\/feelingthemachine\.com\/\.well-known\/security\.txt$/m);
+  const expires = Date.parse(txt.match(/^Expires: (\S+)$/m)?.[1] ?? "");
+  assert.ok(expires > Date.now(), "security.txt has expired: move Expires on");
+  assert.ok(expires - Date.now() <= 366 * 864e5, "Expires is more than a year ahead");
+});

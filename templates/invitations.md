@@ -12,6 +12,12 @@ about a person who agreed to nothing, and that data then has to be logged,
 kept and deleted like any other (CLAUDE.md invariant 1). Every draft below
 asks people to forward the invitation.
 
+**Every draft says what the project will never ask for.** The domain was
+registered on 2026-11-20, and to someone at an AI lab a brand-new site asking
+for a name and email is what phishing looks like. Naming the only domain, and
+what a fake would ask for, lets them check before they click; the home page
+FAQ and the site's 404 page say the same.
+
 **Send from hello@feelingthemachine.com where you can.** Replies then reach
 the address the privacy policy names. LinkedIn messages come from your
 personal profile anyway.
@@ -35,7 +41,10 @@ Fill in the `[brackets]` and delete any you don't use.
 > It only means you agree that I may contact you about future conversations
 > and studies. Nothing else is asked of you, and you can leave at any time.
 > Your name and email address are encrypted in your browser before they are
-> sent, so the website itself cannot read them.
+> sent, so the website itself cannot read them. The project's only site is
+> feelingthemachine.com, and it will never ask you for a password, a payment,
+> an ID document, or to download anything. If you'd rather not click a link,
+> just reply to this email and I'll add you.
 >
 > From February 2027 I'll be recording oral history conversations with panel
 > members who want to take part: 60–90 minutes, every year or two, about your
@@ -78,7 +87,9 @@ After they accept, send message 3.
 > It takes about five minutes at https://feelingthemachine.com/account and
 > only means you're happy to be contacted about future conversations and
 > studies. You can leave at any time, and your name and email are encrypted
-> before they leave your browser. From February 2027 I'll be recording
+> before they leave your browser. The project's only site is
+> feelingthemachine.com, and it will never ask for a password, payment or ID;
+> my own site, erickwatson.com, links to it if you want to check. From February 2027 I'll be recording
 > 60–90 minute conversations with members who want to take part, never about
 > anything confidential to your employer.
 >
