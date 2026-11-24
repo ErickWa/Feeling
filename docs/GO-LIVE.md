@@ -217,7 +217,7 @@ password or secret into a chat, an issue or this file.
   tense in all three languages. The new ZH and DE sentences were reviewed by
   native speakers on 2026-11-24.
 - [x] **E2.** Home page section 06: from "send an email" to the sign-up link,
-  EN, ZH and DE. Done earlier in 383bb84; at go-live the timeline's "Contact
+  EN, ZH and DE. Done earlier in 26a7706; at go-live the timeline's "Contact
   panel opens" moved from Dec 2026 to Nov 2026.
 - [x] **E3.** Close #28; the weekly export (#30) starts. #28 closed
   2026-11-24; #30 started the same day, first weekly run due by 2026-12-01.
