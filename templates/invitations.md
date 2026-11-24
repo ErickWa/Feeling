@@ -53,7 +53,7 @@ Fill in the `[brackets]` and delete any you don't use.
 > Erick
 >
 > Erick Watson
-> Feeling the Machine · https://feelingthemachine.com
+> Independent researcher, Feeling the Machine · https://feelingthemachine.com
 
 ## 2. LinkedIn: connection request note
 
