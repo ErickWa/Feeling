@@ -101,15 +101,74 @@ password or secret into a chat, an issue or this file.
   - [x] GMX or web.de
 - [x] **D3. The whole cycle** with one test account: change choices, leave,
   rejoin, download (check the file saves), delete. Keep a second one joined.
-- [ ] **D4. First vault run**, main vault mounted, outside mainland China:
-  ```
-  CLOUDFLARE_API_TOKEN=$(npx wrangler@4.152.0 auth token) node scripts/export_to_vault.mjs /path/to/mounted/vault --dry-run
-  ```
-  then again without `--dry-run`. Check the test person's name and email in
-  `01_panel/contact-log.csv`; do the hand-work it lists. The printed summary
-  holds IDs only and can be shared.
-- [ ] **D5. Clean up.** Delete the remaining test account on the site, run
-  the export again, remove the test rows from the vault's logs by hand.
+- [ ] **D4. First vault run**, main vault mounted, outside mainland China.
+  The script reads the site, opens the sealed names and emails with the
+  vault's private key, writes three CSVs in the vault, and only then tells the
+  site to drop its sealed copies. That last step changes production, so the
+  dry run comes first.
+
+  1. **Before you start.** Be outside mainland China. Unlock the **main**
+     vault in Cryptomator (not the key vault). Check the wrangler login, and
+     run `npx wrangler@4.152.0 login` if it says you are not logged in:
+     ```
+     cd ~/Documents/GitHub/Feeling
+     npx wrangler@4.152.0 whoami
+     ```
+     Save the vault path in a variable. It has a space, so keep the quotes:
+     ```
+     VAULT="$HOME/Library/Application Support/Cryptomator/mnt/<vault name>"
+     ls "$VAULT/FeelingTheMachine/07_admin/site-keys" "$VAULT/FeelingTheMachine/07_admin/hmac_key.txt"
+     ```
+     You should see one `<kid>.private.json` and the `hmac_key.txt` path. If
+     either is missing, stop: the path is wrong, or the key vault is mounted.
+  2. **Dry run** (changes nothing anywhere; the token comes from your wrangler
+     login and is never shown):
+     ```
+     CLOUDFLARE_API_TOKEN=$(npx wrangler@4.152.0 auth token) node scripts/export_to_vault.mjs "$VAULT" --dry-run
+     ```
+     It prints `DRY RUN: nothing written…`, then P-numbers and counts only.
+     What to expect after D2 and D3:
+     - *New in the contact log*: every test account still joined (the D3
+       account you kept, plus any D2 inbox accounts you did not delete).
+     - *Contact details refreshed*: `none` on a first run.
+     - *Consent rows added*: a small number, one per choice saved by the
+       accounts still on the site. Deleting an account removes its rows, so
+       the deleted one adds none.
+     - *Requests handled*: the D3 account's `delete`, and possibly its earlier
+       `leave` and `rejoin`.
+     - *Would clear sealed values for*: the same P-numbers as "New".
+
+     **Stop and send Claude the output** if you see `NOT COPIED, no vault key
+     opens their seal` (the site's key does not match the vault's private
+     key), `NOT COPIED, sealed email does not match` (should not happen;
+     investigate), or an error such as `already in the contact log with a
+     different address` or `D1 query failed`.
+  3. **The real run**: the same command without `--dry-run`. It prints
+     `Synced.` and the same lists, except the last line now reads "Sealed
+     values cleared on the site for".
+  4. **Check the vault.** Open
+     `"$VAULT/FeelingTheMachine/01_panel/contact-log.csv"` in TextEdit, or in
+     Numbers **without saving it back** (Numbers or Excel can rewrite the
+     format).
+     - Each test P-number has the right name and email, country, role, age
+       band, consent choices, form version `1 v1.1` and language.
+     - The deleted D3 account does **not** appear.
+     - `07_admin/consent-register.csv` has rows starting `site-<n>`;
+       `07_admin/withdrawal-log.csv` has one row per leave or delete request.
+     - Run the dry run again: `none`, `none`, `0`, `none`. That shows a
+       second run changes nothing.
+  5. **The hand-work it lists.** The deleted account's line says "remove from
+     the key vault and delete any panel emails; confirm in writing". It is a
+     test account, so `03_key/key.csv` will not have it: delete the sign-in
+     emails from that test inbox; no written confirmation is needed. A leave
+     line, if one appears, is the same account: nothing to do. D5 removes the
+     test rows from these logs by hand anyway.
+  6. **Finish.** Lock the vault in Cryptomator. Give Claude the summary from
+     step 3, which holds P-numbers and counts only and can be shared; never
+     paste anything from the CSVs. Claude ticks D4.
+- [ ] **D5. Clean up.** Delete the remaining test accounts on the site (the
+  D3 account you kept, and any D2 inbox accounts still joined), run the
+  export again, remove the test rows from the vault's logs by hand.
 
 ## E. Go-live (Claude, after the owner's OK)
 
