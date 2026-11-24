@@ -177,9 +177,24 @@ password or secret into a chat, an issue or this file.
   6. **Finish.** Lock the vault in Cryptomator. Give Claude the summary from
      step 3, which holds P-numbers and counts only and can be shared; never
      paste anything from the CSVs. Claude ticks D4.
-- [ ] **D5. Clean up.** Delete the remaining test accounts on the site (the
+- [x] **D5. Clean up.** Delete the remaining test accounts on the site (the
   D3 account you kept, and any D2 inbox accounts still joined), run the
   export again, remove the test rows from the vault's logs by hand.
+  1. Sign in at `/account` with each test account's inbox and delete it. An
+     inbox you no longer know is in the vault's `contact-log.csv`.
+  2. Dry run, then the real run, as in D4. Expect one `delete` per account
+     and a to-do line for each; `New` none, consent rows `0`.
+  3. In TextEdit, remove the test rows from `consent-register.csv` and
+     `withdrawal-log.csv`, including the ones the run just added.
+  4. Dry run again: `none`, `none`, `0`, `none`, and no to-do lines.
+
+  Done 2026-11-24. P001 to P003 were the only accounts that finished
+  joining. P002 went through the steps above. P003's inbox could not be
+  found, so the owner removed its vault rows by hand and Claude deleted its
+  session, consent and participant rows directly in D1, without a request
+  row, because the vault was already clean. After the final dry run the site
+  holds 0 participants, consents, sessions and requests; the next sign-up
+  is P004.
 
 - [x] **D6. The live pages carry only our scripts.** Cloudflare can insert
   scripts into pages as it serves them, and the tests read our files, so they
