@@ -101,7 +101,7 @@ password or secret into a chat, an issue or this file.
   - [x] GMX or web.de
 - [x] **D3. The whole cycle** with one test account: change choices, leave,
   rejoin, download (check the file saves), delete. Keep a second one joined.
-- [ ] **D4. First vault run**, main vault mounted, outside mainland China.
+- [x] **D4. First vault run**, main vault mounted, outside mainland China.
   The script reads the site, opens the sealed names and emails with the
   vault's private key, writes three CSVs in the vault, and only then tells the
   site to drop its sealed copies. That last step changes production, so the
@@ -114,9 +114,11 @@ password or secret into a chat, an issue or this file.
      cd ~/Documents/GitHub/Feeling
      npx wrangler@4.152.0 whoami
      ```
-     Save the vault path in a variable. It has a space, so keep the quotes:
+     Save the vault path in a variable. It has a space, so keep the quotes,
+     and put no spaces around `=`. It prints nothing when it works, and it
+     lasts only for this terminal window: in a new tab, set it again.
      ```
-     VAULT="$HOME/Library/Application Support/Cryptomator/mnt/<vault name>"
+     VAULT="$HOME/Library/Application Support/Cryptomator/mnt/Feeling"
      ls "$VAULT/FeelingTheMachine/07_admin/site-keys" "$VAULT/FeelingTheMachine/07_admin/hmac_key.txt"
      ```
      You should see one `<kid>.private.json` and the `hmac_key.txt` path. If
@@ -129,6 +131,8 @@ password or secret into a chat, an issue or this file.
      Keep the `| tail -n 1`: wrangler prints its `⛅️ wrangler …` banner on
      the same output as the token, and without it the banner becomes part of
      the token (`Cannot convert argument to a ByteString`).
+     A `Proxy environment variables detected` warning above the output is
+     harmless: it goes to stderr and never reaches the token.
      It prints `DRY RUN: nothing written…`, then P-numbers and counts only.
      What to expect after D2 and D3:
      - *New in the contact log*: every test account still joined (the D3
@@ -146,7 +150,11 @@ password or secret into a chat, an issue or this file.
      key), `NOT COPIED, sealed email does not match` (should not happen;
      investigate), or an error such as `already in the contact log with a
      different address` or `D1 query failed`.
-  3. **The real run**: the same command without `--dry-run`. It prints
+  3. **The real run**, the same command without `--dry-run`:
+     ```
+     CLOUDFLARE_API_TOKEN=$(npx wrangler@4.152.0 auth token | tail -n 1) node scripts/export_to_vault.mjs "$VAULT"
+     ```
+     It prints
      `Synced.` and the same lists, except the last line now reads "Sealed
      values cleared on the site for".
   4. **Check the vault.** Open
