@@ -181,6 +181,20 @@ password or secret into a chat, an issue or this file.
   D3 account you kept, and any D2 inbox accounts still joined), run the
   export again, remove the test rows from the vault's logs by hand.
 
+- [x] **D6. The live pages carry only our scripts.** Cloudflare can insert
+  scripts into pages as it serves them, and the tests read our files, so they
+  cannot see it. Until 2026-11-24 every page carried the Web Analytics beacon:
+  an account-level site under Analytics & Logs → Web Analytics, "Automatic
+  setup", which the Pages project's own "Web analytics is disabled" does not
+  cover. The CSP blocked it (0 page views), but it contradicted "no
+  analytics". Owner disabled it the same day; three `0`s confirmed. The
+  check, fetched as a browser
+  because the insertion only happens for one:
+  ```
+  for p in / /account /privacy; do curl -s -H 'Accept: text/html' -H 'User-Agent: Mozilla/5.0 Safari/605.1.15' "https://feelingthemachine.com$p" | grep -c cloudflareinsights; done
+  ```
+  Three `0`s. Repeat it after any change in the Cloudflare dashboard.
+
 ## E. Go-live (Claude, after the owner's OK)
 
 - [ ] **E1.** Privacy policy: new effective date; section 04 loses "Not open
