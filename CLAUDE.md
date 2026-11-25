@@ -64,6 +64,9 @@ repo as "is supplemented by", and its citations are `protocol/references.md`.
 version's (v1.0 was 10.5281/zenodo.24525241): it always resolves to the latest
 version, so a new protocol version needs no site change. `tests/site.test.mjs`
 fails a page that links any other Zenodo DOI.
+The protocol is also registered on OSF (10.17605/OSF.IO/YKQN5, public
+2026-11-25). Zenodo is the primary record; OSF follows each new version
+through a registration update, so the two never describe different studies.
 
 Everything here is read by strangers: files, history, issues, commit messages.
 Invariant 1 therefore reaches further than the files: no participant's name, address or story in an issue, a comment or a commit

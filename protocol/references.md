@@ -84,3 +84,9 @@ Checked against Crossref on 2026-11-25.
   5 to 7 to the record's References metadata and as "cites" links too.
 - **The website** links that all-versions DOI, so a new protocol version needs
   no site change.
+- **The OSF registration**
+  ([10.17605/OSF.IO/YKQN5](https://doi.org/10.17605/OSF.IO/YKQN5), registered
+  2026-11-25 with OSF's Qualitative Preregistration template) answers the
+  template from the Zenodo protocol and cites its all-versions DOI. Zenodo is
+  the primary record: a change goes there first, as a new version, and OSF
+  follows through a registration update.
