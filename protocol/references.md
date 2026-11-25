@@ -89,4 +89,6 @@ Checked against Crossref on 2026-11-25.
   2026-11-25 with OSF's Qualitative Preregistration template) answers the
   template from the Zenodo protocol and cites its all-versions DOI. Zenodo is
   the primary record: a change goes there first, as a new version, and OSF
-  follows through a registration update.
+  follows through a registration update. OSF takes no new files after
+  registration, so it holds no copy of the current protocol: its answers cite
+  the all-versions DOI, and the v1.1 PDF remains in its original revision.
