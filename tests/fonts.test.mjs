@@ -25,6 +25,17 @@ test("every Chinese character on a page is in the cut-down Noto Serif SC", () =>
   assert.deepEqual(missing, [], `run scripts/subset_han.sh: ${missing.join("")} not in the font`);
 });
 
+// Must match the two extractions in scripts/subset_han.sh. WHAT THIS CANNOT
+// SEE: a new element styled with var(--font-mark) whose text is not in either
+// place; it would fall back to the full cut, correct but no longer small.
+test("the logo's characters are in its own small font, weight by weight", () => {
+  const all = pages.map(read).join("");
+  const han = (s) => [...new Set(s.match(/[\u4e00-\u9fff]/gu) ?? [])].sort().join("");
+  const want = [han([...all.matchAll(/class="han">([^<]*)</g)].map((m) => m[1]).join("")),
+    han([...all.matchAll(/class="scroll"[^>]*>([\s\S]*?)<\/div>\s*<\/div>/g)].map((m) => m[1]).join(""))];
+  assert.deepEqual(read("fonts/mark-chars.txt").trim().split("\n"), want, "run scripts/subset_han.sh");
+});
+
 test("every @font-face source exists in site/fonts", () => {
   const urls = [...css.matchAll(/url\("(\/fonts\/[^"]+)"\)/g)].map((m) => m[1]);
   assert.ok(urls.length >= 9, `only ${urls.length} font files referenced`);
