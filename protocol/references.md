@@ -36,6 +36,31 @@ Crossref on 2026-11-25.
    A six-factor state measure of awe. It is a candidate instrument for the later
    formal study and is **not** used in the oral history, which scores nothing.
 
+## Methods
+
+Cited in the protocol's v1.1 for the sample size and the analysis plan.
+Checked against Crossref on 2026-11-25.
+
+5. **Braun, V., & Clarke, V. (2006).** Using thematic analysis in psychology.
+   *Qualitative Research in Psychology*, 3(2), 77–101.
+   https://doi.org/10.1191/1478088706qp063oa
+
+6. **Braun, V., & Clarke, V. (2019).** Reflecting on reflexive thematic
+   analysis. *Qualitative Research in Sport, Exercise and Health*, 11(4),
+   589–597. https://doi.org/10.1080/2159676X.2019.1628806
+   Defines the reflexive version the protocol uses: the researcher's
+   perspective is part of the analysis, and agreement between coders is not
+   the measure of quality. That is why the second readers (a critical friend,
+   and a native Chinese-speaking reader for the Chinese interviews) are there
+   to challenge the reading, not to score agreement with it.
+
+7. **Malterud, K., Siersma, V. D., & Guassora, A. D. (2016).** Sample size in
+   qualitative interview studies: Guided by information power. *Qualitative
+   Health Research*, 26(13), 1753–1760.
+   https://doi.org/10.1177/1049732315617444
+   The argument for 25 first-round interviews rather than a saturation
+   target.
+
 ## For a general reader
 
 - **Keltner, D. (2023).** *Awe: The New Science of Everyday Wonder and How It
@@ -51,8 +76,11 @@ Crossref on 2026-11-25.
   there. A longer reading list on a page that people read before their
   interview would push them towards the project's own framing.
 - **The Zenodo protocol record**
-  ([10.5281/zenodo.24525241](https://doi.org/10.5281/zenodo.24525241)) carries
-  1 to 4 and the book in its References metadata, and 1 to 4 as DataCite
-  "cites" links, added 2026-11-25 by a metadata edit. Its PDF, the registered
-  content, was not changed and has no reference list; the protocol's next real
-  version should include one in the document itself.
+  ([10.5281/zenodo.24525240](https://doi.org/10.5281/zenodo.24525240), the
+  all-versions DOI, which always resolves to the latest version). v1.0's PDF
+  had no reference list; its metadata gained 1 to 4 and the book on
+  2026-11-25, with 1 to 4 as DataCite "cites" links. v1.1's PDF lists 1 to 7
+  itself, with 1, 2, 5, 6 and 7 cited in the text. When v1.1 is published, add
+  5 to 7 to the record's References metadata and as "cites" links too.
+- **The website** links that all-versions DOI, so a new protocol version needs
+  no site change.
