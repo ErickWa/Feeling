@@ -80,6 +80,14 @@ its text removed and a reply asking them to write to hello@.
   `noreply@anthropic.com` in the `Co-Authored-By` trailers Claude adds. Commit as hello@ in this repo
   (`git config user.email`); `legal.mjs` scans the shipped files, and nothing
   scans commit metadata, so that line is discipline.
+- **The only postal address is the operator's, in `site/impressum.html`**
+  (owner's decision, 2026-11-25): a mail-receiving suite in Redmond, WA,
+  published because German law (§ 18 MStV) asks a site that is not purely
+  private to name its operator and an address. The privacy policy's section 01
+  points to it rather than repeating it, so it lives in one file. Change it
+  there and nowhere else; it is permanent in history from that commit on.
+  Whether a suite address satisfies German law is a legal question nobody has
+  yet answered for this site.
 - **Security reports** come through GitHub's private vulnerability reporting
   or hello@ (`SECURITY.md`).
 

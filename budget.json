@@ -12,12 +12,12 @@
   "deps": {
     "cap": 0
   },
-  "_assets_comment": "THREE ROWS, WEIGHED AS A VISITOR DOWNLOADS THEM. Gzip -9 for text, as in the rest of the fleet; fonts raw, because woff2 is already compressed. Measured at enrolment: pages 32,939, CSS and scripts 10,754, fonts 352,756. Each cap is a ceiling for the site's current shape, three pages, not a fence a word's edit could trip. THE FONT ROW IS THE ONE THAT MOVES ON ITS OWN: three fifths of it is Noto Serif SC cut to the Chinese characters the pages use (scripts/subset_han.sh), so new Chinese text grows it; past the cap, the cut is to drop a weight (600 or 900), not to raise the number. WHAT THESE CANNOT SEE: images (favicons, the share card), which a browser fetches once or a crawler fetches instead of a visitor; the API's responses; and gzip as Cloudflare actually serves it, which is its own compression level, not -9.",
+  "_assets_comment": "THREE ROWS, WEIGHED AS A VISITOR DOWNLOADS THEM. Gzip -9 for text, as in the rest of the fleet; fonts raw, because woff2 is already compressed. Measured at enrolment: pages 32,939, CSS and scripts 10,754, fonts 352,756. Each cap is a ceiling for the site's current shape, three pages, not a fence a word's edit could trip. THE FONT ROW IS THE ONE THAT MOVES ON ITS OWN: three fifths of it is Noto Serif SC cut to the Chinese characters the pages use (scripts/subset_han.sh), so new Chinese text grows it; past the cap, the cut is to drop a weight (600 or 900), not to raise the number. WHAT THESE CANNOT SEE: images (favicons, the share card), which a browser fetches once or a crawler fetches instead of a visitor; the API's responses; and gzip as Cloudflare actually serves it, which is its own compression level, not -9. THE IMPRINT IS NOT WEIGHED (2026-11-25), under the portfolio rule that a published legal document is prose and no budget counts it: site/impressum.html, 2.4 KB gz, arrived with the pages row at 40.6 KB against 40, and the only other move was to shorten a legal notice to fit a number. Excluded by name, anchored, in the row's own `match`, because asset rows take no `exclude`; that also means budget.mjs cannot flag the pattern going dead if the page is renamed. The cap stays at 40000: the page was never counted, so nothing left the row. It exempts the prose only: if the imprint ever needs logic, the logic goes in a counted file. privacy.html stays weighed, as it was at enrolment; moving it out would have to drop the cap by its 12.8 KB in the same commit.",
   "assets": [
     {
       "label": "Pages (HTML)",
       "dir": "site",
-      "match": "^site/[^/]+\\.html$",
+      "match": "^site/(?!impressum\\.html$)[^/]+\\.html$",
       "gzip": true,
       "cap": 40000
     },
