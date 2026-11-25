@@ -35,7 +35,7 @@ You are welcome to reuse the consent forms, the sealing design or anything else 
 | `site/` | The public website, in English, Chinese and German, served by Cloudflare Pages at https://feelingthemachine.com |
 | `functions/`, `lib/`, `migrations/` | The participant-accounts API (Cloudflare Pages Functions over a D1 database) |
 | `forms/` | Released versions of consent and release forms (PDF), with a changelog |
-| `protocol/` | Oral history themes, data-management rules, the participant-accounts design |
+| `protocol/` | Oral history themes, data-management rules, the participant-accounts design, and the research references behind the framing |
 | `templates/` | Blank logs and sheets to copy *into the vault* before filling in, and invitation drafts |
 | `docs/` | `GO-LIVE.md`, the checklist that opened participant accounts |
 | `scripts/` | Vault setup, the vault export, and new-interview folders |
