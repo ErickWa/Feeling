@@ -6,7 +6,7 @@ file it names holds the full text.
 
 1. CODE: Apache License, Version 2.0 (LICENSE)
 
-   Everything not listed under 2 or 3: lib/, functions/, migrations/,
+   Everything not listed under 2 or 3: lib/, functions/, cron/, migrations/,
    scripts/ (except the files under 3), tests/, site/ (except site/fonts/),
    .github/workflows/, and the configuration files at the root.
 

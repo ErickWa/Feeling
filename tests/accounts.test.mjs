@@ -9,8 +9,8 @@
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { langOf, linkMessage, normalizeEmail, rateEmail, rateIp, sealedFor, validateJoin } from "../lib/accounts.js";
-import { choices, gate, join, me, remove, signin, signout, start } from "../lib/api.js";
+import { digestMessage, langOf, linkMessage, normalizeEmail, rateEmail, rateIp, sealedFor, validateJoin } from "../lib/accounts.js";
+import { choices, digest, gate, join, me, remove, signin, signout, start } from "../lib/api.js";
 import { generateVaultKey, importPublicKey, open, seal } from "../site/seal.js";
 import { call, cookieOf, joinOne, linkToken, world } from "./helpers/world.mjs";
 
@@ -323,4 +323,55 @@ test("every language has both emails, each carrying the link", () => {
   }
   assert.equal(langOf("de"), "de");
   assert.equal(langOf("zh-CN"), "en");
+});
+
+test("digestMessage: counts only, and nothing at all for a quiet day", () => {
+  const base = { joined: 0, left: 0, rejoined: 0, deleted: 0, issued: 9, accounts: 8, onPanel: 7, since: new Date("2026-11-24T06:00:00Z") };
+  assert.equal(digestMessage(base), null);
+  const m = digestMessage({ ...base, joined: 2, deleted: 1 });
+  assert.equal(m.subject, "Feeling the Machine: 2 joined, 1 deleted their account");
+  assert.match(m.text, /^Since 2026-11-24 06:00 UTC:\n {2}2 joined\n {2}1 deleted their account\n/);
+  assert.match(m.text, /issued so far: 9\nAccounts on the site: 8\nOn the panel now: 7/);
+});
+
+test("the daily summary: once a UTC day, to hello@ only, counts and nothing about who", async (t) => {
+  t.mock.timers.enable({ apis: ["Date"], now: Date.parse("2026-11-25T09:00:00Z") });
+  const nextDay = () => t.mock.timers.setTime(Date.now() + 86400000);
+  const w = await world();
+  const run = () => call(w.env, digest, "/api/digest", {});
+  const mailed = () => w.outbox.filter((m) => m.to === "hello@feelingthemachine.com");
+
+  assert.equal((await run()).status, 204);
+  assert.equal(mailed().length, 0, "the first call only starts the count");
+  const ada = await signedUp(w);
+  const grace = await signedUp(w, "grace@example.com");
+  await signedUp(w, "lena@example.de");
+  assert.equal((await call(w.env, choices, "/api/choices", { panel: false }, { cookie: ada.cookie })).status, 200);
+  assert.equal((await call(w.env, remove, "/api/delete", { confirm: "delete" }, { cookie: grace.cookie })).status, 200);
+  await run();
+  assert.equal(mailed().length, 0, "nothing until the UTC day has turned");
+
+  nextDay();
+  assert.equal((await run()).status, 204);
+  assert.equal(mailed().length, 1);
+  const { subject, text } = mailed()[0];
+  assert.equal(subject, "Feeling the Machine: 3 joined, 1 left the panel, 1 deleted their account");
+  assert.match(text, /^Since 2026-11-25 09:00 UTC:/);
+  assert.match(text, /issued so far: 3\nAccounts on the site: 2\nOn the panel now: 1/);
+  assert.doesNotMatch(subject + text, /P\d{3}|@|Ada|Grace|Lena|research|30-39|\bUS\b/, "no number, address, name or attribute");
+  await run();
+  assert.equal(mailed().length, 1, "a second call the same day sends nothing");
+
+  nextDay();
+  await run();
+  assert.equal(mailed().length, 1, "a quiet day sends nothing");
+
+  await signedUp(w, "new@example.com");
+  nextDay();
+  w.env.MAIL_SENDER = () => { throw new Error("down"); };
+  assert.equal((await run()).status, 204, "a failed send still answers 204");
+  w.env.MAIL_SENDER = (m) => w.outbox.push(m);
+  nextDay();
+  await run();
+  assert.equal(mailed().at(-1).subject, "Feeling the Machine: 1 joined", "the failed window is reported on the retry");
 });

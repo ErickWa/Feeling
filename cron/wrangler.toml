@@ -1,0 +1,17 @@
+# The cron Worker behind the daily summary (cron/index.js says why it exists).
+#
+# DEPLOYED BY HAND, NOT BY CI: `npm run check`, then
+# `npx wrangler@4.152.0 deploy --config cron/wrangler.toml`. CI's token deploys
+# Pages and nothing else. The Worker holds one fetch and no logic, so it should
+# almost never change; when it does, the gate runs before the deploy.
+#
+# WHAT THIS CANNOT SEE: whether the trigger still fires. Cloudflare's dashboard
+# (Workers > feeling-digest > Triggers) shows its past runs.
+name = "feeling-digest"
+main = "index.js"
+compatibility_date = "2026-10-19"
+workers_dev = false
+
+[triggers]
+# 06:00 UTC: late evening in Seattle, afternoon in Xi'an, morning in Europe.
+crons = ["0 6 * * *"]

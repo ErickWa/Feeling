@@ -4,7 +4,7 @@
   "code": {
     "label": "Code lines",
     "dirs": ["lib", "functions", "site", "scripts"],
-    "files": ["eslint.config.mjs"],
+    "files": ["eslint.config.mjs", "cron/index.js"],
     "ext": [".js", ".mjs"],
     "cap": 1000
   },

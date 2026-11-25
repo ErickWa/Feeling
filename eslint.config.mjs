@@ -49,7 +49,7 @@ export default [
     // Pages Functions and the logic they call run on the Workers runtime:
     // fetch and WebCrypto are there, `process` is not.
     name: "feeling/worker",
-    files: ["functions/**/*.js", "lib/**/*.js"],
+    files: ["functions/**/*.js", "lib/**/*.js", "cron/**/*.js"],
     languageOptions: {
       ecmaVersion: 2024,
       sourceType: "module",

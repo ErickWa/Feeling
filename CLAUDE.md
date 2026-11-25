@@ -99,6 +99,18 @@ the sealing used by both `site/account.js` and the vault scripts. The
 privacy promise has its own test (`tests/accounts.test.mjs`, "THE PROMISE"):
 any change that makes a name or email readable in the database turns it red.
 
+**The daily summary** (owner's request, 2026-11-25): `POST /api/digest` mails
+hello@ how many joined, left, came back and deleted since the last summary,
+with the totals, at most once per UTC day and never on a quiet day. **Counts
+only, never who**: no participant number, country, role, age band or
+language, because any of those beside the mail's timestamp could point at one
+person; a test fails if one appears. The privacy policy says so in all three
+languages, so widening the email means changing the policy in the same
+commit. The trigger is the cron Worker in `cron/` (`feeling-digest`, 06:00
+UTC), **deployed by hand** after `npm run check`, because CI's token deploys
+Pages only; it holds one fetch and no logic. A silent inbox cannot tell a
+quiet day from a dead trigger: the Worker's run history in the dashboard can.
+
 ## Shared gates
 
 Enrolled in devkit on 2026-11-24 (GO-LIVE F1). `npm run check` is lint, the
