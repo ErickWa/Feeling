@@ -51,6 +51,8 @@ Crossref on 2026-11-25.
   there. A longer reading list on a page that people read before their
   interview would push them towards the project's own framing.
 - **The Zenodo protocol record**
-  ([10.5281/zenodo.24525241](https://doi.org/10.5281/zenodo.24525241)) does not
-  carry this list. Add it to that record's next version; the released version
-  stays as it is.
+  ([10.5281/zenodo.24525241](https://doi.org/10.5281/zenodo.24525241)) carries
+  1 to 4 and the book in its References metadata, and 1 to 4 as DataCite
+  "cites" links, added 2026-11-25 by a metadata edit. Its PDF, the registered
+  content, was not changed and has no reference list; the protocol's next real
+  version should include one in the document itself.

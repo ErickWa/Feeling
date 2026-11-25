@@ -10,8 +10,10 @@ oral history and research project on how people who build AI experience its
 growing abilities. It holds the machinery (protocols, form versions, templates,
 vault scripts, the task list as GitHub issues) and the public site in `site/`,
 served at **https://feelingthemachine.com** by the Cloudflare Pages project
-`feeling`. The living planning documents are Claude artifacts linked from
-`README.md`; they are the source of truth and this repo receives frozen exports.
+`feeling`. The living planning documents are private Claude artifacts; they
+are the source of truth and this repo receives frozen exports. **Never link
+them from the repo**: a link to a private document is a dead end for every
+public reader, and the one in `forms/README.md` was removed on 2026-11-25.
 
 ## Invariants
 
@@ -52,9 +54,14 @@ served at **https://feelingthemachine.com** by the Cloudflare Pages project
 
 ## A public repository
 
-Public since 2026-11-24, so that participants can check the site's promises
-against its code. Everything here is read by strangers: files, history,
-issues, commit messages. Invariant 1 therefore reaches further than the files:
+Public since 2026-11-25, so that participants can check the site's promises
+against its code; the home page's "is this site genuine?" answer and the
+privacy policy's section on encryption both link here. (This file said
+2026-11-24 for a day before the switch was actually made: `gh repo view`, not
+this sentence, says what the repo is.) The Zenodo protocol record links the
+repo as "is supplemented by", and its citations are `protocol/references.md`.
+
+Everything here is read by strangers: files, history, issues, commit messages. Invariant 1 therefore reaches further than the files:
 no participant's name, address or story in an issue, a comment or a commit
 message either, and an issue a participant opens with their own details gets
 its text removed and a reply asking them to write to hello@.
@@ -67,7 +74,9 @@ its text removed and a reply asking them to write to hello@.
 - **The only email address in the repo and its history is
   hello@feelingthemachine.com** (owner's decision, 2026-11-24; history
   rewritten that day), plus `no-reply@` as the sender in `wrangler.toml`,
-  reserved `example.*` addresses in tests, and Anthropic's
+  reserved `example.*` addresses in tests, invented `@gmail.com` and
+  `@googlemail.com` addresses in `tests/accounts.test.mjs` (the Gmail rules
+  need the real domain; owner accepted, 2026-11-25), and Anthropic's
   `noreply@anthropic.com` in the `Co-Authored-By` trailers Claude adds. Commit as hello@ in this repo
   (`git config user.email`); `legal.mjs` scans the shipped files, and nothing
   scans commit metadata, so that line is discipline.

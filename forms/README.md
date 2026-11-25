@@ -1,7 +1,6 @@
 # Forms
 
-Released versions of the participant forms. The drafts live in the Consent and Release Forms doc:
-https://claude.ai/artifact/WSJRn9X7Jt5RJUFxh1VfnF
+Released versions of the participant forms. The drafts live in the Consent and Release Forms doc, a private working document kept outside this repository; only released versions are published here.
 
 ## Releasing a version
 
