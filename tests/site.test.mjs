@@ -52,6 +52,14 @@ for (const page of pages) {
     for (const f of icons) assert.ok(existsSync(new URL(`../site/${f}`, import.meta.url)), `${f} is missing`);
   });
 
+  // A version DOI goes stale the day the next protocol version is published;
+  // the all-versions DOI always resolves to the latest. WHAT THIS CANNOT SEE:
+  // a Zenodo link written as a zenodo.org/records/ URL rather than a DOI.
+  test(`${page}: any Zenodo DOI is the protocol's all-versions DOI`, () => {
+    const dois = new Set(html.match(/10\.5281\/zenodo\.\d+/g));
+    for (const d of dois) assert.equal(d, "10.5281/zenodo.24525240", `${d} is one version, not all of them`);
+  });
+
   test(`${page}: the only contact address is at the project's own domain`, () => {
     const addrs = new Set(html.match(/[\w.+-]+@[\w-]+(\.[\w-]+)+/g));
     assert.deepEqual([...addrs], ["hello@feelingthemachine.com"]);

@@ -60,9 +60,13 @@ privacy policy's section on encryption both link here. (This file said
 2026-11-24 for a day before the switch was actually made: `gh repo view`, not
 this sentence, says what the repo is.) The Zenodo protocol record links the
 repo as "is supplemented by", and its citations are `protocol/references.md`.
+**Cite the record by its all-versions DOI, 10.5281/zenodo.24525240**, never a
+version's (v1.0 was 10.5281/zenodo.24525241): it always resolves to the latest
+version, so a new protocol version needs no site change. `tests/site.test.mjs`
+fails a page that links any other Zenodo DOI.
 
-Everything here is read by strangers: files, history, issues, commit messages. Invariant 1 therefore reaches further than the files:
-no participant's name, address or story in an issue, a comment or a commit
+Everything here is read by strangers: files, history, issues, commit messages.
+Invariant 1 therefore reaches further than the files: no participant's name, address or story in an issue, a comment or a commit
 message either, and an issue a participant opens with their own details gets
 its text removed and a reply asking them to write to hello@.
 
